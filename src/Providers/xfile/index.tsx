@@ -5,6 +5,7 @@ import {
     useEffect,
     useState,
 } from "react";
+import { useAuth } from "../user";
 
 import api from "../../services/api";
 
@@ -39,6 +40,8 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
     const [allPosts, setAllPosts] = useState<XFileTypes[]>({} as XFileTypes[]);
     const [onePost, setOnePost] = useState<XFileTypes[]>({} as XFileTypes[]);
 
+    const { accessToken } = useAuth()
+
     const createAPost = ({ ...postData }: XFileTypes) => {
         api.post<XFileTypes[]>(
             "/posts",
@@ -50,7 +53,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
             }
         )
@@ -61,7 +64,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
     const getPostsFromApi = () => {
         api.get<XFileTypes[]>("/posts", {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         })
             .then((response) => {
@@ -74,7 +77,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
     const getSpecificPost = (isRead: string, destUserId: number) => {
         api.get<XFileTypes[]>(`/posts?destUserId=${destUserId}&read=${isRead}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         })
             .then((response) => {
@@ -98,7 +101,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
     const deletePost = (id: number) => {
         api.delete<XFileTypes[]>(`/posts/${id}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         })
             .then((response) => console.log(response.data))
