@@ -21,6 +21,7 @@ interface StoreType {
 interface StoreProviderDate {
   stores: StoreType[];
   getStore: () => void;
+  storesBySegment: StoreType[];
 }
 
 const StoreContext = createContext<StoreProviderDate>({} as StoreProviderDate);
@@ -43,13 +44,15 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
   const getStoreBySegment = (segment: string) => {
     api
-      //.get<StoreType[]>("stores?segment=shopping", config)
-      .get<StoreType[]>(`stores?segment=${segment}`, config)
+      .get<StoreType[]>(`stores?segment=${segment}/`, config)
       .then((resp) => console.log(resp.data))
       .catch((err) => console.log(err));
   };
+  getStoreBySegment();
+  const patchStoreToFavorite = () => {};
+
   return (
-    <StoreContext.Provider value={{ stores, getStore }}>
+    <StoreContext.Provider value={{ stores, getStore, storesBySegment }}>
       {children}
     </StoreContext.Provider>
   );
