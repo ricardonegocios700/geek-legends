@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .post("/login", userData)
       .then((response) => {
         const { access } = response.data;
-        localStorage.setItem("@Habit:access", JSON.stringify(access));
+        localStorage.setItem("token", JSON.stringify(access));
         setAccessToken(access);
         setAuthorized(true);
         history.push("/dashboard");
