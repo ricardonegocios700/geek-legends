@@ -31,10 +31,21 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
   const config = { headers: { Authorization: `Bearer ${accessToken}` } };
   const [stores, setStores] = useState<StoreType[]>([] as StoreType[]);
+  const [storesBySegment, setStoresBySegment] = useState<StoreType[]>(
+    [] as StoreType[]
+  );
   const getStore = () => {
     api
       .get<StoreType[]>("stores/", config)
       .then((resp) => setStores(resp.data))
+      .catch((err) => console.log(err));
+  };
+
+  const getStoreBySegment = (segment: string) => {
+    api
+      //.get<StoreType[]>("stores?segment=shopping", config)
+      .get<StoreType[]>(`stores?segment=${segment}`, config)
+      .then((resp) => console.log(resp.data))
       .catch((err) => console.log(err));
   };
   return (
