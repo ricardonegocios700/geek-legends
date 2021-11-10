@@ -1,12 +1,17 @@
 import { ReactNode } from "react";
 import { MultimediaProvider } from "./multimedia/";
+import { StoreProvider } from "./store/";
 
 interface ProvidersProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 const Providers = ({ children }: ProvidersProps) => {
-    return <MultimediaProvider>{children}</MultimediaProvider>;
+  return (
+    <MultimediaProvider>
+      <StoreProvider>{children}</StoreProvider>
+    </MultimediaProvider>
+  );
 };
 
 export default Providers;
