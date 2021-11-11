@@ -7,29 +7,34 @@ import { GroupProvider } from "./group";
 import { MyStoresProvider } from "./myStore";
 import { MessagesProvider } from "./message";
 import { TalksProvider } from "./talk";
+import { MyMultimediasProvider } from "./myMultimedias";
 
 interface ProvidersProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 const Providers = ({ children }: ProvidersProps) => {
-  return (
-    <AuthProvider>
-      <MultimediaProvider>
-        <XFileProvider>
-          <StoreProvider>
-            <GroupProvider>
-              <MyStoresProvider>
-                <MessagesProvider>
-                  <TalksProvider>{children}</TalksProvider>
-                </MessagesProvider>
-              </MyStoresProvider>
-            </GroupProvider>
-          </StoreProvider>
-        </XFileProvider>
-      </MultimediaProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <MultimediaProvider>
+                <MyMultimediasProvider>
+                    <XFileProvider>
+                        <StoreProvider>
+                            <GroupProvider>
+                                <MyStoresProvider>
+                                    <MessagesProvider>
+                                        <TalksProvider>
+                                            {children}
+                                        </TalksProvider>
+                                    </MessagesProvider>
+                                </MyStoresProvider>
+                            </GroupProvider>
+                        </StoreProvider>
+                    </XFileProvider>
+                </MyMultimediasProvider>
+            </MultimediaProvider>
+        </AuthProvider>
+    );
 };
 
 export default Providers;
