@@ -16,6 +16,8 @@ interface ContextType {
 interface MyStoresProviderDate {
   myStores: ContextType[];
   getMyStores: () => void;
+  addMyStore: (item: ContextType) => void;
+  removeMyStore: (id: number) => void;
 }
 const MyStoresContext = createContext<MyStoresProviderDate>(
   {} as MyStoresProviderDate
@@ -36,8 +38,25 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
       .then((resp) => setMyStores(resp.data))
       .catch((err) => console.log(err));
   };
+
+  const addMyStore = (item: ContextType) => {
+    api
+      .post<ContextType[]>("myStores/", config)
+      .then((resp) => getMyStores())
+      .catch((err) => console.log(err));
+  };
+
+  const removeMyStore = (id: number) => {
+    api
+      .delete(`myStores/${id}`, config)
+      .then((resp) => getMyStores())
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <MyStoresContext.Provider value={{ myStores, getMyStores }}>
+    <MyStoresContext.Provider
+      value={{ myStores, getMyStores, addMyStore, removeMyStore }}
+    >
       {children}
     </MyStoresContext.Provider>
   );
