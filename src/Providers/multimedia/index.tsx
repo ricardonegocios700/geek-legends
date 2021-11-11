@@ -7,6 +7,8 @@ import {
 } from "react";
 
 import api from "../../services/api";
+import { useAuth } from "../user/index";
+import { toast } from "react-toastify";
 
 interface MultimediaProviderProps {
     children: ReactNode;
@@ -29,13 +31,13 @@ interface MultimediaProviderData {
     postNewMultimediaToApi: (mediaData: MultimediaTypes) => void;
     updateMultimediaInApi: (mediaData: MultimediaTypes) => void;
     deleteMultimediaFromApi: (id: number) => void;
-    multimediaUserReaction: (mediaData: MultimediaTypes, reaction: number) => void;
+    multimediaUserReaction: (
+        mediaData: MultimediaTypes,
+        reaction: number
+    ) => void;
     multimediaList: MultimediaTypes[];
     multimediaByType: MultimediaTypes[];
 }
-
-const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmVydG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NTUzMjY0LCJleHAiOjE2MzY1NTY4NjQsInN1YiI6IjMifQ.X3Wv6VLrLkVUA7P17ZtPYB_BXw7vZ_gC8-NdAnzwVeQ";
 
 const MultimediaContext = createContext<MultimediaProviderData>(
     {} as MultimediaProviderData
@@ -50,12 +52,10 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         {} as MultimediaTypes[]
     );
 
+    const { config } = useAuth();
+
     const getAllMultimediaFromApi = () => {
-        api.get<MultimediaTypes[]>("/multimedias", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        api.get<MultimediaTypes[]>("/multimedias", config)
             .then((response) => {
                 console.log(response.data);
                 setMultimediaList(response.data);
@@ -64,16 +64,17 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     };
 
     const getMultimediaByType = (type: string) => {
-        api.get<MultimediaTypes[]>(`/multimedias?type=${type}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        api.get<MultimediaTypes[]>(`/multimedias?type=${type}`, config)
             .then((response) => {
                 console.log(response.data);
                 setMultimediaByType(response.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.error(
+                    "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+                );
+                console.log(err);
+            });
     };
 
     const postNewMultimediaToApi = ({ ...mediaData }: MultimediaTypes) => {
@@ -86,11 +87,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
                 description: mediaData.description,
                 userId: mediaData.userId,
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+            config
         )
             .then((response) => {
                 console.log(response.data);
@@ -107,18 +104,22 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
                 image: mediaData?.image,
                 description: mediaData?.description,
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+            config
         );
     };
 
     const deleteMultimediaFromApi = (id: number) => {
         api.delete(`/multimedias/${id}`)
-            .then((response) => console.log(response.data))
-            .catch((err) => console.log(err));
+            .then((response) => {
+                toast.success("Deletado com sucesso!");
+                console.log(response.data);
+            })
+            .catch((err) => {
+                toast.error(
+                    "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+                );
+                console.log(err);
+            });
     };
 
     const multimediaUserReaction = (
@@ -142,7 +143,17 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
             like: like,
             dislike: dislike,
             userId: mediaData.userId,
-        });
+        }, config
+        )
+            .then((response) => {
+                getAllMultimediaFromApi();
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error(
+                    "Não foi possível registrar sua reação! Favor tentar novamente!"
+                );
+            });
     };
 
     return (
