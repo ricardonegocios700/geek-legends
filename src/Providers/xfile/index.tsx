@@ -8,16 +8,16 @@ import {
 import { useAuth } from "../user";
 
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 interface XFileProviderProps {
     children: ReactNode;
 }
 
 interface XFileTypes {
+    title: string;
     text: string;
     userId: number;
-    destUserId: number;
-    read?: boolean;
     id?: number;
 }
 
@@ -27,46 +27,18 @@ interface XFileProviderData {
     getSpecificPost: (isRead: string, destUserId: number) => void;
     postUpdate: (postDat: XFileTypes) => void;
     deletePost: (id: number) => void;
-    allPosts: any; 
-    onePost: any;
+    allPosts: XFileTypes[];    
 }
-
-const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmVydG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NTUzMjY0LCJleHAiOjE2MzY1NTY4NjQsInN1YiI6IjMifQ.X3Wv6VLrLkVUA7P17ZtPYB_BXw7vZ_gC8-NdAnzwVeQ";
 
 const XFileContext = createContext<XFileProviderData>({} as XFileProviderData);
 
 export const XFileProvider = ({ children }: XFileProviderProps) => {
     const [allPosts, setAllPosts] = useState<XFileTypes[]>({} as XFileTypes[]);
-    const [onePost, setOnePost] = useState<XFileTypes[]>({} as XFileTypes[]);
 
-    const { accessToken } = useAuth()
-
-    const createAPost = ({ ...postData }: XFileTypes) => {
-        api.post<XFileTypes[]>(
-            "/posts",
-            {
-                text: postData.text,
-                userId: postData.userId,
-                destUserId: postData.destUserId,
-                read: false,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            }
-        )
-            .then((response) => console.log(response.data))
-            .catch((err) => console.log(err));
-    };
+    const { config } = useAuth();
 
     const getPostsFromApi = () => {
-        api.get<XFileTypes[]>("/posts", {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        })
+        api.get<XFileTypes[]>("/posts", config)
             .then((response) => {
                 setAllPosts(response.data);
                 console.log(response.data);
@@ -74,37 +46,49 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
             .catch((err) => console.log(err));
     };
 
-    const getSpecificPost = (isRead: string, destUserId: number) => {
-        api.get<XFileTypes[]>(`/posts?destUserId=${destUserId}&read=${isRead}`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
+    const createAPost = ({ ...postData }: XFileTypes) => {
+        api.post<XFileTypes[]>(
+            "/posts",
+            {
+                title: postData.title,
+                text: postData.text,
+                userId: postData.userId,
             },
+            config
+        )
+            .then((response) => getPostsFromApi())
+            .catch((err) => console.log(err));
+    };
+
+    const getSpecificPost = (title: string) => {
+        api.get<XFileTypes[]>(`/posts?title=${title}`, config)
+            .then((response) => {
+                getPostsFromApi();
+            })
+            .catch((err) => {
+                toast.error("X-File não encontrado! Favor tentar novamente!");
+                console.log(err);
+            });
+    };
+
+    const postUpdate = ({ ...postData }: XFileTypes) => {
+        api.patch<XFileTypes[]>(`/posts/${postData.id}`, {
+            title: postData.title,
+            text: postData.text,
+            userId: postData.userId,
         })
             .then((response) => {
-                setOnePost(response.data);
+                getPostsFromApi();
                 console.log(response.data);
             })
             .catch((err) => console.log(err));
     };
 
-    const postUpdate = ({ ...postData }: XFileTypes) => {
-        api.patch<XFileTypes[]>(`/posts/${postData.id}`, {
-            text: postData.text,
-            userId: postData.userId,
-            destUserId: postData.destUserId,
-            read: postData.read,
-        })
-            .then((response) => console.log(response.data))
-            .catch((err) => console.log(err));
-    };
-
     const deletePost = (id: number) => {
-        api.delete<XFileTypes[]>(`/posts/${id}`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        })
-            .then((response) => console.log(response.data))
+        api.delete<XFileTypes[]>(`/posts/${id}`, config)
+            .then((response) => {
+                getPostsFromApi();
+                console.log(response.data)})
             .catch((err) => console.log(err));
     };
 
@@ -116,8 +100,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
                 getSpecificPost,
                 postUpdate,
                 deletePost,
-                allPosts,
-                onePost
+                allPosts,                
             }}
         >
             {children}
