@@ -17,17 +17,17 @@ interface StoreType {
   image: string;
   segment: string;
   userId: number;
-  like: number;
-  dislike: number;
-  id: number;
+  like?: number;
+  dislike?: number;
+  id?: number;
 }
 interface StoreProviderDate {
   stores: StoreType[];
   getStores: () => void;
   storesBySegment: StoreType[];
   getStoreBySegment: (segment: string) => void;
-  updateStorateLike: (item: StoreType) => void;
-  updateStorateDeslike: (item: StoreType) => void;
+  updateStoreLike: (item: StoreType) => void;
+  updateStoreDeslike: (item: StoreType) => void;
 }
 
 const StoreContext = createContext<StoreProviderDate>({} as StoreProviderDate);
@@ -55,14 +55,18 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       .catch((err) => console.log(err));
   };
 
-  const updateStorateLike = (item: StoreType) => {
-    api.patch<StoreType>(`stores/${item.id}`, { like: item.like + 1 }, config);
-  };
-
-  const updateStorateDeslike = (item: StoreType) => {
+  const updateStoreLike = (item: StoreType) => {
     api.patch<StoreType>(
       `stores/${item.id}`,
-      { dislike: item.like - 1 },
+      { like: Number(item.like) + 1 },
+      config
+    );
+  };
+
+  const updateStoreDeslike = (item: StoreType) => {
+    api.patch<StoreType>(
+      `stores/${item.id}`,
+      { dislike: Number(item.like) - 1 },
       config
     );
   };
@@ -74,8 +78,8 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
         getStores,
         storesBySegment,
         getStoreBySegment,
-        updateStorateLike,
-        updateStorateDeslike,
+        updateStoreLike,
+        updateStoreDeslike,
       }}
     >
       {children}
