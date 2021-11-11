@@ -17,25 +17,29 @@ interface StoreType {
   image: string;
   segment: string;
   userId: number;
+  like: number;
+  id: number;
 }
 interface StoreProviderDate {
   stores: StoreType[];
-  getStore: () => void;
+  getStores: () => void;
   storesBySegment: StoreType[];
+  getStoreBySegment: (segment: string) => void;
+  updateStorateLike: (item: StoreType) => void;
 }
 
 const StoreContext = createContext<StoreProviderDate>({} as StoreProviderDate);
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {
   const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NTc3OTc1LCJleHAiOjE2MzY1ODE1NzUsInN1YiI6IjQifQ._9oBlyU1bnbpAUvTDdS0PDxiwvjoW1Mpf7I0CwP2r4I";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NTk0MjAwLCJleHAiOjE2MzY1OTc4MDAsInN1YiI6IjQifQ.GHzpaTGKKAQcJbbanTUL3KTGS-D9bntB0j9ZLfiZEYo";
 
   const config = { headers: { Authorization: `Bearer ${accessToken}` } };
   const [stores, setStores] = useState<StoreType[]>([] as StoreType[]);
   const [storesBySegment, setStoresBySegment] = useState<StoreType[]>(
     [] as StoreType[]
   );
-  const getStore = () => {
+  const getStores = () => {
     api
       .get<StoreType[]>("stores/", config)
       .then((resp) => setStores(resp.data))
@@ -44,15 +48,31 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
   const getStoreBySegment = (segment: string) => {
     api
-      .get<StoreType[]>(`stores?segment=${segment}/`, config)
-      .then((resp) => console.log(resp.data))
+      .get<StoreType[]>(`stores?segment=${segment}`, config)
+      .then((resp) => setStoresBySegment(resp.data))
       .catch((err) => console.log(err));
   };
-  getStoreBySegment();
-  const patchStoreToFavorite = () => {};
+
+  const updateStorateLike = (item: StoreType) => {
+    api.patch<StoreType>(
+      `stores/${item.id}`,
+      {
+        like: item.like + 1,
+      },
+      config
+    );
+  };
 
   return (
-    <StoreContext.Provider value={{ stores, getStore, storesBySegment }}>
+    <StoreContext.Provider
+      value={{
+        stores,
+        getStores,
+        storesBySegment,
+        getStoreBySegment,
+        updateStorateLike,
+      }}
+    >
       {children}
     </StoreContext.Provider>
   );
