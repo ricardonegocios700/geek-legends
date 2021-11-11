@@ -5,6 +5,7 @@ import { AuthProvider } from "./user";
 import { XFileProvider } from "./xfile";
 import { GroupProvider } from "./group";
 import { MyStoresProvider } from "./myStore";
+import { TalksProvider } from "./talk";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -17,7 +18,9 @@ const Providers = ({ children }: ProvidersProps) => {
         <XFileProvider>
           <StoreProvider>
             <GroupProvider>
-              <MyStoresProvider>{children}</MyStoresProvider>
+              <TalksProvider>
+                <MyStoresProvider>{children}</MyStoresProvider>
+              </TalksProvider>
             </GroupProvider>
           </StoreProvider>
         </XFileProvider>
