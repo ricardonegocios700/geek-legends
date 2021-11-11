@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { MultimediaProvider } from "./multimedia/";
+import { StoreProvider } from "./store/";
 import { AuthProvider } from "./user";
 import { XFileProvider } from "./xfile";
 import { GroupProvider } from "./group";
@@ -13,7 +14,9 @@ const Providers = ({ children }: ProvidersProps) => {
     <AuthProvider>
       <MultimediaProvider>
         <XFileProvider>
-          <GroupProvider>{children}</GroupProvider>
+          <StoreProvider>
+            <GroupProvider>{children}</GroupProvider>
+          </StoreProvider>
         </XFileProvider>
       </MultimediaProvider>
     </AuthProvider>
