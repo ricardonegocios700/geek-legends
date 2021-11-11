@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { useAuth } from "../user";
 import api from "../../services/api";
-import { isNum } from "react-toastify/dist/utils";
 
 interface TalksProps {
   children: ReactNode;
@@ -73,12 +72,7 @@ export const TalksProvider = ({ children }: TalksProps) => {
       });
 
     let talkOrder = talk.sort((a, b) => {
-      if (isNum(a.id) && isNum(b.id)) {
-        let order1: number = a.id;
-        let order2: number = b.id;
-        return order1 - order2;
-      }
-      return 0;
+      return Number(a.id) - Number(b.id);
     });
 
     setTalk(talkOrder);
