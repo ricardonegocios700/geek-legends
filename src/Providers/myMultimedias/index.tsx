@@ -7,6 +7,7 @@ import {
 } from "react";
 import api from "../../services/api";
 import { useAuth } from "../user/index";
+import { toast } from "react-toastify";
 
 interface MyMultimediasProviderProps {
     children: ReactNode;
@@ -17,7 +18,7 @@ interface MyMultimediasTypes {
     type: string;
     image: string;
     description: string;
-    userId: number;      
+    userId: number;
 }
 
 interface MyMultimediasProviderData {
@@ -37,7 +38,7 @@ export const MyMultimediaProvider = ({
 }: MyMultimediasProviderProps) => {
     const [myMultimediaList, setMyMultimediaList] = useState<
         MyMultimediasTypes[]
-    >({} as MyMultimediasTypes[]);   
+    >({} as MyMultimediasTypes[]);
 
     const { userId, config } = useAuth();
 
@@ -57,9 +58,13 @@ export const MyMultimediaProvider = ({
         )
             .then((response) => {
                 getMyMultimediasFromApi();
+                toast.success(`Filtrado pelo tipo  ${type}`);
                 console.log(response.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                toast.error(`Não foram encontrados favoritos do tipo ${type}`);
+                console.log(err);
+            });
     };
 
     const addToMyMultimedias = ({ ...multimediaData }: MyMultimediasTypes) => {
@@ -67,21 +72,37 @@ export const MyMultimediaProvider = ({
             "/myMultimedias",
             {
                 title: multimediaData.title,
-                type: multimediaData.type,                
+                type: multimediaData.type,
                 image: multimediaData.image,
                 description: multimediaData.description,
-                userId: multimediaData.userId,                
+                userId: multimediaData.userId,
             },
             config
         )
-            .then((response) => getMyMultimediasFromApi())
-            .catch((err) => console.log(err));
+            .then((response) => {
+                getMyMultimediasFromApi();
+                toast.success("Favorito adicionado com sucesso!");
+            })
+            .catch((err) => {
+                toast.error(
+                    "Nãofoi possível adicionar o favorito no momento. Favor tentar mais tarde."
+                );
+                console.log(err);
+            });
     };
 
     const deleteMyMultimedias = (id: number) => {
         api.delete(`/myMultimedias/${id}`)
-            .then((response) => getMyMultimediasFromApi())
-            .catch((err) => console.log(err));
+            .then((response) => {
+                toast.success("Favorito deletado com sucesso!");
+                getMyMultimediasFromApi();
+            })
+            .catch((err) => {
+                toast.error(
+                    "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+                );
+                console.log(err);
+            });
     };
 
     return (
