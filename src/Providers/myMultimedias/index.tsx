@@ -33,7 +33,7 @@ const MyMultimediasContext = createContext<MyMultimediasProviderData>(
     {} as MyMultimediasProviderData
 );
 
-export const MyMultimediaProvider = ({
+export const MyMultimediasProvider = ({
     children,
 }: MyMultimediasProviderProps) => {
     const [myMultimediaList, setMyMultimediaList] = useState<
