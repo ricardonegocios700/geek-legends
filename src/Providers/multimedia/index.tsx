@@ -15,6 +15,8 @@ interface MultimediaProviderProps {
 interface MultimediaTypes {
     title: string;
     type: string;
+    like?: number;
+    dislike?: number;
     image: string;
     description: string;
     id: number;
@@ -27,6 +29,7 @@ interface MultimediaProviderData {
     postNewMultimediaToApi: (mediaData: MultimediaTypes) => void;
     updateMultimediaInApi: (mediaData: MultimediaTypes) => void;
     deleteMultimediaFromApi: (id: number) => void;
+    multimediaUserReaction: (mediaData: MultimediaTypes, reaction: number) => void;
     multimediaList: MultimediaTypes[];
     multimediaByType: MultimediaTypes[];
 }
@@ -43,7 +46,9 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         {} as MultimediaTypes[]
     );
 
-    const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>({} as MultimediaTypes[])
+    const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>(
+        {} as MultimediaTypes[]
+    );
 
     const getAllMultimediaFromApi = () => {
         api.get<MultimediaTypes[]>("/multimedias", {
@@ -66,7 +71,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         })
             .then((response) => {
                 console.log(response.data);
-                setMultimediaByType(response.data)
+                setMultimediaByType(response.data);
             })
             .catch((err) => console.log(err));
     };
@@ -116,6 +121,30 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
             .catch((err) => console.log(err));
     };
 
+    const multimediaUserReaction = (
+        { ...mediaData }: MultimediaTypes,
+        reaction: number
+    ) => {
+        let like = 0;
+        let dislike = 0;
+        if (reaction > 0) {
+            like = Number(mediaData.like) + 1;
+        } else {
+            like = Number(mediaData.like);
+        }
+        if (reaction < 0) {
+            dislike = Number(mediaData.dislike) + 1;
+        } else {
+            dislike = Number(mediaData.dislike);
+        }
+
+        api.patch<MultimediaTypes[]>(`/multimedia/${mediaData.id}`, {
+            like: like,
+            dislike: dislike,
+            userId: mediaData.userId,
+        });
+    };
+
     return (
         <MultimediaContext.Provider
             value={{
@@ -124,6 +153,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
                 postNewMultimediaToApi,
                 updateMultimediaInApi,
                 deleteMultimediaFromApi,
+                multimediaUserReaction,
                 multimediaList,
                 multimediaByType,
             }}
