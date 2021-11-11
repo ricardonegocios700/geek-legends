@@ -18,6 +18,7 @@ interface StoreType {
   segment: string;
   userId: number;
   like: number;
+  dislike: number;
   id: number;
 }
 interface StoreProviderDate {
@@ -59,7 +60,11 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   };
 
   const updateStorateDeslike = (item: StoreType) => {
-    api.patch<StoreType>(`stores/${item.id}`, { like: item.like - 1 }, config);
+    api.patch<StoreType>(
+      `stores/${item.id}`,
+      { dislike: item.like - 1 },
+      config
+    );
   };
 
   return (
