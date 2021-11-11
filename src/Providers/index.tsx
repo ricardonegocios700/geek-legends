@@ -5,6 +5,7 @@ import { AuthProvider } from "./user";
 import { XFileProvider } from "./xfile";
 import { GroupProvider } from "./group";
 import { MyStoresProvider } from "./myStore";
+import { MessagesProvider } from "./message";
 import { TalksProvider } from "./talk";
 
 interface ProvidersProps {
@@ -18,9 +19,11 @@ const Providers = ({ children }: ProvidersProps) => {
         <XFileProvider>
           <StoreProvider>
             <GroupProvider>
-              <TalksProvider>
-                <MyStoresProvider>{children}</MyStoresProvider>
-              </TalksProvider>
+              <MyStoresProvider>
+                <MessagesProvider>
+                  <TalksProvider>{children}</TalksProvider>
+                </MessagesProvider>
+              </MyStoresProvider>
             </GroupProvider>
           </StoreProvider>
         </XFileProvider>
