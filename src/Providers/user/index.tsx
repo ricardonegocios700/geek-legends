@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         console.log(response.data);
         const { accessToken } = response.data;
         localStorage.setItem(
-          "@geelLegends:access",
+          "@geekLegends:access",
           JSON.stringify(accessToken)
         );
         setAccessToken(accessToken);

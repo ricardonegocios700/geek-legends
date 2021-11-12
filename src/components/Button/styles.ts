@@ -10,7 +10,6 @@ export const ActionButton = styled.button`
   text-align: center;
   text-transform: uppercase;
   color: #fff;
-  transition: 0.5s;
   box-shadow: 0 0 15px 0px var(--red-button-shadow);
   display: block;
 
