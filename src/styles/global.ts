@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --red-button: #E23E3E;
     --blue-button: #2534B9;
     --red-button-shadow: #868b8e;
+    --back-color: #231f20;
 
       box-sizing: border-box;
       outline: none;
