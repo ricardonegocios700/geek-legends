@@ -6,10 +6,11 @@ import {
   useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { History } from "history";
 import api from "../../services/api";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
+import { History } from "history";
 interface AuthProps {
   children: ReactNode;
 }
@@ -37,7 +38,7 @@ interface DecodeData {
 
 interface AuthProviderData {
   userSignup: (userData: UserData, history: History) => void;
-  userLogin: (userData: UserData, history: History) => void;
+  userLogin: (userData: UserLoginData) => void;
   Logout: (history: History) => void;
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
@@ -106,12 +107,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
         );
         setAccessToken(accessToken);
         setAuthorized(true);
-        console.log("Login efetuado com sucesso!"); /*TODO toast*/
+        toast.success("Login efetuado com sucesso!");
         history.push("/dashboard");
       })
-      .catch((err) =>
-        console.log(`Falha! Senha ou email incorreto => ${err}`)
-      ); /*TODO toast*/
+      .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };
 
   const getUsers = () => {
