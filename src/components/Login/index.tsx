@@ -1,6 +1,7 @@
 import { useHistory } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import Button from "../Button";
 import * as yup from "yup";
 
 import { useAuth } from "../../Providers/user";
@@ -46,7 +47,7 @@ const Form = () => {
         <p>{errors.email?.message}</p>
         <input placeholder="Senha" type="password" {...register("password")} />
         <p>{errors.password?.message}</p>
-        <button type="submit">Logar</button>
+        <Button type="submit" title="Logar" backgroundColor="#E23E3E" />
       </form>
     </>
   );
