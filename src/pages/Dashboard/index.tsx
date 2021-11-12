@@ -1,18 +1,19 @@
-import InfoGeek from "../../components/infoGeek";
-import { Container } from "./styles";
+import InfoGeek from "../../components/infoGeek/index";
+import BoxTreasure from "../../components/boxTreasure/index";
+import { ContainerDash } from "./styles";
 
 const Dashboard = () => {
   return (
-    <Container>
+    <ContainerDash>
       <header>componente de cima</header>
       <div>
         <InfoGeek />
         <section>
-          <div>geek treasure</div>
           <div>Message sansei</div>
+          <BoxTreasure />
         </section>
       </div>
-    </Container>
+    </ContainerDash>
   );
 };
 
