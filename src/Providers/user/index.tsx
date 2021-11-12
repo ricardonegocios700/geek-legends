@@ -13,7 +13,10 @@ import jwtDecode from "jwt-decode";
 interface AuthProps {
   children: ReactNode;
 }
-
+interface UserLoginData {
+  email: string;
+  password: string;
+}
 interface UserData {
   userId: number;
   name: string;
@@ -91,18 +94,24 @@ export const AuthProvider = ({ children }: AuthProps) => {
       });
   };
 
-  const userLogin = (userData: UserData, history: History) => {
+  const userLogin = (userData: UserLoginData) => {
     api
       .post("/login", userData)
       .then((response) => {
-        const { access } = response.data;
-        localStorage.setItem("token", JSON.stringify(access));
-        setAccessToken(access);
+        console.log(response.data);
+        const { accessToken } = response.data;
+        localStorage.setItem(
+          "@geelLegends:access",
+          JSON.stringify(accessToken)
+        );
+        setAccessToken(accessToken);
         setAuthorized(true);
+        console.log("Login efetuado com sucesso!"); /*TODO toast*/
         history.push("/dashboard");
-        console.log("Login efetuado com sucesso!");
       })
-      .catch((err) => console.log(`Falha! Senha ou email incorreto => ${err}`));
+      .catch((err) =>
+        console.log(`Falha! Senha ou email incorreto => ${err}`)
+      ); /*TODO toast*/
   };
 
   const getUsers = () => {
