@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     --blue-div: rgba(17, 23, 80, 0.65);
     --red-button: #E23E3E;
     --blue-button: #2534B9;
+    --red-button-shadow: #868b8e;
 
       box-sizing: border-box;
       outline: none;
