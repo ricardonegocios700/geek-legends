@@ -20,11 +20,11 @@ interface UserLoginData {
 }
 
 interface UserData {
-  userId: number;
+  userId?: number;
   name: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   preferences: string;
   aboutMe: string;
   decode?: DecodeData;
@@ -45,7 +45,7 @@ interface RequestConfigTypes {
 }
 
 interface AuthProviderData {
-  userSignup: (userData: UserData, history: History) => void;
+  userSignup: (userData: UserData) => void;
   userLogin: (userData: UserLoginData) => void;
   Logout: (history: History) => void;
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     () => localStorage.getItem("token") || ""
   );
 
-  const userSignup = (userData: UserData, history: History) => {
+  const userSignup = (userData: UserData) => {
     api
       .post("/users", userData)
       .then((response) => {
