@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import api from "../../services/api";
+import { useAuth } from "../user";
 
 interface StoreProviderProps {
   children: ReactNode;
@@ -33,10 +34,7 @@ interface StoreProviderDate {
 const StoreContext = createContext<StoreProviderDate>({} as StoreProviderDate);
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {
-  const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NTk0MjAwLCJleHAiOjE2MzY1OTc4MDAsInN1YiI6IjQifQ.GHzpaTGKKAQcJbbanTUL3KTGS-D9bntB0j9ZLfiZEYo";
-
-  const config = { headers: { Authorization: `Bearer ${accessToken}` } };
+  const { config } = useAuth();
   const [stores, setStores] = useState<StoreType[]>([] as StoreType[]);
   const [storesBySegment, setStoresBySegment] = useState<StoreType[]>(
     [] as StoreType[]

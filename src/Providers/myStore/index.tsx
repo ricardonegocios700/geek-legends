@@ -24,12 +24,8 @@ const MyStoresContext = createContext<MyStoresProviderDate>(
 );
 
 export const MyStoresProvider = ({ children }: ProviderProps) => {
-  {
-    /*const { config, accessToken } = useAuth();*/
-  }
-  const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG9AZW1haWwuY29tIiwiaWF0IjoxNjM2NjUwMTAwLCJleHAiOjE2MzY2NTM3MDAsInN1YiI6IjQifQ.5W2Ief_S0afUu40WLeFVa8GgBPe3Yb0JpoussWRjO1Q";
-  const config = { headers: { Authorization: `Bearer ${accessToken}` } };
+  const { config } = useAuth();
+
   const [myStores, setMyStores] = useState<ContextType[]>([] as ContextType[]);
 
   const getMyStores = () => {
