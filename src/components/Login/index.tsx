@@ -5,6 +5,7 @@ import Button from "../Button";
 import * as yup from "yup";
 
 import { useAuth } from "../../Providers/user";
+import { Context } from "./styles";
 
 interface UserData {
   email: string;
@@ -43,11 +44,17 @@ const Form = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
-        <input placeholder="Email" {...register("email")} />
-        <p>{errors.email?.message}</p>
-        <input placeholder="Senha" type="password" {...register("password")} />
-        <p>{errors.password?.message}</p>
-        <Button type="submit" title="Logar" backgroundColor="#E23E3E" />
+        <Context className="input">
+          <input placeholder="Email" {...register("email")} />
+          {errors.email && <span>{errors.email?.message}</span>}
+          <input
+            placeholder="Senha"
+            type="password"
+            {...register("password")}
+          />
+          {errors.password && <span>{errors.password?.message}</span>}
+        </Context>
+        <Button type="submit" title="Logar" />
       </form>
     </>
   );
