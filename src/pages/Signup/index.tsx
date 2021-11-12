@@ -5,9 +5,6 @@ const Signup = () => {
     return (
         <>
             <Container>
-
-
-
                 <Div1>
                     <div>
                         <Title>Geek Legends</Title>
@@ -18,7 +15,6 @@ const Signup = () => {
                 <Div>
                     <Register />
                 </Div>
-
             </Container>
         </>
     );

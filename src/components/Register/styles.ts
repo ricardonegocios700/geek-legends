@@ -38,9 +38,10 @@ export const FormContainer = styled.form`
         font-family: Comic Neue;
         padding: 10px;
     }
+
     & p.errorMsg {
         font-size: 14px;
-        color: red;
+        color: #E23E3E;
         font-weight: 700;
         margin: 5px;        
     }
@@ -57,5 +58,13 @@ export const FormContainer = styled.form`
         text-align: center;
         font-size: 14px;
         color: #fff;
+        margin: 5px 0;
+    }
+`;
+
+export const ButtonContainer = styled.div`  
+
+    & Button {
+        width: 100%;
     }
 `;

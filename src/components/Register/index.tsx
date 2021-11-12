@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Container, FormContainer } from "./styles";
+import { Container, FormContainer, ButtonContainer } from "./styles";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
@@ -50,7 +50,7 @@ const Register = () => {
         aboutMe,
     }: FormTypes) => {
         const data = { name, email, password, preferences, aboutMe };
-        // userSignup(data);    
+        userSignup(data);
         reset();
     };
 
@@ -97,7 +97,9 @@ const Register = () => {
                         <span>Já possui uma conta?</span>
                         <Link to="/login"> Login</Link>
                     </div>
-                    <Button type="submit" title="cadastrar" />
+                    <ButtonContainer>
+                        <Button type="submit" title="cadastrar" />
+                    </ButtonContainer>
                 </FormContainer>
             </Container>
         </>
