@@ -1,15 +1,21 @@
-import { Container } from "./styles";
+import Register from "../../components/Register";
+import { Container, Div, Title } from "./styles";
 
 const Signup = () => {
-
-
-    return(
+    return (
         <>
-        <Container>
-
-        </Container>        
+            <Container>
+                <Div>
+                    <div>
+                        <Title>Geek Legends</Title>
+                    </div>
+                </Div>
+                <Div>
+                    <Register />
+                </Div>
+            </Container>
         </>
-    )
-}
+    );
+};
 
 export default Signup;
