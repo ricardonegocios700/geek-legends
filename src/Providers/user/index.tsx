@@ -6,12 +6,17 @@ import {
   useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { History } from "history";
 import api from "../../services/api";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
+import { History } from "history";
 interface AuthProps {
   children: ReactNode;
+}
+interface UserLoginData {
+  email: string;
+  password: string;
 }
 
 interface UserData {
@@ -32,51 +37,47 @@ interface DecodeData {
   sub?: string;
 }
 
+interface HeadersTypes {
+  Authorization: string;
+}
+interface RequestConfigTypes {
+  headers: HeadersTypes;
+}
+
 interface AuthProviderData {
   userSignup: (userData: UserData, history: History) => void;
-  userLogin: (userData: UserData, history: History) => void;
+  userLogin: (userData: UserLoginData) => void;
   Logout: (history: History) => void;
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
-  userId: number;
+  userId: any;
   user: UserData;
   setUserId: any;
   authorized: boolean;
   setAuthorized: any;
   accessToken: string;
-  config: {
-    headers: { Authorization: string };
-  };
+  config: RequestConfigTypes;
   usersList: any;
 }
 
-export const AuthContext = createContext<AuthProviderData>(
-  {} as AuthProviderData
-);
+const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
 
-  const [user, setUser] = useState({} as UserData);
-  const [userId, setUserId] = useState(0);
-  const [authorized, setAuthorized] = useState(false);
-  const [config, setConfig] = useState({
-    headers: {
-      Authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXRyaXpAZW1haWwuY29tIiwiaWF0IjoxNjM2NTY4MjUyLCJleHAiOjE2MzY1NzE4NTIsInN1YiI6IjEifQ.CHwm00T0XTyqHAF4Ix1FT8Af8YEN2KETVoLkNBLR1y4",
-    },
-  });
-  const [checkMove, setCheckMove] = useState(false);
-  const [usersList, setUsersList] = useState<UserData[]>({} as UserData[]);
-  const [accessToken, setAccessToken] = useState(
-    () => localStorage.getItem("token") || ""
+  const [user, setUser] = useState<UserData>({} as UserData);
+  const [userId, setUserId] = useState<Number>(0);
+  const [authorized, setAuthorized] = useState<boolean>(false);
+
+  const [config, setConfig] = useState<RequestConfigTypes>(
+    {} as RequestConfigTypes
   );
 
-  useEffect(() => {
-    setConfig({
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-  }, [accessToken]);
+  const [checkMove, setCheckMove] = useState<boolean>(false);
+  const [usersList, setUsersList] = useState<UserData[]>({} as UserData[]);
+  const [accessToken, setAccessToken] = useState<string>(
+    () => localStorage.getItem("token") || ""
+  );
 
   const userSignup = (userData: UserData, history: History) => {
     api
@@ -91,18 +92,22 @@ export const AuthProvider = ({ children }: AuthProps) => {
       });
   };
 
-  const userLogin = (userData: UserData, history: History) => {
+  const userLogin = (userData: UserLoginData) => {
     api
       .post("/login", userData)
       .then((response) => {
-        const { access } = response.data;
-        localStorage.setItem("token", JSON.stringify(access));
-        setAccessToken(access);
+        console.log(response.data);
+        const { accessToken } = response.data;
+        localStorage.setItem(
+          "@geekLegends:access",
+          JSON.stringify(accessToken)
+        );
+        setAccessToken(accessToken);
         setAuthorized(true);
+        toast.success("Login efetuado com sucesso!");
         history.push("/dashboard");
-        console.log("Login efetuado com sucesso!");
       })
-      .catch((err) => console.log(`Falha! Senha ou email incorreto => ${err}`));
+      .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };
 
   const getUsers = () => {
@@ -121,11 +126,13 @@ export const AuthProvider = ({ children }: AuthProps) => {
       setUser(decode);
       setUserId(Number(decode.decode?.sub));
       setAuthorized(true);
-      setConfig({
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
       getUsers();
     }
+    // esse setConfig aparecia em outro useEffect, com [accessToken],
+    // mudei para um só
+    setConfig({
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
   }, [accessToken, checkMove]);
 
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
