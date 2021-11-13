@@ -85,6 +85,4 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   );
 };
 
-export const useStore = () => {
-  useContext(StoreContext);
-};
+export const useStore = () => useContext(StoreContext);
