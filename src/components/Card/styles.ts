@@ -10,6 +10,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #f5f5f5;
 
     & h1 {
         text-align: center;
