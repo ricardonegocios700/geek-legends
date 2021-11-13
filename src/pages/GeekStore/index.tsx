@@ -1,16 +1,25 @@
 import Header from "../../components/Header";
-import { useLocation } from 'react-router-dom'
-
-
+import { Container } from "./styles";
+import ListCard from "../../components/ListCard/index";
+import { useStore } from "../../Providers/store";
+import { useEffect } from "react";
 
 const GeekStore = () => {
-    
 
-    return(
+    const { stores, getStores } = useStore();
+
+    useEffect(() => {
+        getStores()
+    }, [])
+
+    return (
         <>
-        <Header />
+            <Header />
+            <Container>
+                <ListCard dataToRender={stores} />
+            </Container>
         </>
-    )
-}
+    );
+};
 
 export default GeekStore;

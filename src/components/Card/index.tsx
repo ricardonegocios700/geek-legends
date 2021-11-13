@@ -8,8 +8,8 @@ interface CardProps {
     name: string;
     url?: string;
     preferences?: string;
-    like: string;
-    dislike: string;
+    like: string | number | undefined;
+    dislike: string | number | undefined;
     handleClick: (arg: number) => number;
     handleAddPersona: () => void;
 }
@@ -46,7 +46,7 @@ const Card = ({
                         {location.pathname === "/persona" ? (
                             <p>{preferences}</p>
                         ) : location.pathname === "/geekstore" ? (
-                            <a href={url}>Site</a>
+                            <a href={url} target='_about'>Site</a>
                         ) : null}
                     </p>
                 </Info>
