@@ -3,6 +3,8 @@ import DesktopBack from "../../assets/myGeekStoreBG-desktop.gif";
 import MobileBack from "../../assets/myGeekStore-mobile.jpg";
 
 export const Container = styled.section`
+    width: 100%;
+    height:100%;
     padding: 150px 70px 0;
     display: flex;
     flex-direction: row;
