@@ -29,13 +29,13 @@ export const Title = styled.h1`
   font-size: 38px;
   margin: 0;
   position: relative;
-  bottom: 160px;
+  bottom: 0px;
   width: 432px;
-  bottom: 30px;
 
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
+    bottom: 170px;
     font-size: 50px;
   }
 `;
@@ -47,13 +47,20 @@ export const Text = styled.section`
   font-size: large;
 `;
 
+export const ContainerText = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const DivText = styled.div`
   display: none;
   @media only screen and (min-width: 400px) {
     display: none;
   }
   @media only screen and (min-width: 800px) {
-    display: flex;
-    flex-direction: column;
+    display: inline;
+    position: relative;
+    botton: 320px;
+    left: 70px;
   }
 `;

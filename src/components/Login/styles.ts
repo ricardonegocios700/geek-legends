@@ -17,6 +17,7 @@ export const Container = styled.div`
   @media only screen and (min-width: 800px) {
     width: 350px;
     border-radius: 5px;
+    top: -70px;
   }
 `;
 
