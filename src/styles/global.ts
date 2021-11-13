@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   
   * {
-    --font-family-primary: Comic Neue;
+    --font-family-primary: 'Comic Neue';
     --font-family-secundary: Roboto;
     --font-color-white: #FFFFFF;
     --font-color-black: #000000;
@@ -15,16 +15,30 @@ const GlobalStyle = createGlobalStyle`
     --red-button: #E23E3E;
     --blue-button: #2534B9;
     --red-button-shadow: #868b8e;
+    --back-color: #231f20;
 
       box-sizing: border-box;
       outline: none;
+      list-style: none;
+      text-decoration: none;
+      padding: 0;
+      margin: 0;
+      
   }
   
   body {
     margin: 0;
     padding: 0;
     border: none;
-    list-style: none;
+    
+  }
+
+  a {
+    color: #000;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
 
