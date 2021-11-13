@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 300px;
-    height: 400px;
+    height: 450px;
     border: 2px solid #000;
     border-radius: 6px;
     padding: 40px 30px;
@@ -79,4 +79,10 @@ export const Dislike = styled(Like)`
         width: 50px;
         height: 50px;
     }
+`;
+
+export const Info = styled.div`
+    margin: 0 auto;
+    width: 90%;
+    text-align: justify;
 `;

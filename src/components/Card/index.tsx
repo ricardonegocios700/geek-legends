@@ -1,4 +1,4 @@
-import { Container, ImageDiv, Like, Dislike } from "./styles";
+import { Container, ImageDiv, Like, Dislike, Info } from "./styles";
 import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
 import { useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ interface CardProps {
     like: string;
     dislike: string;
     handleClick: (arg: number) => number;
+    handleAddPersona: () => void;
 }
 
 interface LocationTypes {
@@ -28,6 +29,7 @@ const Card = ({
     like,
     dislike,
     handleClick,
+    handleAddPersona
 }: CardProps) => {
     const location = useLocation<PathProps>();
 
@@ -38,7 +40,7 @@ const Card = ({
                     <img src={img} alt="nome" />
                 </ImageDiv>
 
-                <div>
+                <Info>
                     <h1>{name}</h1>
                     <p>
                         {location.pathname === "/persona" ? (
@@ -47,7 +49,7 @@ const Card = ({
                             <a href={url}>Site</a>
                         ) : null}
                     </p>
-                </div>
+                </Info>
 
                 <div className="emojis">
                     <Like>
@@ -58,7 +60,9 @@ const Card = ({
                         <p>{like}</p>
                     </Like>
                     {location.pathname === "/persona" && (
-                        <IoMdAddCircle className="addCard" />
+                        <IoMdAddCircle 
+                            onClick={handleAddPersona}
+                            className="addCard" />
                     )}
                     <Dislike>
                         <BsEmojiFrownFill
