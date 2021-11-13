@@ -1,12 +1,12 @@
 import Form from "../../components/Login/";
-import { Title, Container, Text } from "./styles";
+import { DivText, Title, Container, Text } from "./styles";
 
 const Login = () => {
   return (
     <Container>
       <Form />
-      <div>
-        <Title>Geek Legends</Title>
+      <Title>Geek Legends</Title>
+      <DivText>
         <Text>
           <p>Sua entrada para o mundo Geek!!!</p>
           <p>
@@ -14,7 +14,7 @@ const Login = () => {
           </p>
           <p>Localize o seu ‘mimo’ favorito e aumente a sua coleção!!</p>
         </Text>
-      </div>
+      </DivText>
     </Container>
   );
 };

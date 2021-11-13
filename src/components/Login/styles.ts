@@ -1,6 +1,27 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  border: #000 1px solid;
+  border-radius: 8px;
+  background-color: #672828;
+  width: 280px;
+  height: 280px;
+  position: relative;
+  bottom: 54px;
+  text-align: center;
+  top: 30px;
+
+  @media only screen and (min-width: 400px) {
+    width: 350px;
+  }
+  @media only screen and (min-width: 800px) {
+    width: 350px;
+    border-radius: 5px;
+  }
+`;
+
 export const FormLogin = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,25 +35,17 @@ export const FormLogin = styled.form`
   }
 `;
 
-export const Context = styled.div`
-  border: #000 1px solid;
-  border-radius: 8px;
-  background-color: #672828;
-  width: 280px;
-  height: 280px;
-  position: relative;
-  bottom: 54px;
-  text-align: center;
-`;
-
 export const H1 = styled.h1`
-  align-items: left;
+  text-align: left;
   color: #fff;
   margin-top: 20px;
   margin-bottom: 6px;
+  font-family: "Comic Neue";
+  font-size: 35px;
+  font-weight: bold;
 `;
 
-export const CentextInput = styled.div`
+export const ContainerInput = styled.div`
   text-align: center;
 `;
 

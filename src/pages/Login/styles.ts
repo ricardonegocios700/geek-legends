@@ -6,21 +6,19 @@ export const Container = styled.section`
   height: 100vh;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
+  align-items: center;
   position: relative;
-  h1 {
-    text-align: left;
-  }
+  text-align: left;
   @media only screen and (min-width: 400px) {
+  }
+  @media only screen and (min-width: 800px) {
     background: url(${LoginBG}) no-repeat;
     background-size: cover;
     background-position: center;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-  }
-  @media only screen and (min-width: 800px) {
   }
 `;
 
@@ -33,6 +31,7 @@ export const Title = styled.h1`
   position: relative;
   bottom: 160px;
   width: 432px;
+  bottom: 30px;
 
   @media only screen and (min-width: 400px) {
   }
@@ -46,5 +45,15 @@ export const Text = styled.section`
   bottom: 110px;
   color: #fff;
   font-size: large;
-  width: 532px;
+`;
+
+export const DivText = styled.div`
+  display: none;
+  @media only screen and (min-width: 400px) {
+    display: none;
+  }
+  @media only screen and (min-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
