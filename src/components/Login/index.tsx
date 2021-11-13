@@ -55,6 +55,7 @@ const Form = () => {
           {errors.password && <span>{errors.password?.message}</span>}
         </CentextInput>
         <Button type="submit" title="Logar" />
+        <a href="/signup"> Não possui uma conta? Cadastro</a>
       </FormLogin>
     </Context>
   );

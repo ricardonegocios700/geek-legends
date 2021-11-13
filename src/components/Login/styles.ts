@@ -5,7 +5,12 @@ export const FormLogin = styled.form`
   flex-direction: column;
   align-items: center;
   button {
-    margin: 20px 0;
+    margin: 13px 0;
+  }
+  a {
+    color: #fff;
+    font-size: small;
+    margin-top: 3px;
   }
 `;
 
@@ -21,9 +26,10 @@ export const Context = styled.div`
 `;
 
 export const H1 = styled.h1`
-  /* text-align: left; */
   align-items: left;
-  /* justify-content: left; */
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 6px;
 `;
 
 export const CentextInput = styled.div`
