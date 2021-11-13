@@ -1,18 +1,22 @@
+import { useEffect } from "react";
 import { useMessages } from "./../../Providers/message/index";
+import { useAuth } from "../../Providers/user";
+import { MessageSenseiStyle } from "./styles";
 
 export const MessageSensei = () => {
-  const { message }: any = useMessages();
+  const { config } = useAuth();
+  const { getMessage, message } = useMessages();
+
+  useEffect(() => {
+    getMessage();
+  }, [config]);
 
   return (
-    <>
+    <MessageSenseiStyle>
       <h3>Mensagem do Sensei</h3>
-      {message && (
-        <>
-          <p>{message.quote}</p>
-          <p>{message.author}</p>
-        </>
-      )}
-    </>
+      <h5>{message.quote}</h5>
+      <p>{message.author}</p>
+    </MessageSenseiStyle>
   );
 };
 

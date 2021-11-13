@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const [checkMove, setCheckMove] = useState<boolean>(false);
   const [usersList, setUsersList] = useState<UserData[]>({} as UserData[]);
   const [accessToken, setAccessToken] = useState<string>(
-    () => localStorage.getItem("token") || ""
+    () => localStorage.getItem("@geekLegends:access") || ""
   );
 
   const userSignup = (userData: UserData) => {
@@ -98,10 +98,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .then((response) => {
         console.log(response.data);
         const { accessToken } = response.data;
-        localStorage.setItem(
-          "@geekLegends:access",
-          JSON.stringify(accessToken)
-        );
+        localStorage.setItem("@geekLegends:access", accessToken);
         setAccessToken(accessToken);
         setAuthorized(true);
         toast.success("Login efetuado com sucesso!");
@@ -171,6 +168,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
     console.log("Logout realizado");
   };
+
+  console.log(config);
 
   return (
     <AuthContext.Provider

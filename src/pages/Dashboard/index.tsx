@@ -1,6 +1,7 @@
 import InfoGeek from "../../components/infoGeek/index";
 import BoxTreasure from "../../components/boxTreasure/index";
 import { ContainerDash } from "./styles";
+import MessageSensei from "../../components/msgRandom";
 
 const Dashboard = () => {
   return (
@@ -9,7 +10,7 @@ const Dashboard = () => {
       <div>
         <InfoGeek />
         <section>
-          <div>Message sansei</div>
+          <MessageSensei />
           <BoxTreasure />
         </section>
       </div>
