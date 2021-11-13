@@ -6,10 +6,12 @@ export const Container = styled.div`
     border: 2px solid #000;
     border-radius: 6px;
     padding: 40px 30px;
-    margin: 10px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #f5f5f5;
+
 
     & h1 {
         text-align: center;
@@ -44,7 +46,7 @@ export const ImageDiv = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 8px;
-        object-fit: cover;
+        object-fit: scale-down;
     }
 `;
 
