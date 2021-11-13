@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
       list-style: none;
       text-decoration: none;
       padding: 0;
+      margin: 0;
       
   }
   
