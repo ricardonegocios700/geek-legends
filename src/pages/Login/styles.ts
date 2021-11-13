@@ -9,7 +9,9 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   position: relative;
-
+  h1 {
+    text-align: left;
+  }
   @media only screen and (min-width: 400px) {
     background: url(${LoginBG}) no-repeat;
     background-size: cover;
