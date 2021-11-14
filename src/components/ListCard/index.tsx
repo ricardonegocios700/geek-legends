@@ -1,6 +1,6 @@
 import Card from "../Card";
 
-const ListCard = ({ dataToRender }: any) => {
+const ListCard = ({ dataToRender, ...rest }: any) => {
 
 
     return(
