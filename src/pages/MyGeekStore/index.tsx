@@ -1,13 +1,25 @@
 import Header from "../../components/Header";
+import { Container } from "./styles";
+import ListCard from "../../components/ListCard/index";
+import { useMyStores } from "../../Providers/myStore/index";
+import { useEffect } from "react";
 
 const MyGeekStore = () => {
 
+    const { myStores, getMyStores, removeMyStore } = useMyStores();
 
-    return(
+    useEffect(() => {
+        getMyStores()
+    }, [])
+
+    return (
         <>
-        <Header />
+            <Header />
+            <Container>
+                <ListCard dataToRender={myStores} handleRemove={removeMyStore}/>
+            </Container>
         </>
-    )
-}
+    );
+};
 
 export default MyGeekStore;
