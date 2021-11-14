@@ -13,7 +13,6 @@ interface MultimediaTypes {
 // TODO  typeValue não é any, eu quero que seja uma string
 const TypesMultimedia = ({ typeValue }: any) => {
   const { multimediaByType, getMultimediaByType } = useMultimedia();
-  const [type, setType] = useState<MultimediaTypes[]>({} as MultimediaTypes[]);
 
   useEffect(() => {
     getMultimediaByType(typeValue);

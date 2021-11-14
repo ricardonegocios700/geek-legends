@@ -49,6 +49,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   const { config, accessToken } = useAuth();
 
   const getAllMultimediaFromApi = () => {
+    //TODO não usamos config
     api
       .get<MultimediaTypes[]>("/multimedias", {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -64,7 +65,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   };
 
   const getMultimediaByType = (type: string) => {
-    //TODO erro quando uso a variavel login
+    //TODO não usamos config
     api
       .get<MultimediaTypes[]>(`/multimedias?type=${type}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
