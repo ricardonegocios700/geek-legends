@@ -143,7 +143,13 @@ export const AuthProvider = ({ children }: AuthProps) => {
     setConfig({
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-  }, [accessToken, checkMove]);
+  }, [checkMove]);
+
+  useEffect(() => {
+    setConfig({
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }, [accessToken]);
 
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
     api
