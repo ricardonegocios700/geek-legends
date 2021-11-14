@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import DesktopBack from "../../assets/myGeekStoreBG-desktop.gif";
+import DesktopBack from "../../assets/GeekStore-desktop.jpg";
 import MobileBack from "../../assets/myGeekStore-mobile.jpg";
 
 export const Container = styled.section`
     width: 100%;
-    height:100%;
+    height:100vh;
     padding: 150px 70px 0;
     display: flex;
     flex-direction: row;

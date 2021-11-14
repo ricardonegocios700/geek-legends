@@ -1,12 +1,14 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import api from "../../services/api";
 import { useAuth } from "../user";
 
-interface MessagesProviderData {
-  getMessage: () => void;
-  message: ContextType;
-}
-interface ProviderProps {
+interface MessagesProps {
   children: ReactNode;
 }
 interface ContextType {
@@ -16,11 +18,15 @@ interface ContextType {
   author: string;
 }
 
+interface MessagesProviderData {
+  getMessage: () => void;
+  message: ContextType;
+}
 const MessagesContext = createContext<MessagesProviderData>(
   {} as MessagesProviderData
 );
 
-export const MessagesProvider = ({ children }: ProviderProps) => {
+export const MessagesProvider = ({ children }: MessagesProps) => {
   const { config } = useAuth();
   const [message, setMessage] = useState<ContextType>({} as ContextType);
 
@@ -30,7 +36,7 @@ export const MessagesProvider = ({ children }: ProviderProps) => {
 
   const getMessage = () => {
     api
-      .get<ContextType[]>(`messages/`, config)
+      .get<ContextType[]>(`/messages`, config)
       .then((resp) => {
         const max = Number(resp.data.length);
         const random = getRandomArbitrary(0, max);
@@ -46,6 +52,4 @@ export const MessagesProvider = ({ children }: ProviderProps) => {
   );
 };
 
-export const useMessages = () => {
-  useContext(MessagesContext);
-};
+export const useMessages = () => useContext(MessagesContext);

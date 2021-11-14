@@ -30,7 +30,7 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
 
   const getMyStores = () => {
     api
-      .get<ContextType[]>("myStores/", config)
+      .get<ContextType[]>("/myStores", config)
       .then((resp) => setMyStores(resp.data))
       .catch((err) => console.log(err));
   };
@@ -58,6 +58,4 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
   );
 };
 
-export const useMyStores = () => {
-  useContext(MyStoresContext);
-};
+export const useMyStores = () => useContext(MyStoresContext);

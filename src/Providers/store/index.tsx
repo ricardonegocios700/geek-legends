@@ -48,14 +48,14 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
   const getStoreBySegment = (segment: string) => {
     api
-      .get<StoreType[]>(`stores?segment=${segment}`, config)
+      .get<StoreType[]>(`/stores?segment=${segment}`, config)
       .then((resp) => setStoresBySegment(resp.data))
       .catch((err) => console.log(err));
   };
 
   const updateStoreLike = (item: StoreType) => {
     api.patch<StoreType>(
-      `stores/${item.id}`,
+      `/stores/${item.id}`,
       { like: Number(item.like) + 1 },
       config
     );
@@ -63,7 +63,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
 
   const updateStoreDeslike = (item: StoreType) => {
     api.patch<StoreType>(
-      `stores/${item.id}`,
+      `/stores/${item.id}`,
       { dislike: Number(item.like) - 1 },
       config
     );
