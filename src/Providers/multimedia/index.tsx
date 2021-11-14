@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 import api from "../../services/api";
 import { useAuth } from "../user/index";
@@ -49,7 +43,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   );
 
   const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>(
-    {} as MultimediaTypes[]
+    [] as MultimediaTypes[]
   );
 
   const { config } = useAuth();
@@ -58,15 +52,17 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     api
       .get<MultimediaTypes[]>("/multimedias", config)
       .then((response) => {
-        console.log("no provider: ", response.data);
         setMultimediaList(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error(
+          "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+        );
+      });
   };
 
   const getMultimediaByType = (type: string) => {
-    const accessToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpY2FyZG9AZW1haWwuY29tIiwiaWF0IjoxNjM2ODUyMzg4LCJleHAiOjE2MzY4NTU5ODgsInN1YiI6IjQifQ._UvwcunFdaXfZMt-F-mHHaQs7frP1CUrnmAkwVC0Jq8";
+    console.log("config", config);
     api
       .get<MultimediaTypes[]>(`/multimedias?type=${type}`, config)
       .then((response) => {
