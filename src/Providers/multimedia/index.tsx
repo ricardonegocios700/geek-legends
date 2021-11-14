@@ -62,7 +62,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   };
 
   const getMultimediaByType = (type: string) => {
-    console.log("config", config);
+    //TODO erro quando uso a variavel login
     api
       .get<MultimediaTypes[]>(`/multimedias?type=${type}`, config)
       .then((response) => {
