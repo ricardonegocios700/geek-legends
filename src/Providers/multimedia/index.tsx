@@ -45,7 +45,7 @@ const MultimediaContext = createContext<MultimediaProviderData>(
 
 export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   const [multimediaList, setMultimediaList] = useState<MultimediaTypes[]>(
-    {} as MultimediaTypes[]
+    [] as MultimediaTypes[]
   );
 
   const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>(

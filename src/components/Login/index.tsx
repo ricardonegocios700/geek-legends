@@ -16,9 +16,9 @@ const Form = () => {
   const history = useHistory();
   const { authorized, userLogin } = useAuth();
 
-  if (authorized) {
+  /*if (authorized) {
     history.push("/dashboard");
-  }
+  }*/
 
   const schema = yup.object().shape({
     email: yup
