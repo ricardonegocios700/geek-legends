@@ -1,12 +1,14 @@
 import InfoGeek from "../../components/infoGeek/index";
 import BoxTreasure from "../../components/boxTreasure/index";
-import { ContainerDash } from "./styles";
+import Header from "../../components/Header";
+import { ContainerDash, Space } from "./styles";
 import MessageSensei from "../../components/msgRandom";
 
 const Dashboard = () => {
   return (
     <ContainerDash>
-      <header>componente de cima</header>
+      <Header />
+      <Space> </Space>
       <div>
         <InfoGeek />
         <section>

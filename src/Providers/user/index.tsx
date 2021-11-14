@@ -34,7 +34,7 @@ interface DecodeData {
   email: string;
   iat: number;
   exp: number;
-  sub?: string;
+  sub: string;
 }
 
 interface HeadersTypes {
@@ -50,8 +50,11 @@ interface AuthProviderData {
   Logout: (history: History) => void;
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
+  getOneUser: (userId: UserData) => void;
   userId: any;
   user: UserData;
+  userInfo: UserData;
+  setUser: any;
   setUserId: any;
   authorized: boolean;
   setAuthorized: any;
@@ -66,6 +69,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
 
   const [user, setUser] = useState<UserData>({} as UserData);
+  const [userInfo, setUserInfo] = useState<UserData>({} as UserData);
   const [userId, setUserId] = useState<Number>(0);
   const [authorized, setAuthorized] = useState<boolean>(false);
 
@@ -83,12 +87,12 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .post("/users", userData)
       .then((response) => {
-        console.log("Conta criada com sucesso!");
+        toast.success("Conta criada com sucesso!");
         setUser(response.data);
-        history.push("/dashboard");
+        history.push("/login");
       })
       .catch((err) => {
-        console.log(`erro ao criar`);
+        toast.error(`erro ao criar`);
       });
   };
 
@@ -96,7 +100,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .post("/login", userData)
       .then((response) => {
-        console.log(response.data);
         const { accessToken } = response.data;
         localStorage.setItem("@geekLegends:access", accessToken);
         setAccessToken(accessToken);
@@ -111,17 +114,27 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .get(`/users`, config)
       .then((response) => {
-        console.log(response.data);
+        setUsersList(response.data);
       })
       .catch((err) => console.log(userId));
+  };
+
+  const getOneUser = (userId: UserData) => {
+    api
+      .get(`users?id=${userId}`, config)
+      .then((response) => {
+        setUserInfo(response.data[0]);
+        setUserId(response.data.id);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     const token = accessToken;
     if (token) {
-      const decode: UserData = jwtDecode(token);
-      setUser(decode);
-      setUserId(Number(decode.decode?.sub));
+      const decode: DecodeData = jwtDecode(token);
+      let num = Number(decode.sub);
+      setUserId(num);
       setAuthorized(true);
       getUsers();
     }
@@ -151,7 +164,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       )
       .then((response) => {
         setCheckMove(!checkMove);
-        console.log(`Usuário alterado. Olá ${response.data.username}`);
+        toast.success(`Usuário alterado. Olá ${response.data.username}`);
       })
       .catch((err) => {
         console.log(err);
@@ -166,10 +179,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
     history.push("/login");
 
-    console.log("Logout realizado");
+    toast.success("Logout realizado");
   };
-
-  console.log(config);
 
   return (
     <AuthContext.Provider
@@ -177,8 +188,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
         userSignup,
         Logout,
         userLogin,
+        getOneUser,
         userId,
         user,
+        userInfo,
+        setUser,
         setUserId,
         usersList,
         userProfileUpdate,

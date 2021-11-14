@@ -11,6 +11,7 @@ export const Container = styled.div`
   align-items: center;
   border: 2px solid transparent;
   border-radius: 20px;
+  color: black;
   h3 {
     background: darkblue;
     border-radius: 20px 20px 0 0;
