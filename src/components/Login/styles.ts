@@ -42,6 +42,7 @@ export const H1 = styled.h1`
   font-family: "Comic Neue";
   font-size: 35px;
   font-weight: bold;
+  width: 200px;
 `;
 
 export const ContainerInput = styled.div`
