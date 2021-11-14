@@ -23,9 +23,9 @@ const TypesMultimedia = ({ typeValue }: any) => {
     <>
       {console.log(typeValue, multimediaByType)}
       <h1>Lista</h1>
-      {/*multimediaByType.map((item, index) => (
+      {multimediaByType.map((item, index) => (
         <p key={index}> {item.title}</p>
-      ))*/}
+      ))}
     </>
   );
 };

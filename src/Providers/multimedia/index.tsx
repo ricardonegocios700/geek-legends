@@ -46,11 +46,13 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     [] as MultimediaTypes[]
   );
 
-  const { config } = useAuth();
+  const { config, accessToken } = useAuth();
 
   const getAllMultimediaFromApi = () => {
     api
-      .get<MultimediaTypes[]>("/multimedias", config)
+      .get<MultimediaTypes[]>("/multimedias", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
       .then((response) => {
         setMultimediaList(response.data);
       })
@@ -64,7 +66,9 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   const getMultimediaByType = (type: string) => {
     //TODO erro quando uso a variavel login
     api
-      .get<MultimediaTypes[]>(`/multimedias?type=${type}`, config)
+      .get<MultimediaTypes[]>(`/multimedias?type=${type}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
       .then((response) => {
         setMultimediaByType(response.data);
       })
