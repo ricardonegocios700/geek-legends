@@ -8,8 +8,8 @@ interface MultimediaTypes {
   id: number;
   userId?: number;
 }
-const Card = (item: MultimediaTypes) => {
-  return <h1>Cartão de multimidia por tipo</h1>;
+const Card = (item: MultimediaTypes, { ...rest }: any) => {
+  return <h1 {...rest}>{item.title}</h1>;
 };
 
 export default Card;

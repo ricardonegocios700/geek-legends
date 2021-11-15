@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMultimedia } from "../../Providers/multimedia";
+import Card from "../CardMultmedia";
+//({ dataToRender, ...rest }: any)
 interface MultimediaTypes {
   title: string;
   type: string;
@@ -20,10 +22,14 @@ const TypesMultimedia = ({ typeValue }: any) => {
 
   return (
     <>
-      {console.log(typeValue, multimediaByType)}
       <h1>Lista</h1>
       {multimediaByType.map((item, index) => (
-        <p key={index}> {item.title}</p>
+        <div key={index}>
+          <p>
+            {typeof item} {item.title} {item.type}
+          </p>
+          {/* <Card item={item} />  //TODO não passa */}
+        </div>
       ))}
     </>
   );
