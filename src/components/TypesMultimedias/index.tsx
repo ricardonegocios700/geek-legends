@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMultimedia } from "../../Providers/multimedia";
-import Card from "../CardMultmedia";
+import { H1, Div, Container } from "./style";
+//import Card from "../CardMultmedia";
 //({ dataToRender, ...rest }: any)
 interface MultimediaTypes {
   title: string;
@@ -21,17 +22,17 @@ const TypesMultimedia = ({ typeValue }: any) => {
   }, []);
 
   return (
-    <>
-      <h1>Lista</h1>
+    <Container>
+      <H1>{typeValue}</H1>
       {multimediaByType.map((item, index) => (
-        <div key={index}>
-          <p>
-            {typeof item} {item.title} {item.type}
-          </p>
+        <Div key={index}>
+          <p>{typeof item}</p>
+          <p> {item.title}</p>
+          <p> {item.type}</p>
           {/* <Card item={item} />  //TODO não passa */}
-        </div>
+        </Div>
       ))}
-    </>
+    </Container>
   );
 };
 

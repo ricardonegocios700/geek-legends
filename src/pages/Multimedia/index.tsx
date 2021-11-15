@@ -5,7 +5,7 @@ const Multimedia = () => {
   return (
     <Container>
       <Header />
-      <Div>
+      <Div className="teste">
         <TypesMultimedia typeValue="Filmes" />
         <TypesMultimedia typeValue="Animes" />
         <TypesMultimedia typeValue="Gibis" />
