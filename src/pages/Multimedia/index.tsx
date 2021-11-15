@@ -4,7 +4,7 @@ import { Container, Div } from "./styles";
 const Multimedia = () => {
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       <Div className="teste">
         <TypesMultimedia typeValue="Filmes" />
         <TypesMultimedia typeValue="Animes" />
