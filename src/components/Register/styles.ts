@@ -57,9 +57,12 @@ export const FormContainer = styled.form`
     & > div {
         text-align: center;
         font-size: 14px;
+        font-family: var(--font-family-secundary);
         color: #fff;
-        margin: 5px 0;
+        margin: 5px 0;       
+        
     }
+
 `;
 
 export const ButtonContainer = styled.div`  
