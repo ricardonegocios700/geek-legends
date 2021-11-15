@@ -19,6 +19,7 @@ interface XFileTypes {
     text: string;
     userId: number;
     id?: number;
+    date: string;
 }
 
 interface XFileProviderData {
@@ -27,7 +28,7 @@ interface XFileProviderData {
     getSpecificPost: (isRead: string, destUserId: number) => void;
     postUpdate: (postDat: XFileTypes) => void;
     deletePost: (id: number) => void;
-    allPosts: XFileTypes[];    
+    allPosts: XFileTypes[];
 }
 
 const XFileContext = createContext<XFileProviderData>({} as XFileProviderData);
@@ -35,7 +36,7 @@ const XFileContext = createContext<XFileProviderData>({} as XFileProviderData);
 export const XFileProvider = ({ children }: XFileProviderProps) => {
     const [allPosts, setAllPosts] = useState<XFileTypes[]>({} as XFileTypes[]);
 
-    const { config } = useAuth();
+    const { config, accessToken } = useAuth();
 
     const getPostsFromApi = () => {
         api.get<XFileTypes[]>("/posts", config)
@@ -43,7 +44,9 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
                 setAllPosts(response.data);
                 console.log(response.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log("Erro: " + err);
+            });
     };
 
     const createAPost = ({ ...postData }: XFileTypes) => {
@@ -53,6 +56,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
                 title: postData.title,
                 text: postData.text,
                 userId: postData.userId,
+                date: postData.date,
             },
             config
         )
@@ -76,10 +80,10 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
             title: postData.title,
             text: postData.text,
             userId: postData.userId,
+            date: postData.date,
         })
             .then((response) => {
                 getPostsFromApi();
-                console.log(response.data);
             })
             .catch((err) => console.log(err));
     };
@@ -88,9 +92,13 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
         api.delete<XFileTypes[]>(`/posts/${id}`, config)
             .then((response) => {
                 getPostsFromApi();
-                console.log(response.data)})
+            })
             .catch((err) => console.log(err));
     };
+
+    useEffect(() => {
+        getPostsFromApi();
+    }, [config]);
 
     return (
         <XFileContext.Provider
@@ -100,7 +108,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
                 getSpecificPost,
                 postUpdate,
                 deletePost,
-                allPosts,                
+                allPosts,
             }}
         >
             {children}
