@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
     --font-family-secundary: Roboto;
     --font-color-white: #FFFFFF;
     --font-color-black: #000000;
+    --font-color-guia: #76F7FF;
     
     --header-background-color: #98C1FF;
 
