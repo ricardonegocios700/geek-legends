@@ -95,7 +95,7 @@ const Register = () => {
 
                     <div>
                         <span>Já possui uma conta?</span>
-                        <Link to="/login"> Login</Link>
+                        <Link style={{color: '#fff'}} to="/login"> Login</Link>
                     </div>
                     <ButtonContainer>
                         <Button type="submit" title="cadastrar" />

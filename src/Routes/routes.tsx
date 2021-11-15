@@ -10,11 +10,15 @@ import MyPersona from "../pages/MyPersona/index";
 import MyXFileGeek from "../pages/MyXFileGeek/index";
 import Persona from "../pages/Persona/index";
 import Signup from "../pages/Signup/index";
+import { useLocation } from "react-router-dom";
 
 const Routes = () => {
+
+    const location = useLocation();
+
     return (
         <>
-            <Switch>
+            <Switch location={location} key={location.pathname}>
                 <Route exact path="/">
                     <Home />
                 </Route>
