@@ -15,14 +15,15 @@ const Persona = () => {
   return (
     <>
       <Header />
-      {usersList.map((item: CardUsersData) => (
-        <CardPersona
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          preferences={item.preferences}
-        />
-      ))}
+      {usersList[0] &&
+        usersList.map((item: CardUsersData) => (
+          <CardPersona
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            preferences={item.preferences}
+          />
+        ))}
     </>
   );
 };

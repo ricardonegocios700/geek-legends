@@ -118,6 +118,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .get(`/users`, config)
       .then((response) => {
+        console.log(response.data);
         setUsersList(response.data);
       })
       .catch((err) => console.log(err));
@@ -150,7 +151,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       let num = Number(decode.sub);
       setUserId(num);
       setAuthorized(true);
-      getUsers();
     }
     // esse setConfig aparecia em outro useEffect, com [accessToken],
     // mudei para um só
@@ -158,6 +158,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
   }, [accessToken, checkMove]);
+
+  useEffect(() => {
+    getUsers();
+  }, [config]);
 
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
     api
