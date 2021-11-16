@@ -4,8 +4,9 @@ import BackGroundMobile from "../../assets/myXFileGeek-mobile.jpg";
 
 export const Container = styled.section`
   width: 100%;
-  height: 100vh;
-  padding: 150px 10px 0;
+  min-height: 100vh;
+  height: 100%;
+  padding: 150px 10px 0;  
 
   background: url(${BackGroundMobile});
   background-size: cover;
@@ -17,6 +18,6 @@ export const Container = styled.section`
     background: url(${BackGroundDesktop}) no-repeat;
     background-size: cover;
     background-position: center;
-    padding: 150px 70px 0;
+    padding: 150px 70px 10px;
   }
 `;

@@ -69,6 +69,10 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
     );
   };
 
+  useEffect(() => {
+    getStores()
+  }, [config])
+
   return (
     <StoreContext.Provider
       value={{
