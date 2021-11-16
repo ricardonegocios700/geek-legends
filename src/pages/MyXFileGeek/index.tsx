@@ -1,8 +1,11 @@
 import Header from "../../components/Header";
 import XFilesForm from "../../components/XFilesForm";
-import { Container } from "./styles";
+import { Container, Button } from "./styles";
 import XFileListCard from "../../components/XFileListCard";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { RiArrowDownSFill } from 'react-icons/ri';
+import { RiArrowUpSFill } from 'react-icons/ri';
 
 const pageTransition = {
   ease: "easeIn",
@@ -10,6 +13,9 @@ const pageTransition = {
 };
 
 const MyXFileGeek = () => {
+
+  const [ isShow, setIsShow ] = useState(false)
+
   return (
     <>
       <motion.div
@@ -20,7 +26,15 @@ const MyXFileGeek = () => {
       >
         <Header />
         <Container>
-          <XFilesForm />
+          <Button
+            onClick={() => setIsShow(!isShow)}
+          >
+            {!isShow ? 'Add coment' : 'Close form'}
+            {!isShow ? <RiArrowDownSFill 
+              style={{fontSize: '30px'}} /> : <RiArrowUpSFill style={{fontSize: '30px'}}/>}
+              
+          </Button>
+          {isShow && <XFilesForm />}
           <XFileListCard />
         </Container>
       </motion.div>
