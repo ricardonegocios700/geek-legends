@@ -44,6 +44,12 @@ interface RequestConfigTypes {
   headers: HeadersTypes;
 }
 
+interface CardUsersData {
+  id: number;
+  name: string;
+  preferences: string;
+}
+
 interface AuthProviderData {
   userSignup: (userData: UserData) => void;
   userLogin: (userData: UserLoginData) => void;
@@ -51,7 +57,7 @@ interface AuthProviderData {
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
   getOneUser: (userId: UserData) => void;
-  getOneUserForAddMyPersona: (userId: UserData) => void;
+  getOneUserForAddMyPersona: (id: CardUsersData) => void;
   userId: any;
   user: UserData;
   userInfo: UserData;
@@ -62,27 +68,23 @@ interface AuthProviderData {
   accessToken: string;
   config: RequestConfigTypes;
   usersList: any;
+  usersListAdd: UserData[];
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
-
   const [user, setUser] = useState<UserData>({} as UserData);
   const [userInfo, setUserInfo] = useState<UserData>({} as UserData);
   const [userId, setUserId] = useState<Number>(0);
   const [authorized, setAuthorized] = useState<boolean>(false);
-
   const [config, setConfig] = useState<RequestConfigTypes>(
     {} as RequestConfigTypes
   );
-
   const [checkMove, setCheckMove] = useState<boolean>(false);
-  const [usersList, setUsersList] = useState<UserData[]>({} as UserData[]);
-  const [usersListAdd, setUsersListAdd] = useState<UserData[]>(
-    {} as UserData[]
-  );
+  const [usersList, setUsersList] = useState<UserData[]>([] as UserData[]);
+  const [usersListAdd, setUsersListAdd] = useState<UserData[]>([]);
   const [accessToken, setAccessToken] = useState<string>(
     () => localStorage.getItem("@geekLegends:access") || ""
   );
@@ -134,15 +136,17 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .catch((err) => console.log(err));
   };
 
-  const getOneUserForAddMyPersona = (userId: UserData) => {
+  const getOneUserForAddMyPersona = ({ id }: CardUsersData) => {
     api
-      .get(`users?id=${userId}`, config)
+      .get(`/users?id=${id}`, config)
       .then((response) => {
-        setUsersListAdd([...usersListAdd, response.data[0]]);
-        setUserId(response.data.id);
+        !usersListAdd.find(
+          (person: UserData) => person.name === response.data[0].name
+        ) && setUsersListAdd([...usersListAdd, response.data[0]]);
       })
       .catch((err) => console.log(err));
   };
+  console.log(usersListAdd);
 
   useEffect(() => {
     const token = accessToken;
@@ -217,6 +221,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setUser,
         setUserId,
         usersList,
+        usersListAdd,
         userProfileUpdate,
         authorized,
         setAuthorized,
