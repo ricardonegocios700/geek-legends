@@ -10,8 +10,8 @@ interface CardProps {
     preferences?: string;
     like: string | number | undefined;
     dislike: string | number | undefined;
-    handleClick: (arg: number) => number;
-    handleAddPersona: () => void;
+    handleClick?: (arg: number) => number;
+    handleAddPersona?: () => void;
 }
 
 interface LocationTypes {
@@ -37,7 +37,7 @@ const Card = ({
         <>
             <Container>
                 <ImageDiv>
-                    <img src={img} alt="nome" />
+                    <img src={img} alt={name} />
                 </ImageDiv>
 
                 <Info>
@@ -55,19 +55,19 @@ const Card = ({
                     <Like>
                         <BsEmojiHeartEyesFill
                             className="smile"
-                            onClick={() => handleClick(1)}
+                            // onClick={() => handleClick(1)}
                         />
                         <p>{like}</p>
                     </Like>
-                    {location.pathname === "/persona" && (
+                    {location.pathname === "/persona" || location.pathname==='/geekstore' ? (
                         <IoMdAddCircle 
                             onClick={handleAddPersona}
                             className="addCard" />
-                    )}
+                    ) : null}
                     <Dislike>
                         <BsEmojiFrownFill
                             className="sad"
-                            onClick={() => handleClick(-1)}
+                            // onClick={() => handleClick(-1)}
                         />
                         <p>{dislike}</p>
                     </Dislike>

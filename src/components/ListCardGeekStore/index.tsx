@@ -1,30 +1,33 @@
-import Card from "../Card";
+import CardGeekStore from "../CardGeekStore";
 
 interface CardProps {
+  userId: number;
+  id: number;
   image: string;
   name: string;
   url?: string;
   preferences?: string;
-  like: string | number | undefined;
-  dislike: string | number | undefined;
+  like: number;
+  dislike: number;
   handleClick?: (arg: number) => number;
   handleAddPersona?: () => void;
 }
 
-const ListCard = ({ dataToRender }: any) => {
-  console.log(dataToRender);
+const ListCardGeekStore = ({ dataToRender }: any) => {  
 
     return (
 
       <>
       {dataToRender[0] && dataToRender.map((data: CardProps, index: number) => (
-        <Card 
+        <CardGeekStore 
           key={index}
           img={data.image}
           name={data.name}
           like={data.like}
           dislike={data.dislike}
           url= {data.url}
+          id={data.id}
+          userId= {data.userId}
         />
       ))}
       </>
@@ -32,4 +35,4 @@ const ListCard = ({ dataToRender }: any) => {
     )
 };
 
-export default ListCard;
+export default ListCardGeekStore;

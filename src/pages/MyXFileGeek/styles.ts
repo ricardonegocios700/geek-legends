@@ -3,10 +3,10 @@ import BackGroundDesktop from "../../assets/myXFileGeekBG-desktop.jpeg";
 import BackGroundMobile from "../../assets/myXFileGeek-mobile.jpg";
 
 export const Container = styled.section`
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    padding: 150px 10px 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  padding: 150px 10px 0;  
 
     background: url(${BackGroundMobile});
     background-size: cover;
@@ -32,5 +32,6 @@ export const Button = styled.button`
     background-color: var(--blue-button);
     border: transparent;
     border-radius: 6px;
-    width: 190px;
+    width: 190px;    
+  
 `;
