@@ -12,7 +12,6 @@ export const Container = styled.div`
     justify-content: space-between;
     background-color: #f5f5f5;
 
-
     & h1 {
         text-align: center;
     }
@@ -30,8 +29,19 @@ export const Container = styled.div`
             width: 50px;
             height: 50px;
             color: var(--blue-button);
+            cursor: pointer;
         }
+
+        & .delCard {
+        width: 60px;
+        height: 60px;
+        color: var(--blue-button);
+        cursor: pointer;
+        margin: 0 auto;
     }
+    }
+
+    
 `;
 
 export const ImageDiv = styled.div`

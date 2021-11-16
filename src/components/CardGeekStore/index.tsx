@@ -2,17 +2,20 @@ import { Container, ImageDiv, Like, Dislike, Info } from "./styles";
 import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
 import { useLocation } from "react-router-dom";
-import { useMyStores } from '../../Providers/myStore/index';
+import { useMyStores } from "../../Providers/myStore/index";
 import { useStore } from "../../Providers/store";
+import { TiDelete } from 'react-icons/ti'
 
 interface CardProps {
     img: string;
     name: string;
-    url?: string;  
-    like:  number;
+    url?: string;
+    like: number;
     dislike: number;
     segment?: string;
-    handleClick?: (arg: number) => number;
+    id: number;
+    userId: number;
+    handleClick?: (data: CardProps) => void;
     handleAddCard?: (data: CardProps) => void;
 }
 
@@ -26,17 +29,31 @@ interface PathProps {
 const CardGeekStore = ({
     img,
     name,
-    url = "https://www.google.com.br",    
+    url = "https://www.google.com.br",
     like,
     dislike,
+    id,
+    userId,
     handleClick,
-    handleAddCard
+    handleAddCard,
 }: CardProps) => {
     const location = useLocation<PathProps>();
-    const { addMyStore } = useMyStores()
+    const { addMyStore, removeMyStore } = useMyStores();
+    const { updateStoreLike, updateStoreDeslike } = useStore()
 
-    const data = { segment: '', userId: 0, image:img, name, url, like, dislike, handleAddCard, handleClick }
-
+    const data = {
+        segment: "",
+        userId,
+        image: img,
+        name,
+        url,
+        like,
+        dislike,
+        id,
+        handleAddCard,
+        handleClick,
+    };
+    
     return (
         <>
             <Container>
@@ -47,30 +64,37 @@ const CardGeekStore = ({
                 <Info>
                     <h1>{name}</h1>
                     <p>
-                        <a href={url} target='_about'>Site</a>
+                        <a href={url} target="_about">
+                            Site 
+                        </a>
                     </p>
                 </Info>
 
                 <div className="emojis">
-                    <Like>
+                    {location.pathname === "/geekstore" && <Like>
                         <BsEmojiHeartEyesFill
                             className="smile"
-                            // onClick={() => handleClick(1)}
+                            onClick={() => updateStoreLike(data)}
                         />
                         <p>{like}</p>
-                    </Like>
-                    {location.pathname==='/geekstore' ? (
-                        <IoMdAddCircle 
+                    </Like>}
+                    {location.pathname === "/geekstore" ? (
+                        <IoMdAddCircle
                             onClick={() => addMyStore(data)}
-                            className="addCard" />
-                    ) : null}
-                    <Dislike>
+                            className="addCard"
+                        />
+                    ) : 
+                    <TiDelete 
+                    onClick={() => removeMyStore(data.id)}
+                    className="delCard"/>
+                    }
+                    {location.pathname === "/geekstore" && <Dislike>
                         <BsEmojiFrownFill
                             className="sad"
-                            // onClick={() => handleClick(-1)}
+                            onClick={() => updateStoreDeslike(data)}
                         />
                         <p>{dislike}</p>
-                    </Dislike>
+                    </Dislike>}
                 </div>
             </Container>
         </>

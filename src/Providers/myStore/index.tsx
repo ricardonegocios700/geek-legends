@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { convertToObject } from "typescript";
 import api from "../../services/api";
 import { useAuth } from "../user";
 
@@ -12,7 +14,10 @@ interface ContextType {
   segment: string;
   userId: number;
   id?: number;
+  like: number;
+  dislike: number;
 }
+
 interface MyStoresProviderDate {
   myStores: ContextType[];
   getMyStores: () => void;
@@ -24,30 +29,47 @@ const MyStoresContext = createContext<MyStoresProviderDate>(
 );
 
 export const MyStoresProvider = ({ children }: ProviderProps) => {
-  const { config } = useAuth();
+  const { config, userId } = useAuth();
 
   const [myStores, setMyStores] = useState<ContextType[]>([] as ContextType[]);
 
   const getMyStores = () => {
     api
-      .get<ContextType[]>("/myStores", config)
+      .get<ContextType[]>(`/myStores?userId=${userId}`, config)
       .then((resp) => setMyStores(resp.data))
       .catch((err) => console.log(err));
   };
 
   const addMyStore = (item: ContextType) => {
     api
-      .post<ContextType[]>("myStores/", config)
-      .then((resp) => getMyStores())
-      .catch((err) => console.log(err));
+      .post<ContextType[]>("/myStores", {
+        name: item.name,
+        image: item.image,
+        url: item.url,
+        like: item.like,
+        dislike: item.dislike,
+        userId: item.userId,
+        id: item.id
+      },config)
+      .then((resp) => {
+        toast.success('Loja adicionada ao My Stores Geek!')
+        console.log(resp.data)
+        getMyStores()})
+      .catch((err) => {
+        toast.error('Loja já adicionada anteriormente!')
+        console.log(err)});
   };
 
   const removeMyStore = (id: number) => {
     api
-      .delete(`myStores/${id}`, config)
+      .delete(`/myStores/${id}`, config)
       .then((resp) => getMyStores())
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, id));
   };
+
+  useEffect(() => {
+    getMyStores()
+  }, [config])
 
   return (
     <MyStoresContext.Provider

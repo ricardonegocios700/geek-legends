@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import { Container } from "./styles";
-import ListCard from "../../components/ListCard/index";
+import ListCardGeekStore from "../../components/ListCardGeekStore/index";
 import { useStore } from "../../Providers/store";
 import { useEffect } from "react";
 
@@ -16,7 +16,7 @@ const GeekStore = () => {
     <>
       <Header />
       <Container>
-        <ListCard dataToRender={stores} />
+        <ListCardGeekStore dataToRender={stores} />
       </Container>
     </>
   );

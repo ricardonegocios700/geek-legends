@@ -58,15 +58,21 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       `/stores/${item.id}`,
       { like: Number(item.like) + 1 },
       config
-    );
+    ).then(((response) => {
+      getStores()
+      console.log(response.data)
+    })).catch((err) => console.log(err))
   };
 
   const updateStoreDeslike = (item: StoreType) => {
     api.patch<StoreType>(
       `/stores/${item.id}`,
-      { dislike: Number(item.like) - 1 },
+      { dislike: Number(item.dislike) + 1 },
       config
-    );
+    ).then(((response) => {
+      getStores()
+      console.log(response.data)
+    })).catch((err) => console.log(err))
   };
 
   useEffect(() => {
