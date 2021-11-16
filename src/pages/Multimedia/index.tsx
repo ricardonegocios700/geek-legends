@@ -5,12 +5,13 @@ const Multimedia = () => {
   return (
     <Container>
       {/* <Header /> */}
-      <Div className="teste">
-        <TypesMultimedia typeValue="Filmes" />
+      <Div>
+        <TypesMultimedia />
+        {/* <TypesMultimedia typeValue="Filmes" />
         <TypesMultimedia typeValue="Animes" />
         <TypesMultimedia typeValue="Gibis" />
         <TypesMultimedia typeValue="Séries" />
-        <TypesMultimedia typeValue="Games" />
+        <TypesMultimedia typeValue="Games" /> */}
       </Div>
     </Container>
   );

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 export const DivLikes = styled.div`
+  position: relative;
+  text-align: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  text-align: center;
 `;
+
 export const Like = styled.div`
   color: var(--red-button);
   cursor: pointer;
@@ -39,8 +40,8 @@ export const Dislike = styled(Like)`
 `;
 
 export const ImageDiv = styled.div`
-  width: 90%;
-  height: 50%;
+  max-width: 90%;
+  max-height: 50%;
   border: 4px solid gold;
   border-radius: 10px;
   margin: 0 auto;
@@ -83,12 +84,17 @@ export const Div = styled.div`
 `;
 
 export const Container = styled.section`
+  position: relative;
   width: 90vw;
-  height: 593px;
+  height: 90vh;
   margin-top: 50px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
+  div {
+    width: 100%;
+    height: 593px;
+  }
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {

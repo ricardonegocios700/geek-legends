@@ -20,7 +20,6 @@ export const Container = styled.section`
     background: url(${BackImage}) no-repeat;
     background-size: cover;
     background-position: center;
-    flex-direction: row;
     align-items: center;
     height: 100vh;
     width: 100vw;

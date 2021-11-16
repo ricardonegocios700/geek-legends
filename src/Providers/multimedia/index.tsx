@@ -1,8 +1,14 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { toast } from "react-toastify";
 
 import api from "../../services/api";
 import { useAuth } from "../user/index";
-import { toast } from "react-toastify";
 
 interface MultimediaProviderProps {
   children: ReactNode;
@@ -21,7 +27,7 @@ interface MultimediaTypes {
 
 interface MultimediaProviderData {
   getAllMultimediaFromApi: () => void;
-  getMultimediaByType: (type: string) => void;
+  getMultimediaByType: () => void;
   postNewMultimediaToApi: (mediaData: MultimediaTypes) => void;
   updateMultimediaInApi: (mediaData: MultimediaTypes) => void;
   deleteMultimediaFromApi: (id: number) => void;
@@ -30,7 +36,11 @@ interface MultimediaProviderData {
     reaction: number
   ) => void;
   multimediaList: MultimediaTypes[];
-  multimediaByType: MultimediaTypes[];
+  multimediaByFilmes: MultimediaTypes[];
+  multimediaBySeries: MultimediaTypes[];
+  multimediaByAnimes: MultimediaTypes[];
+  multimediaByGames: MultimediaTypes[];
+  multimediaByGibis: MultimediaTypes[];
 }
 
 const MultimediaContext = createContext<MultimediaProviderData>(
@@ -42,19 +52,30 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     [] as MultimediaTypes[]
   );
 
-  const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>(
+  const [multimediaByFilmes, setMultimediaByFilmes] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaByGibis, setMultimediaByGibis] = useState<MultimediaTypes[]>(
     [] as MultimediaTypes[]
   );
-
+  const [multimediaByAnimes, setMultimediaByAnimes] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaBySeries, setMultimediaBySeries] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaByGames, setMultimediaByGames] = useState<MultimediaTypes[]>(
+    [] as MultimediaTypes[]
+  );
+  const test = ["Gibi", "Filme"];
   const { config, accessToken } = useAuth();
 
   const getAllMultimediaFromApi = () => {
     //TODO não usamos config
     api
-      .get<MultimediaTypes[]>("/multimedias", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
+      .get<MultimediaTypes[]>("/multimedias", config)
       .then((response) => {
+        console.log("Provider multimediaList", response.data);
         setMultimediaList(response.data);
       })
       .catch((err) => {
@@ -64,18 +85,60 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
       });
   };
 
-  const getMultimediaByType = (type: string) => {
+  const getMultimediaByType = () => {
     //TODO não usamos config
+    //TODO nem tentei usar uma variável para os types, não quis investir tempo
+
     api
-      .get<MultimediaTypes[]>(`/multimedias?type=${type}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
+      .get<MultimediaTypes[]>(`/multimedias?type=Filmes`, config)
       .then((response) => {
-        setMultimediaByType(response.data);
+        setMultimediaByFilmes(response.data);
       })
       .catch((err) => {
         toast.error(
-          "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+          "Não foi possível carregar Filmes. Favor tentar novamente!"
+        );
+        console.log(err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Gibis`, config)
+      .then((response) => {
+        setMultimediaByGibis(response.data);
+      })
+      .catch((err) => {
+        toast.error("Não foi possível carregar Gibis. Favor tentar novamente!");
+        console.log(err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Animes`, config)
+      .then((response) => {
+        setMultimediaByAnimes(response.data);
+      })
+      .catch((err) => {
+        toast.error(
+          "Não foi possível concluir carregar Animes. Favor tentar novamente!"
+        );
+        console.log(err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Séries`, config)
+      .then((response) => {
+        setMultimediaBySeries(response.data);
+      })
+      .catch((err) => {
+        toast.error(
+          "Não foi possível concluir carregar Séries. Favor tentar novamente!"
+        );
+        console.log(err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Games`, config)
+      .then((response) => {
+        setMultimediaByGames(response.data);
+      })
+      .catch((err) => {
+        toast.error(
+          "Não foi possível concluir carregar Games. Favor tentar novamente!"
         );
         console.log(err);
       });
@@ -176,7 +239,11 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         deleteMultimediaFromApi,
         multimediaUserReaction,
         multimediaList,
-        multimediaByType,
+        multimediaByFilmes,
+        multimediaBySeries,
+        multimediaByAnimes,
+        multimediaByGames,
+        multimediaByGibis,
       }}
     >
       {children}
