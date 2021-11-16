@@ -7,29 +7,21 @@ interface CardUsersData {
   name: string;
   preferences: string;
 }
-interface UserData {
-  id: number;
-  userId?: number;
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
-  preferences: string;
-  aboutMe: string;
-}
 
 const CardPersona = ({ id, name, preferences }: CardUsersData) => {
   const { getOneUserForAddMyPersona } = useAuth();
-  const handlerAddMypersona = (id: UserData) => {
-    getOneUserForAddMyPersona(id);
+  const handlerAddMypersona = ({ id, name, preferences }: CardUsersData) => {
+    getOneUserForAddMyPersona({ id, name, preferences });
   };
 
   return (
     <CardPersonaStyle>
-      <img src={logoUsers} alt={"imagem"} width="50px" height="50px" />
-      <p>{name}</p>
+      <img src={logoUsers} alt={"imagem"} />
+      <h4>{name}</h4>
       <p>{preferences}</p>
-      <button onClick={() => handlerAddMypersona}></button>
+      <button onClick={() => handlerAddMypersona({ id, name, preferences })}>
+        add persona
+      </button>
     </CardPersonaStyle>
   );
 };
