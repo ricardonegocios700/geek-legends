@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import { Container } from "./styles";
-import ListCard from "../../components/ListCard/index";
+import ListCardGeekStore from "../../components/ListCardGeekStore/index";
 import { useMyStores } from "../../Providers/myStore/index";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
@@ -27,9 +27,9 @@ const MyGeekStore = () => {
             >
                 <Header />
                 <Container>
-                    <ListCard
+                    <ListCardGeekStore
                         dataToRender={myStores}
-                        handleRemove={removeMyStore}
+                        // handleRemove={removeMyStore}
                     />
                 </Container>
             </motion.div>
