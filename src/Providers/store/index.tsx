@@ -41,7 +41,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   );
   const getStores = () => {
     api
-      .get<StoreType[]>("stores/", config)
+      .get<StoreType[]>("/stores", config)
       .then((resp) => setStores(resp.data))
       .catch((err) => console.log(err));
   };
