@@ -8,8 +8,19 @@ import spider from "../../assets/spider-man.gif";
 import iron from "../../assets/iron-man.gif";
 import flash from "../../assets/flash.gif";
 import darth from "../../assets/darth_vader.gif";
+import { useHistory } from "react-router";
 
 const Home = () => {
+  const history = useHistory();
+
+  const handleLogin = () => {
+    history.push("/login");
+  };
+
+  const handleSignUp = () => {
+    history.push("/signup");
+  };
+
   return (
     <HomeContainer>
       <TitleSection>
@@ -27,8 +38,8 @@ const Home = () => {
       </TitleSection>
 
       <ButtonsDiv>
-        <Button type="submit" title="LOGIN" />
-        <Button type="submit" title="CADASTRO" />
+        <Button handleClick={handleLogin} type="submit" title="LOGIN" />
+        <Button handleClick={handleSignUp} type="submit" title="CADASTRO" />
       </ButtonsDiv>
 
       <TeamSection>
@@ -36,22 +47,26 @@ const Home = () => {
         <div className="containerDevs">
           <div>
             <img src={Beatriz} alt="" />
-            <h4>Beatriz</h4>
+            <a href="https://www.linkedin.com/in/beatriz-alves-arruda-de-oliveira-130768127/">
+              Beatriz
+            </a>
             <h5> Scrum Master </h5>
           </div>
           <div>
             <img src={Ricardo} alt="" />
-            <h4>Ricardo</h4>
+            <a href="https://www.linkedin.com/in/ricardoliveira700/">Ricardo</a>
             <h5> Product Owner </h5>
           </div>
           <div>
             <img src={Roberto} alt="" />
-            <h4>Roberto</h4>
+            <a href="https://www.linkedin.com/in/roberto-bressanelli-1814b015/">
+              Roberto
+            </a>
             <h5> Tech Leader </h5>
           </div>
           <div>
             <img src={Sthefany} alt="" />
-            <h4>Sthéfany</h4>
+            <a href="https://www.linkedin.com/in/sthefanyagomes/">Sthéfany</a>
             <h5> Quality Assurance</h5>
           </div>
         </div>
