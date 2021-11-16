@@ -1,6 +1,7 @@
 import CardPersona from "../../components/CardPersona";
 import Header from "../../components/Header";
 import { useAuth } from "../../Providers/user";
+import { ContainerPersona } from "./styles";
 
 interface CardUsersData {
   id: number;
@@ -10,20 +11,23 @@ interface CardUsersData {
 
 const Persona = () => {
   const { usersList } = useAuth();
-  console.log(usersList);
 
   return (
     <>
       <Header />
-      {usersList[0] &&
-        usersList.map((item: CardUsersData) => (
-          <CardPersona
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            preferences={item.preferences}
-          />
-        ))}
+      <ContainerPersona>
+        <ul>
+          {usersList[0] &&
+            usersList.map((item: CardUsersData) => (
+              <CardPersona
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                preferences={item.preferences}
+              />
+            ))}
+        </ul>
+      </ContainerPersona>
     </>
   );
 };
