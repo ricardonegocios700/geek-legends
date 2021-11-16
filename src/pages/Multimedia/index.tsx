@@ -1,17 +1,36 @@
-import Header from "../../components/Header";
-import TypesMultimedia from "../../components/TypesMultimedias";
+import { useEffect } from "react";
+
 import { Container, Div } from "./styles";
+
+import Header from "../../components/Header";
+import { useAuth } from "../../Providers/user";
+import { useMultimedia } from "../../Providers/multimedia";
+import TypesMultimedia from "../../components/TypesMultimedias";
+
 const Multimedia = () => {
+  const { config } = useAuth();
+  const {
+    multimediaByFilmes,
+    multimediaBySeries,
+    multimediaByAnimes,
+    multimediaByGames,
+    multimediaByGibis,
+    getMultimediaByType,
+  } = useMultimedia();
+
+  useEffect(() => {
+    getMultimediaByType();
+  }, [config]);
+
   return (
     <Container>
-      {/* <Header /> */}
+      <Header />
       <Div>
-        <TypesMultimedia />
-        {/* <TypesMultimedia typeValue="Filmes" />
-        <TypesMultimedia typeValue="Animes" />
-        <TypesMultimedia typeValue="Gibis" />
-        <TypesMultimedia typeValue="Séries" />
-        <TypesMultimedia typeValue="Games" /> */}
+        <TypesMultimedia dataToRender={multimediaByFilmes} title="Filmes" />
+        <TypesMultimedia dataToRender={multimediaBySeries} title="Séries" />
+        <TypesMultimedia dataToRender={multimediaByAnimes} title="Animes" />
+        <TypesMultimedia dataToRender={multimediaByGames} title="Games" />
+        <TypesMultimedia dataToRender={multimediaByGibis} title="Gibis" />
       </Div>
     </Container>
   );

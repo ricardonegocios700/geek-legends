@@ -66,8 +66,8 @@ export const H1 = styled.h1`
 `;
 
 export const Div = styled.div`
-  max-width: 209px;
-  max-height: 593px;
+  width: 209px;
+  height: 593px;
   border: 1px #000 solid;
   background-color: #dcdcdc;
   display: flex;
@@ -87,14 +87,14 @@ export const Container = styled.section`
   position: relative;
   width: 90vw;
   height: 90vh;
-  margin-top: 50px;
+  margin-top: 450px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
-  div {
+  /* div {
     width: 100%;
     height: 593px;
-  }
+  } */
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {

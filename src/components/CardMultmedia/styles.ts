@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 300px;
-  height: 450px;
+export const Container2 = styled.div`
+  width: 220px;
+  min-height: 320px;
   border: 2px solid #000;
   border-radius: 6px;
   padding: 40px 30px;
@@ -12,6 +12,8 @@ export const Container = styled.div`
 
   & h1 {
     text-align: center;
+    font-size: medium;
+    color: #000;
   }
 
   & p {
