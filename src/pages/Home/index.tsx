@@ -8,8 +8,19 @@ import spider from "../../assets/spider-man.gif";
 import iron from "../../assets/iron-man.gif";
 import flash from "../../assets/flash.gif";
 import darth from "../../assets/darth_vader.gif";
+import { useHistory } from "react-router";
 
 const Home = () => {
+  const history = useHistory();
+
+  const handleLogin = () => {
+    history.push("/login");
+  };
+
+  const handleSignUp = () => {
+    history.push("/signup");
+  };
+
   return (
     <HomeContainer>
       <TitleSection>
@@ -27,8 +38,8 @@ const Home = () => {
       </TitleSection>
 
       <ButtonsDiv>
-        <Button type="submit" title="LOGIN" />
-        <Button type="submit" title="CADASTRO" />
+        <Button handleClick={handleLogin} type="submit" title="LOGIN" />
+        <Button handleClick={handleSignUp} type="submit" title="CADASTRO" />
       </ButtonsDiv>
 
       <TeamSection>
