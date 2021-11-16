@@ -25,6 +25,7 @@ export const Container = styled.section`
 export const Button = styled.button`
     display: flex;
     align-items: center;
+    justify-content: space-between;    
     margin: 10px 0;
     font-size: 20px;
     color: #fff;
@@ -32,6 +33,5 @@ export const Button = styled.button`
     background-color: var(--blue-button);
     border: transparent;
     border-radius: 6px;
-    width: 190px;    
-  
+    width: 190px; 
 `;
