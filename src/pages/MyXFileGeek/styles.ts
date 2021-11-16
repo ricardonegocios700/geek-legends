@@ -8,16 +8,30 @@ export const Container = styled.section`
   height: 100%;
   padding: 150px 10px 0;  
 
-  background: url(${BackGroundMobile});
-  background-size: cover;
-  background-position: center;
-
-  @media only screen and (min-width: 400px) {
-  }
-  @media only screen and (min-width: 800px) {
-    background: url(${BackGroundDesktop}) no-repeat;
+    background: url(${BackGroundMobile});
     background-size: cover;
     background-position: center;
-    padding: 150px 70px 10px;
-  }
+
+    @media only screen and (min-width: 400px) {
+    }
+    @media only screen and (min-width: 800px) {
+        background: url(${BackGroundDesktop}) no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 150px 70px 20px;
+    }
+`;
+
+export const Button = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+    margin: 10px 0;
+    font-size: 20px;
+    color: #fff;
+    padding: 5px 25px;
+    background-color: var(--blue-button);
+    border: transparent;
+    border-radius: 6px;
+    width: 190px; 
 `;
