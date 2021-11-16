@@ -19,9 +19,10 @@ interface UserData {
 }
 
 const CardPersona = ({ id, name, preferences }: CardUsersData) => {
+  const userId = id;
   const { getOneUserForAddMyPersona } = useAuth();
-  const handlerAddMypersona = (id: UserData) => {
-    getOneUserForAddMyPersona(id);
+  const handlerAddMypersona = (userId: UserData) => {
+    getOneUserForAddMyPersona(userId);
   };
 
   return (
