@@ -4,7 +4,7 @@ import BackGroundMobile from "../../assets/myXFileGeek-mobile.jpg";
 
 export const Container = styled.section`
   width: 100%;
-  height: 150vh;
+  height: 100vh;
   padding: 150px 10px 0;
 
   background: url(${BackGroundMobile});
