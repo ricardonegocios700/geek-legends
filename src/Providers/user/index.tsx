@@ -51,6 +51,7 @@ interface AuthProviderData {
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
   getOneUser: (userId: UserData) => void;
+  getOneUserForAddMyPersona: (userId: UserData) => void;
   userId: any;
   user: UserData;
   userInfo: UserData;
@@ -79,6 +80,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
   const [checkMove, setCheckMove] = useState<boolean>(false);
   const [usersList, setUsersList] = useState<UserData[]>({} as UserData[]);
+  const [usersListAdd, setUsersListAdd] = useState<UserData[]>(
+    {} as UserData[]
+  );
   const [accessToken, setAccessToken] = useState<string>(
     () => localStorage.getItem("@geekLegends:access") || ""
   );
@@ -116,7 +120,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .then((response) => {
         setUsersList(response.data);
       })
-      .catch((err) => console.log(userId));
+      .catch((err) => console.log(err));
   };
 
   const getOneUser = (userId: UserData) => {
@@ -124,6 +128,16 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .get(`users?id=${userId}`, config)
       .then((response) => {
         setUserInfo(response.data[0]);
+        setUserId(response.data.id);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getOneUserForAddMyPersona = (userId: UserData) => {
+    api
+      .get(`users?id=${userId}`, config)
+      .then((response) => {
+        setUsersListAdd([...usersListAdd, response.data[0]]);
         setUserId(response.data.id);
       })
       .catch((err) => console.log(err));
@@ -143,13 +157,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     setConfig({
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-  }, [checkMove]);
-
-  useEffect(() => {
-    setConfig({
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-  }, [accessToken]);
+  }, [accessToken, checkMove]);
 
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
     api
@@ -188,6 +196,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
     toast.success("Logout realizado");
   };
 
+  console.log(config);
+  console.log(usersList);
+
   return (
     <AuthContext.Provider
       value={{
@@ -195,6 +206,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         Logout,
         userLogin,
         getOneUser,
+        getOneUserForAddMyPersona,
         userId,
         user,
         userInfo,
