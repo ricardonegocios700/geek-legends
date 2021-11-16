@@ -5,21 +5,21 @@ import { useStore } from "../../Providers/store";
 import { useEffect } from "react";
 
 const GeekStore = () => {
+  const { stores, getStores } = useStore();
 
-    const { stores, getStores } = useStore();
+  console.log(stores);
+  useEffect(() => {
+    getStores();
+  }, []);
 
-    useEffect(() => {
-        getStores()
-    }, [])
-
-    return (
-        <>
-            <Header />
-            <Container>
-                <ListCard dataToRender={stores} />
-            </Container>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Container>
+        <ListCard dataToRender={stores} />
+      </Container>
+    </>
+  );
 };
 
 export default GeekStore;
