@@ -27,6 +27,7 @@ export const MessageSenseiStyle = styled.article`
     color: var(--font-color-white);
     text-shadow: -1px -1px 0px red, -1px 1px 0px red, 1px -1px 0px red,
       1px 0px 0px red;
+    overflow: scroll;
   }
   & > p {
     text-align: right;
