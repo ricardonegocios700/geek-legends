@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../Providers/user";
+import UpdateUserModal from "../UserUpdateModal";
 import logoUser from "./../../assets/logoUser.png";
 import { Container } from "./styles";
 
 export const InfoGeek = () => {
   const { userInfo, userId, getOneUser, config } = useAuth();
+  const [ showModal, setShowModal ] = useState(false)
   useEffect(() => {
     getOneUser(userId);
   }, [config]);
@@ -22,7 +24,10 @@ export const InfoGeek = () => {
       <p>{userInfo.preferences ? userInfo.preferences : "carregando..."}</p>
       <h6>about me</h6>
       <p>{userInfo.aboutMe ? userInfo.aboutMe : "Nada a declarar"}</p>
-      <button>atualização de usuário</button>
+      <button
+        onClick={() => setShowModal(!showModal)}
+      >atualização de usuário</button>
+      <UpdateUserModal show={showModal} handleClick={setShowModal}/>
     </Container>
   );
 };
