@@ -27,6 +27,13 @@ const Persona = () => {
               />
             ))}
         </ul>
+        <audio autoPlay={true} controls={false} loop={true}>
+          <source
+            src="https://ringtonazer.b-cdn.net/fetch/7e/7ee7454efe64a845973d2d29cd1e807e.mp3"
+            type="audio/mp3"
+          />
+          seu navegador não suporta HTML5
+        </audio>
       </ContainerPersona>
     </>
   );
