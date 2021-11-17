@@ -69,6 +69,7 @@ interface AuthProviderData {
   config: RequestConfigTypes;
   usersList: any;
   usersListAdd: UserData[];
+  setUsersListAdd: any;
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
@@ -111,7 +112,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setAccessToken(accessToken);
         setAuthorized(true);
         toast.success("Login efetuado com sucesso!");
-        history.push("/multimedia");
+        history.push("/dashboard");
       })
       .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };
@@ -126,7 +127,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .catch((err) => console.log(err));
   };
 
-  const getOneUser = (userId: UserData) => {
+  const getOneUser = () => {
     api
       .get(`users?id=${userId}`, config)
       .then((response) => {
@@ -142,7 +143,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .then((response) => {
         !usersListAdd.find(
           (person: UserData) => person.name === response.data[0].name
-        ) && setUsersListAdd([...usersListAdd, response.data[0]]);
+        ) && toast.success("Persona adicionado a sua lista");
+        setUsersListAdd([...usersListAdd, response.data[0]]);
       })
       .catch((err) => console.log(err));
   };
@@ -222,6 +224,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setUserId,
         usersList,
         usersListAdd,
+        setUsersListAdd,
         userProfileUpdate,
         authorized,
         setAuthorized,
