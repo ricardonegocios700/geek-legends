@@ -1,7 +1,9 @@
 import { Container2, ImageDiv, Like, Dislike, Info } from "./styles";
 import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
+import { TiDelete } from "react-icons/ti";
 import { useLocation } from "react-router-dom";
+
 import { useMultimedia } from "../../Providers/multimedia";
 import { useMyMultimedias } from "../../Providers/myMultimedias";
 
@@ -58,7 +60,7 @@ const Card = ({
     multimediaId: id,
   };
   const { multimediaUserReaction } = useMultimedia();
-  const { addToMyMultimedias } = useMyMultimedias();
+  const { addToMyMultimedias, deleteMyMultimedias } = useMyMultimedias();
   const location = useLocation<PathProps>();
   const handleClickLike = (reaction: Number) => {
     multimediaUserReaction(mediaData, Number(reaction));
@@ -66,6 +68,9 @@ const Card = ({
 
   const handleClikeFavorite = () => {
     addToMyMultimedias(mediaData);
+  };
+  const handleClikeRemove = (id: number) => {
+    deleteMyMultimedias(id);
   };
 
   return (
@@ -88,6 +93,9 @@ const Card = ({
         </Like>
         {location.pathname === "/multimedia" && (
           <IoMdAddCircle className="addCard" onClick={handleClikeFavorite} />
+        )}
+        {location.pathname === "/mymultimedia" && (
+          <TiDelete className="addCard" onClick={() => handleClikeRemove(id)} />
         )}
         <Dislike>
           <BsEmojiFrownFill

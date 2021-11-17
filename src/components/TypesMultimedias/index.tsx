@@ -13,7 +13,6 @@ interface CardProps {
 }
 
 const TypesMultimedia = ({ dataToRender }: any) => {
-  console.log("existem dados?", dataToRender[0]);
   if (dataToRender[0] === undefined) {
     return <></>;
   } else {

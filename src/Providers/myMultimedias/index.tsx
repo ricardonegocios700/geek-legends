@@ -179,10 +179,10 @@ export const MyMultimediasProvider = ({
   };
   const deleteMyMultimedias = (id: number) => {
     api
-      .delete(`/myMultimedias/${id}`)
+      .delete(`/myMultimedias/${id}`, config)
       .then((response) => {
-        toast.success("Favorito deletado com sucesso!");
-        getMyMultimediasFromApi();
+        toast.success("Favorito removido com sucesso!");
+        getMyMultimediaByType();
       })
       .catch((err) => {
         toast.error(
