@@ -37,8 +37,8 @@ export const Container = styled.div`
   p {
     color: var(--font-color-black);
     width: 80%;
-    overflow: scroll;
-    height: 50px;
+    overflow: auto;
+    height: 60px;
   }
   img {
     width: 50px;
