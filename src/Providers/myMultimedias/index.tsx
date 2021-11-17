@@ -28,7 +28,13 @@ interface MyMultimediasProviderData {
   geyMyMultimediasFilter: (type: string) => void;
   addToMyMultimedias: (multimediaData: MyMultimediasTypes) => void;
   deleteMyMultimedias: (id: number) => void;
+  getMyMultimediaByType: () => void;
   myMultimediaList: MyMultimediasTypes[];
+  myMultimediaByFilmes: MyMultimediasTypes[];
+  myMultimediaBySeries: MyMultimediasTypes[];
+  myMultimediaByAnimes: MyMultimediasTypes[];
+  myMultimediaByGames: MyMultimediasTypes[];
+  myMultimediaByGibis: MyMultimediasTypes[];
 }
 
 const MyMultimediasContext = createContext<MyMultimediasProviderData>(
@@ -52,6 +58,80 @@ export const MyMultimediasProvider = ({
         console.log(response.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  const [myMultimediaByFilmes, setMyMultimediaByFilmes] = useState<
+    MyMultimediasTypes[]
+  >([] as MyMultimediasTypes[]);
+  const [myMultimediaByGibis, setMyMultimediaByGibis] = useState<
+    MyMultimediasTypes[]
+  >([] as MyMultimediasTypes[]);
+  const [myMultimediaByAnimes, setMyMultimediaByAnimes] = useState<
+    MyMultimediasTypes[]
+  >([] as MyMultimediasTypes[]);
+  const [myMultimediaBySeries, setMyMultimediaBySeries] = useState<
+    MyMultimediasTypes[]
+  >([] as MyMultimediasTypes[]);
+  const [myMultimediaByGames, setMyMultimediaByGames] = useState<
+    MyMultimediasTypes[]
+  >([] as MyMultimediasTypes[]);
+
+  const getMyMultimediaByType = () => {
+    api
+      .get<MyMultimediasTypes[]>(
+        `/myMultimedias?userId=${userId}&type=Filmes`,
+        config
+      )
+      .then((response) => {
+        setMyMultimediaByFilmes(response.data);
+      })
+      .catch((err) => {
+        console.log("Filmes: ", err);
+      });
+    api
+      .get<MyMultimediasTypes[]>(
+        `/myMultimedias?userId=${userId}&type=Gibis`,
+        config
+      )
+      .then((response) => {
+        setMyMultimediaByGibis(response.data);
+      })
+      .catch((err) => {
+        console.log("Filmes: ", err);
+      });
+    api
+      .get<MyMultimediasTypes[]>(
+        `/myMultimedias?userId=${userId}&type=Animes`,
+        config
+      )
+      .then((response) => {
+        setMyMultimediaByAnimes(response.data);
+      })
+      .catch((err) => {
+        console.log("Animes: ", err);
+      });
+    api
+      .get<MyMultimediasTypes[]>(
+        `/myMultimedias?userId=${userId}&type=Séries`,
+        config
+      )
+      .then((response) => {
+        setMyMultimediaBySeries(response.data);
+      })
+      .catch((err) => {
+        console.log("Séries: ", err);
+      });
+    api
+      .get<MyMultimediasTypes[]>(
+        `/myMultimedias?userId=${userId}&type=Games`,
+        config
+      )
+      .then((response) => {
+        setMyMultimediaByGames(response.data);
+      })
+      .catch((err) => {
+        console.log("Games: ", err);
+      });
   };
 
   const geyMyMultimediasFilter = (type: string) => {
@@ -119,6 +199,12 @@ export const MyMultimediasProvider = ({
         geyMyMultimediasFilter,
         addToMyMultimedias,
         deleteMyMultimedias,
+        myMultimediaByFilmes,
+        myMultimediaBySeries,
+        myMultimediaByAnimes,
+        myMultimediaByGames,
+        myMultimediaByGibis,
+        getMyMultimediaByType,
         myMultimediaList,
       }}
     >

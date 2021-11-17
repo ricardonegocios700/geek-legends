@@ -66,8 +66,8 @@ const Card = ({
 
   const handleClikeFavorite = () => {
     addToMyMultimedias(mediaData);
-    //console.log(mediaData);
   };
+
   return (
     <Container2>
       <ImageDiv>
