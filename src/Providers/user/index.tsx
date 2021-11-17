@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setAccessToken(accessToken);
         setAuthorized(true);
         toast.success("Login efetuado com sucesso!");
-        history.push("/dashboard");
+        history.push("/multimedia");
       })
       .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };

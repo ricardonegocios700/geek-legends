@@ -1,177 +1,232 @@
-import {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import api from "../../services/api";
 import { useAuth } from "../user/index";
-import { toast } from "react-toastify";
 
 interface MultimediaProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 interface MultimediaTypes {
-    title: string;
-    type: string;
-    like?: number;
-    dislike?: number;
-    image: string;
-    description: string;
-    id: number;
-    userId?: number;
+  id: number;
+  title: string;
+  type: string;
+  like: number;
+  dislike: number;
+  image: string;
+  description: string;
+  userId: number;
 }
 
 interface MultimediaProviderData {
-    getAllMultimediaFromApi: () => void;
-    getMultimediaByType: (type: string) => void;
-    postNewMultimediaToApi: (mediaData: MultimediaTypes) => void;
-    updateMultimediaInApi: (mediaData: MultimediaTypes) => void;
-    deleteMultimediaFromApi: (id: number) => void;
-    multimediaUserReaction: (
-        mediaData: MultimediaTypes,
-        reaction: number
-    ) => void;
-    multimediaList: MultimediaTypes[];
-    multimediaByType: MultimediaTypes[];
+  getAllMultimediaFromApi: () => void;
+  getMultimediaByType: () => void;
+  postNewMultimediaToApi: (mediaData: MultimediaTypes) => void;
+  updateMultimediaInApi: (mediaData: MultimediaTypes) => void;
+  deleteMultimediaFromApi: (id: number) => void;
+  multimediaUserReaction: (
+    mediaData: MultimediaTypes,
+    reaction: number
+  ) => void;
+  multimediaList: MultimediaTypes[];
+  multimediaByFilmes: MultimediaTypes[];
+  multimediaBySeries: MultimediaTypes[];
+  multimediaByAnimes: MultimediaTypes[];
+  multimediaByGames: MultimediaTypes[];
+  multimediaByGibis: MultimediaTypes[];
 }
 
 const MultimediaContext = createContext<MultimediaProviderData>(
-    {} as MultimediaProviderData
+  {} as MultimediaProviderData
 );
 
 export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
-    const [multimediaList, setMultimediaList] = useState<MultimediaTypes[]>(
-        {} as MultimediaTypes[]
-    );
+  const [multimediaList, setMultimediaList] = useState<MultimediaTypes[]>(
+    [] as MultimediaTypes[]
+  );
 
-    const [multimediaByType, setMultimediaByType] = useState<MultimediaTypes[]>(
-        {} as MultimediaTypes[]
-    );
+  const [multimediaByFilmes, setMultimediaByFilmes] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaByGibis, setMultimediaByGibis] = useState<MultimediaTypes[]>(
+    [] as MultimediaTypes[]
+  );
+  const [multimediaByAnimes, setMultimediaByAnimes] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaBySeries, setMultimediaBySeries] = useState<
+    MultimediaTypes[]
+  >([] as MultimediaTypes[]);
+  const [multimediaByGames, setMultimediaByGames] = useState<MultimediaTypes[]>(
+    [] as MultimediaTypes[]
+  );
 
-    const { config } = useAuth();
+  const { config, accessToken } = useAuth();
 
-    const getAllMultimediaFromApi = () => {
-        api.get<MultimediaTypes[]>("/multimedias", config)
-            .then((response) => {
-                console.log(response.data);
-                setMultimediaList(response.data);
-            })
-            .catch((err) => console.log(err));
-    };
-
-    const getMultimediaByType = (type: string) => {
-        api.get<MultimediaTypes[]>(`/multimedias?type=${type}`, config)
-            .then((response) => {
-                console.log(response.data);
-                setMultimediaByType(response.data);
-            })
-            .catch((err) => {
-                toast.error(
-                    "Não foi possível concluir sua solicitação. Favor tentar novamente!"
-                );
-                console.log(err);
-            });
-    };
-
-    const postNewMultimediaToApi = ({ ...mediaData }: MultimediaTypes) => {
-        api.post<MultimediaTypes[]>(
-            "/multimedias",
-            {
-                title: mediaData.title,
-                type: mediaData.type,
-                image: mediaData.image,
-                description: mediaData.description,
-                userId: mediaData.userId,
-            },
-            config
-        )
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((err) => console.log(err));
-    };
-
-    const updateMultimediaInApi = ({ ...mediaData }: MultimediaTypes) => {
-        api.patch<MultimediaTypes[]>(
-            `/multimedias/${mediaData.id}`,
-            {
-                title: mediaData?.title,
-                type: mediaData?.type,
-                image: mediaData?.image,
-                description: mediaData?.description,
-            },
-            config
+  const getAllMultimediaFromApi = () => {
+    api
+      .get<MultimediaTypes[]>("/multimedias", config)
+      .then((response) => {
+        console.log("Provider multimediaList", response.data);
+        setMultimediaList(response.data);
+      })
+      .catch((err) => {
+        console.log(
+          "Não foi possível concluir sua solicitação. Favor tentar novamente!"
         );
-    };
+      });
+  };
 
-    const deleteMultimediaFromApi = (id: number) => {
-        api.delete(`/multimedias/${id}`)
-            .then((response) => {
-                toast.success("Deletado com sucesso!");
-                console.log(response.data);
-            })
-            .catch((err) => {
-                toast.error(
-                    "Não foi possível concluir sua solicitação. Favor tentar novamente!"
-                );
-                console.log(err);
-            });
-    };
+  const getMultimediaByType = () => {
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Filmes`, config)
+      .then((response) => {
+        setMultimediaByFilmes(response.data);
+      })
+      .catch((err) => {
+        console.log("Filmes: ", err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Gibis`, config)
+      .then((response) => {
+        setMultimediaByGibis(response.data);
+      })
+      .catch((err) => {
+        console.log("Filmes: ", err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Animes`, config)
+      .then((response) => {
+        setMultimediaByAnimes(response.data);
+      })
+      .catch((err) => {
+        console.log("Animes: ", err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Séries`, config)
+      .then((response) => {
+        setMultimediaBySeries(response.data);
+      })
+      .catch((err) => {
+        console.log("Séries: ", err);
+      });
+    api
+      .get<MultimediaTypes[]>(`/multimedias?type=Games`, config)
+      .then((response) => {
+        setMultimediaByGames(response.data);
+      })
+      .catch((err) => {
+        console.log("Games: ", err);
+      });
+  };
 
-    const multimediaUserReaction = (
-        { ...mediaData }: MultimediaTypes,
-        reaction: number
-    ) => {
-        let like = 0;
-        let dislike = 0;
-        if (reaction > 0) {
-            like = Number(mediaData.like) + 1;
-        } else {
-            like = Number(mediaData.like);
-        }
-        if (reaction < 0) {
-            dislike = Number(mediaData.dislike) + 1;
-        } else {
-            dislike = Number(mediaData.dislike);
-        }
+  const postNewMultimediaToApi = ({ ...mediaData }: MultimediaTypes) => {
+    api
+      .post<MultimediaTypes[]>(
+        "/multimedias",
+        {
+          title: mediaData.title,
+          type: mediaData.type,
+          image: mediaData.image,
+          description: mediaData.description,
+          userId: mediaData.userId,
+        },
+        config
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
-        api.patch<MultimediaTypes[]>(`/multimedia/${mediaData.id}`, {
-            like: like,
-            dislike: dislike,
-            userId: mediaData.userId,
-        }, config
-        )
-            .then((response) => {
-                getAllMultimediaFromApi();
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error(
-                    "Não foi possível registrar sua reação! Favor tentar novamente!"
-                );
-            });
-    };
-
-    return (
-        <MultimediaContext.Provider
-            value={{
-                getAllMultimediaFromApi,
-                getMultimediaByType,
-                postNewMultimediaToApi,
-                updateMultimediaInApi,
-                deleteMultimediaFromApi,
-                multimediaUserReaction,
-                multimediaList,
-                multimediaByType,
-            }}
-        >
-            {children}
-        </MultimediaContext.Provider>
+  const updateMultimediaInApi = ({ ...mediaData }: MultimediaTypes) => {
+    api.patch<MultimediaTypes>(
+      `/multimedias/${mediaData.id}`,
+      {
+        title: mediaData?.title,
+        type: mediaData?.type,
+        image: mediaData?.image,
+        description: mediaData?.description,
+      },
+      config
     );
+  };
+
+  const deleteMultimediaFromApi = (id: number) => {
+    api
+      .delete(`/multimedias/${id}`)
+      .then((response) => {
+        toast.success("Deletado com sucesso!");
+        console.log(response.data);
+      })
+      .catch((err) => {
+        toast.error(
+          "Não foi possível concluir sua solicitação. Favor tentar novamente!"
+        );
+        console.log(err);
+      });
+  };
+
+  const multimediaUserReaction = (
+    { ...mediaData }: MultimediaTypes,
+    reaction: number
+  ) => {
+    let like = 0;
+    let dislike = 0;
+    if (reaction > 0) {
+      like = Number(mediaData.like) + 1;
+    } else {
+      like = Number(mediaData.like);
+    }
+    if (reaction < 0) {
+      dislike = Number(mediaData.dislike) + 1;
+    } else {
+      dislike = Number(mediaData.dislike);
+    }
+
+    api
+      .patch<MultimediaTypes>(
+        `/multimedia/${mediaData.id}`,
+        {
+          like: Number(like),
+          dislike: Number(dislike),
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      )
+      .then((response) => {
+        getAllMultimediaFromApi();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(
+          "Não foi possível registrar sua reação! Favor tentar novamente!"
+        );
+      });
+  };
+
+  return (
+    <MultimediaContext.Provider
+      value={{
+        getAllMultimediaFromApi,
+        getMultimediaByType,
+        postNewMultimediaToApi,
+        updateMultimediaInApi,
+        deleteMultimediaFromApi,
+        multimediaUserReaction,
+        multimediaList,
+        multimediaByFilmes,
+        multimediaBySeries,
+        multimediaByAnimes,
+        multimediaByGames,
+        multimediaByGibis,
+      }}
+    >
+      {children}
+    </MultimediaContext.Provider>
+  );
 };
 
 export const useMultimedia = () => useContext(MultimediaContext);
