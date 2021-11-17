@@ -1,18 +1,21 @@
-import { useAuth } from "../../Providers/user";
+import { usePersonas } from "../../Providers/myPersonas";
 import logoUsers from "./../../assets/logoUsers.png";
 import { CardPersonaStyle } from "./styles";
 
 interface CardUsersData {
+  id: number;
   name: string;
   preferences: string;
 }
 
-const CardMyPersona = ({ name, preferences }: CardUsersData) => {
-  const { usersListAdd, setUsersListAdd } = useAuth();
-  const handlerADeleteMypersona = ({ name, preferences }: CardUsersData) => {
-    const newList = usersListAdd.filter((person) => person.name !== name);
-    setUsersListAdd(newList);
-    console.log(newList);
+const CardMyPersona = ({ id, name, preferences }: CardUsersData) => {
+  const { removeMyPersonas } = usePersonas();
+  const handlerADeleteMypersona = ({
+    id,
+    name,
+    preferences,
+  }: CardUsersData) => {
+    removeMyPersonas(id);
   };
 
   return (
@@ -20,7 +23,9 @@ const CardMyPersona = ({ name, preferences }: CardUsersData) => {
       <img src={logoUsers} alt={"imagem"} />
       <h4>{name}</h4>
       <p>{preferences}</p>
-      <button onClick={() => handlerADeleteMypersona({ name, preferences })}>
+      <button
+        onClick={() => handlerADeleteMypersona({ id, name, preferences })}
+      >
         expulse persona
       </button>
     </CardPersonaStyle>

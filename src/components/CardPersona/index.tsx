@@ -1,3 +1,4 @@
+import { usePersonas } from "../../Providers/myPersonas";
 import { useAuth } from "../../Providers/user";
 import logoUsers from "./../../assets/logoUsers.png";
 import { CardPersonaStyle } from "./styles";
@@ -9,9 +10,10 @@ interface CardUsersData {
 }
 
 const CardPersona = ({ id, name, preferences }: CardUsersData) => {
-  const { getOneUserForAddMyPersona } = useAuth();
+  const { addMyPersonas } = usePersonas();
+  const { userId } = useAuth();
   const handlerAddMypersona = ({ id, name, preferences }: CardUsersData) => {
-    getOneUserForAddMyPersona({ id, name, preferences });
+    addMyPersonas({ id, name, preferences, userId });
   };
 
   return (

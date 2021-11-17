@@ -13,17 +13,15 @@ interface ProviderProps {
   children: ReactNode;
 }
 interface UsersType {
-  email: string;
-  confirmPassword: string;
   name: string;
-  aboutMe: string;
   preferences: string;
   userId: number;
-  id?: number;
+  id: number;
 }
 
 interface MyPersonasProviderData {
   myPersonas: UsersType[];
+  setMyPersonas: any;
   getMyPersonas: () => void;
   addMyPersonas: (item: UsersType) => void;
   removeMyPersonas: (id: number) => void;
@@ -35,12 +33,15 @@ const MyPersonasContext = createContext<MyPersonasProviderData>(
 export const MyPersonasProvider = ({ children }: ProviderProps) => {
   const { config, userId } = useAuth();
 
-  const [myPersonas, setMyPersonas] = useState<UsersType[]>([] as UsersType[]);
+  const [myPersonas, setMyPersonas] = useState<UsersType[]>([]);
+  //const [usersListAdd, setUsersListAdd] = useState<UserData[]>([]);
 
   const getMyPersonas = () => {
     api
-      .get<UsersType[]>(`/myPersonas?userId=${userId}`, config)
-      .then((resp) => setMyPersonas(resp.data))
+      .get<UsersType[]>(`/myPersonas`, config)
+      .then((resp) => {
+        setMyPersonas(resp.data);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -49,12 +50,10 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
       .post<UsersType[]>(
         "/myPersonas",
         {
-          email: item.email,
-          confirmPassword: item.confirmPassword,
           name: item.name,
-          aboutMe: item.aboutMe,
           preferences: item.preferences,
-          userId: item.userId,
+          id: item.id,
+          userId: userId,
         },
         config
       )
@@ -83,9 +82,17 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
     getMyPersonas();
   }, [config]);
 
+  console.log(myPersonas);
+
   return (
     <MyPersonasContext.Provider
-      value={{ myPersonas, getMyPersonas, addMyPersonas, removeMyPersonas }}
+      value={{
+        myPersonas,
+        setMyPersonas,
+        getMyPersonas,
+        addMyPersonas,
+        removeMyPersonas,
+      }}
     >
       {children}
     </MyPersonasContext.Provider>

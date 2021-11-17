@@ -3,6 +3,7 @@ import CardMyPersona from "../../components/cardMypersona";
 import { useAuth } from "../../Providers/user";
 import { motion } from "framer-motion";
 import { ContainerMyPersona } from "./styles";
+import { usePersonas } from "../../Providers/myPersonas";
 
 const pageTransition = {
   // ease: "easeIn",
@@ -10,22 +11,21 @@ const pageTransition = {
 };
 
 interface CardUsersData {
-  id: number;
+  id?: number;
   name: string;
   preferences: string;
 }
-interface UserData {
-  userId?: number;
+
+interface UsersType {
   name: string;
-  email: string;
-  password: string;
-  confirmPassword?: string;
   preferences: string;
-  aboutMe: string;
+  userId: number;
+  id: number;
 }
 
 const MyPersona = () => {
-  const { usersListAdd } = useAuth();
+  const { myPersonas } = usePersonas();
+  console.log(myPersonas);
   return (
     <>
       <motion.div
@@ -37,10 +37,11 @@ const MyPersona = () => {
         <Header />
         <ContainerMyPersona>
           <ul>
-            {usersListAdd[0] &&
-              usersListAdd.map((item: UserData) => (
+            {myPersonas[0] &&
+              myPersonas.map((item: UsersType, index: number) => (
                 <CardMyPersona
-                  key={item.userId}
+                  key={index}
+                  id={item.id}
                   name={item.name}
                   preferences={item.preferences}
                 />
