@@ -34,7 +34,6 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
   const { config, userId } = useAuth();
 
   const [myPersonas, setMyPersonas] = useState<UsersType[]>([]);
-  //const [usersListAdd, setUsersListAdd] = useState<UserData[]>([]);
 
   const getMyPersonas = () => {
     api

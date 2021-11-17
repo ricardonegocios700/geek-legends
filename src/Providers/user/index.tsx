@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setAccessToken(accessToken);
         setAuthorized(true);
         toast.success("Login efetuado com sucesso!");
-        history.push("/multimedia");
+        history.push("/dashboard");
       })
       .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };
@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .catch((err) => console.log(err));
   };
 
-  const getOneUser = (userId: UserData) => {
+  const getOneUser = () => {
     api
       .get(`users?id=${userId}`, config)
       .then((response) => {
