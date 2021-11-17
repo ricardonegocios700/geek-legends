@@ -86,7 +86,7 @@ const Header = () => {
           className="select"
           options={optionsSet}
           isClearable
-          placeholder="escolha a página"
+          placeholder="My Pages"
           onChange={(e) => handleSelectDestination(e?.value)}
         />
       </Container>
