@@ -14,8 +14,8 @@ export const MessageSensei = () => {
   return (
     <MessageSenseiStyle>
       <h3>Mensagem do Sensei</h3>
-      <h5>{message.quote}</h5>
-      <p>{message.author}</p>
+      <h5>{message?.quote}</h5>
+      <p>{message?.author}</p>
     </MessageSenseiStyle>
   );
 };
