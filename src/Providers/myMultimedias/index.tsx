@@ -55,7 +55,7 @@ export const MyMultimediasProvider = ({
       .get<MyMultimediasTypes[]>(`/myMultimedias?userId=${userId}`, config)
       .then((response) => {
         setMyMultimediaList(response.data);
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
@@ -152,30 +152,37 @@ export const MyMultimediasProvider = ({
   };
 
   const addToMyMultimedias = ({ ...multimediaData }: MyMultimediasTypes) => {
-    console.log(multimediaData);
-    api
-      .post<MyMultimediasTypes>(
-        "/myMultimedias",
-        {
-          title: multimediaData.title,
-          type: multimediaData.type,
-          image: multimediaData.image,
-          description: multimediaData.description,
-          userId: Number(userId),
-          multimediaId: multimediaData.multimediaId,
-        },
-        config
-      )
-      .then((response) => {
-        getMyMultimediasFromApi();
-        toast.success("Favorito adicionado com sucesso!");
-      })
-      .catch((err) => {
-        toast.error(
-          "Nãofoi possível adicionar o favorito no momento. Favor tentar mais tarde."
-        );
-        console.log(err);
-      });
+    let array = myMultimediaList
+      .filter((item) => item.userId === userId)
+      .filter((item) => item.multimediaId === multimediaData.multimediaId);
+
+    if (array[0] === undefined) {
+      api
+        .post<MyMultimediasTypes>(
+          "/myMultimedias",
+          {
+            title: multimediaData.title,
+            type: multimediaData.type,
+            image: multimediaData.image,
+            description: multimediaData.description,
+            userId: Number(userId),
+            multimediaId: multimediaData.multimediaId,
+          },
+          config
+        )
+        .then((response) => {
+          getMyMultimediasFromApi();
+          toast.success("Favorito adicionado com sucesso!");
+        })
+        .catch((err) => {
+          toast.error(
+            "Nãofoi possível adicionar o favorito no momento. Favor tentar mais tarde."
+          );
+          console.log(err);
+        });
+    } else {
+      toast.warn("Já é seu favorito!");
+    }
   };
   const deleteMyMultimedias = (id: number) => {
     api
@@ -191,6 +198,10 @@ export const MyMultimediasProvider = ({
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    getMyMultimediasFromApi();
+  }, [config]);
 
   return (
     <MyMultimediasContext.Provider
