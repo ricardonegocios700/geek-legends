@@ -136,8 +136,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
         `/users/${userId}/`,
         {
           name: userData.name,
-          email: userData.email,
-          password: userData.password,
+          // email: userData.email,
+          // password: userData.password,
           preferences: userData.preferences,
           aboutMe: userData.aboutMe,
         },
