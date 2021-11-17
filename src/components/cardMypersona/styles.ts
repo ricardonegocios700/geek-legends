@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CardPersonaStyle = styled.li`
-  background: lightblue;
+  background: rgba(0, 0, 0, 0.8);
   width: 200px;
   height: 250px;
   border: 5px solid transparent;
@@ -11,6 +11,7 @@ export const CardPersonaStyle = styled.li`
   justify-content: space-around;
   align-items: center;
   margin: 5px;
+  color: white;
   &:hover {
     border: 5px solid darkblue;
   }
@@ -23,17 +24,17 @@ export const CardPersonaStyle = styled.li`
     font-size: 20px;
   }
   p {
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 90%;
+    overflow: auto;
+    height: 70px;
+    text-align: center;
   }
   button {
     border: 2px solid transparent;
     border-radius: 20px;
     font-size: 15px;
-    background: darkgreen;
-    color: white;
+    background: red;
+    color: floralwhite;
     padding: 5px;
     &:hover {
       border: 2px solid darkred;

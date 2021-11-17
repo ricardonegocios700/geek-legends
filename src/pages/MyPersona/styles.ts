@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import backImg from "../../assets/persona-desktop.gif";
+import backImg from "../../assets/myPersonasBG-mobile.jpg";
+import backImgTwo from "../../assets/myPersonasBG-desktop.jpg";
 
 export const ContainerMyPersona = styled.main`
   background-image: url(${backImg});
@@ -20,6 +21,12 @@ export const ContainerMyPersona = styled.main`
     }
   }
   @media (min-width: 800px) {
+    background-image: url(${backImgTwo});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    min-height: 99vh;
     ul {
       display: flex;
       flex-direction: row;
