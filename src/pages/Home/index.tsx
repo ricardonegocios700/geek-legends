@@ -47,22 +47,26 @@ const Home = () => {
         <div className="containerDevs">
           <div>
             <img src={Beatriz} alt="" />
-            <h4>Beatriz</h4>
+            <a href="https://www.linkedin.com/in/beatriz-alves-arruda-de-oliveira-130768127/">
+              Beatriz
+            </a>
             <h5> Scrum Master </h5>
           </div>
           <div>
             <img src={Ricardo} alt="" />
-            <h4>Ricardo</h4>
+            <a href="https://www.linkedin.com/in/ricardoliveira700/">Ricardo</a>
             <h5> Product Owner </h5>
           </div>
           <div>
             <img src={Roberto} alt="" />
-            <h4>Roberto</h4>
+            <a href="https://www.linkedin.com/in/roberto-bressanelli-1814b015/">
+              Roberto
+            </a>
             <h5> Tech Leader </h5>
           </div>
           <div>
             <img src={Sthefany} alt="" />
-            <h4>Sthéfany</h4>
+            <a href="https://www.linkedin.com/in/sthefanyagomes/">Sthéfany</a>
             <h5> Quality Assurance</h5>
           </div>
         </div>

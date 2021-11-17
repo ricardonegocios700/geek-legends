@@ -131,6 +131,14 @@ export const TeamSection = styled.section`
 
   .containerDevs > div {
     margin: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .containerDevs > div > a {
+    color: var(--font-color-white);
+    margin: 5px;
   }
 
   .containerDevs > div > img {

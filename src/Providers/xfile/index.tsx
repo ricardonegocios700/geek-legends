@@ -36,10 +36,10 @@ const XFileContext = createContext<XFileProviderData>({} as XFileProviderData);
 export const XFileProvider = ({ children }: XFileProviderProps) => {
     const [allPosts, setAllPosts] = useState<XFileTypes[]>({} as XFileTypes[]);
 
-    const { config, accessToken } = useAuth();
+    const { config, userId } = useAuth();
 
     const getPostsFromApi = () => {
-        api.get<XFileTypes[]>("/posts", config)
+        api.get<XFileTypes[]>(`/posts?userId=${userId}`, config)
             .then((response) => {
                 setAllPosts(response.data);
                 console.log(response.data);
