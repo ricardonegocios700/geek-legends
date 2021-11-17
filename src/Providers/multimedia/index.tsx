@@ -172,6 +172,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     { ...mediaData }: MultimediaTypes,
     reaction: number
   ) => {
+    console.log(reaction, typeof reaction, mediaData);
     let like = 0;
     let dislike = 0;
     if (reaction > 0) {
@@ -184,20 +185,19 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     } else {
       dislike = Number(mediaData.dislike);
     }
-
+    console.log(like, dislike);
+    console.log(mediaData.id);
     api
       .patch<MultimediaTypes>(
-        `/multimedia/${mediaData.id}`,
+        `/multimedias/${mediaData.id}`,
         {
           like: Number(like),
           dislike: Number(dislike),
         },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
+        config
       )
       .then((response) => {
-        getAllMultimediaFromApi();
+        getMultimediaByType();
       })
       .catch((err) => {
         console.log(err);
