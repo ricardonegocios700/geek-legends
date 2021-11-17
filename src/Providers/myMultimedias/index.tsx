@@ -49,13 +49,11 @@ export const MyMultimediasProvider = ({
   >({} as MyMultimediasTypes[]);
 
   const { userId, config } = useAuth();
-  console.log("userId", userId);
   const getMyMultimediasFromApi = () => {
     api
       .get<MyMultimediasTypes[]>(`/myMultimedias?userId=${userId}`, config)
       .then((response) => {
         setMyMultimediaList(response.data);
-        //console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
@@ -97,7 +95,7 @@ export const MyMultimediasProvider = ({
         setMyMultimediaByGibis(response.data);
       })
       .catch((err) => {
-        console.log("Filmes: ", err);
+        console.log("Gibis: ", err);
       });
     api
       .get<MyMultimediasTypes[]>(
@@ -143,7 +141,6 @@ export const MyMultimediasProvider = ({
       .then((response) => {
         getMyMultimediasFromApi();
         toast.success(`Filtrado pelo tipo  ${type}`);
-        console.log(response.data);
       })
       .catch((err) => {
         toast.error(`Não foram encontrados favoritos do tipo ${type}`);
