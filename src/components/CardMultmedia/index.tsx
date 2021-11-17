@@ -3,6 +3,7 @@ import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { useMultimedia } from "../../Providers/multimedia";
+import { useMyMultimedias } from "../../Providers/myMultimedias";
 
 interface MultimediaTypes {
   id: number;
@@ -13,7 +14,7 @@ interface MultimediaTypes {
   image: string;
   description: string;
   userId: number;
-  reaction: number;
+  reaction?: number;
 }
 
 interface CardProps {
@@ -54,11 +55,18 @@ const Card = ({
     image: image,
     description: description,
     userId: userId,
+    multimediaId: id,
   };
   const { multimediaUserReaction } = useMultimedia();
+  const { addToMyMultimedias } = useMyMultimedias();
   const location = useLocation<PathProps>();
   const handleClickLike = (reaction: Number) => {
     multimediaUserReaction(mediaData, Number(reaction));
+  };
+
+  const handleClikeFavorite = () => {
+    addToMyMultimedias(mediaData);
+    //console.log(mediaData);
   };
   return (
     <Container2>
@@ -68,15 +76,6 @@ const Card = ({
 
       <Info>
         <h1>{title}</h1>
-        <p>
-          {location.pathname === "/persona" ? (
-            <p>{title}</p>
-          ) : location.pathname === "/geekstore" ? (
-            <a href="www.google.com.br" target="_about">
-              Site
-            </a>
-          ) : null}
-        </p>
       </Info>
 
       <div className="emojis">
@@ -87,8 +86,8 @@ const Card = ({
           />
           <p>{like}</p>
         </Like>
-        {location.pathname === "/persona" && (
-          <IoMdAddCircle className="addCard" />
+        {location.pathname === "/multimedia" && (
+          <IoMdAddCircle className="addCard" onClick={handleClikeFavorite} />
         )}
         <Dislike>
           <BsEmojiFrownFill
