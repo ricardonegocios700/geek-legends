@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
@@ -15,14 +9,14 @@ interface MultimediaProviderProps {
 }
 
 interface MultimediaTypes {
+  id: number;
   title: string;
   type: string;
-  like?: number;
-  dislike?: number;
+  like: number;
+  dislike: number;
   image: string;
   description: string;
-  id: number;
-  userId?: number;
+  userId: number;
 }
 
 interface MultimediaProviderData {
@@ -67,11 +61,10 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   const [multimediaByGames, setMultimediaByGames] = useState<MultimediaTypes[]>(
     [] as MultimediaTypes[]
   );
-  const test = ["Gibi", "Filme"];
+
   const { config, accessToken } = useAuth();
 
   const getAllMultimediaFromApi = () => {
-    //TODO não usamos config
     api
       .get<MultimediaTypes[]>("/multimedias", config)
       .then((response) => {
@@ -79,26 +72,20 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaList(response.data);
       })
       .catch((err) => {
-        toast.error(
+        console.log(
           "Não foi possível concluir sua solicitação. Favor tentar novamente!"
         );
       });
   };
 
   const getMultimediaByType = () => {
-    //TODO não usamos config
-    //TODO nem tentei usar uma variável para os types, não quis investir tempo
-
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Filmes`, config)
       .then((response) => {
         setMultimediaByFilmes(response.data);
       })
       .catch((err) => {
-        toast.error(
-          "Não foi possível carregar Filmes. Favor tentar novamente!"
-        );
-        console.log(err);
+        console.log("Filmes: ", err);
       });
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Gibis`, config)
@@ -106,8 +93,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaByGibis(response.data);
       })
       .catch((err) => {
-        toast.error("Não foi possível carregar Gibis. Favor tentar novamente!");
-        console.log(err);
+        console.log("Filmes: ", err);
       });
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Animes`, config)
@@ -115,10 +101,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaByAnimes(response.data);
       })
       .catch((err) => {
-        toast.error(
-          "Não foi possível concluir carregar Animes. Favor tentar novamente!"
-        );
-        console.log(err);
+        console.log("Animes: ", err);
       });
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Séries`, config)
@@ -126,10 +109,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaBySeries(response.data);
       })
       .catch((err) => {
-        toast.error(
-          "Não foi possível concluir carregar Séries. Favor tentar novamente!"
-        );
-        console.log(err);
+        console.log("Séries: ", err);
       });
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Games`, config)
@@ -137,10 +117,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaByGames(response.data);
       })
       .catch((err) => {
-        toast.error(
-          "Não foi possível concluir carregar Games. Favor tentar novamente!"
-        );
-        console.log(err);
+        console.log("Games: ", err);
       });
   };
 
@@ -164,7 +141,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
   };
 
   const updateMultimediaInApi = ({ ...mediaData }: MultimediaTypes) => {
-    api.patch<MultimediaTypes[]>(
+    api.patch<MultimediaTypes>(
       `/multimedias/${mediaData.id}`,
       {
         title: mediaData?.title,
@@ -209,14 +186,15 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     }
 
     api
-      .patch<MultimediaTypes[]>(
+      .patch<MultimediaTypes>(
         `/multimedia/${mediaData.id}`,
         {
-          like: like,
-          dislike: dislike,
-          userId: mediaData.userId,
+          like: Number(like),
+          dislike: Number(dislike),
         },
-        config
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
       )
       .then((response) => {
         getAllMultimediaFromApi();

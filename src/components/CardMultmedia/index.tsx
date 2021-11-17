@@ -2,16 +2,29 @@ import { Container2, ImageDiv, Like, Dislike, Info } from "./styles";
 import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
 import { useLocation } from "react-router-dom";
+import { useMultimedia } from "../../Providers/multimedia";
+
+interface MultimediaTypes {
+  id: number;
+  title: string;
+  type: string;
+  like: number;
+  dislike: number;
+  image: string;
+  description: string;
+  userId: number;
+  reaction: number;
+}
 
 interface CardProps {
-  img: string;
-  name: string;
-  type?: string;
-  url?: string;
-  preferences?: string;
-  like: string | number | undefined;
-  dislike: string | number | undefined;
-  handleClick?: (arg: number) => number;
+  id: number;
+  title: string;
+  type: string;
+  like: number;
+  dislike: number;
+  image: string;
+  description: string;
+  userId: number;
   handleAddPersona?: () => void;
 }
 
@@ -23,30 +36,43 @@ interface PathProps {
 }
 
 const Card = ({
-  img,
-  name,
-  url = "https://www.google.com.br",
-  preferences,
+  id,
+  title,
+  type,
   like,
   dislike,
-  type,
-  handleClick,
-  handleAddPersona,
+  image,
+  description,
+  userId,
 }: CardProps) => {
+  const mediaData = {
+    id: id,
+    title: title,
+    type: type,
+    like: like,
+    dislike: dislike,
+    image: image,
+    description: description,
+    userId: userId,
+  };
+  const { multimediaUserReaction } = useMultimedia();
   const location = useLocation<PathProps>();
+  const handleClickLike = (reaction: Number) => {
+    multimediaUserReaction(mediaData, Number(reaction));
+  };
   return (
     <Container2>
       <ImageDiv>
-        <img src={img} alt="nome" />
+        <img src={image} alt="nome" />
       </ImageDiv>
 
       <Info>
-        <h1>{name}</h1>
+        <h1>{title}</h1>
         <p>
           {location.pathname === "/persona" ? (
-            <p>{preferences}</p>
+            <p>{title}</p>
           ) : location.pathname === "/geekstore" ? (
-            <a href={url} target="_about">
+            <a href="www.google.com.br" target="_about">
               Site
             </a>
           ) : null}
@@ -55,14 +81,20 @@ const Card = ({
 
       <div className="emojis">
         <Like>
-          <BsEmojiHeartEyesFill className="smile" />
+          <BsEmojiHeartEyesFill
+            className="smile"
+            onClick={() => handleClickLike(1)}
+          />
           <p>{like}</p>
         </Like>
         {location.pathname === "/persona" && (
-          <IoMdAddCircle onClick={handleAddPersona} className="addCard" />
+          <IoMdAddCircle className="addCard" />
         )}
         <Dislike>
-          <BsEmojiFrownFill className="sad" />
+          <BsEmojiFrownFill
+            className="sad"
+            onClick={() => handleClickLike(-1)}
+          />
           <p>{dislike}</p>
         </Dislike>
       </div>

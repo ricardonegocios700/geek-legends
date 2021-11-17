@@ -26,11 +26,11 @@ const Multimedia = () => {
     <Container>
       <Header />
       <Div>
-        <TypesMultimedia dataToRender={multimediaByFilmes} title="Filmes" />
-        <TypesMultimedia dataToRender={multimediaBySeries} title="Séries" />
-        <TypesMultimedia dataToRender={multimediaByAnimes} title="Animes" />
-        <TypesMultimedia dataToRender={multimediaByGames} title="Games" />
-        <TypesMultimedia dataToRender={multimediaByGibis} title="Gibis" />
+        <TypesMultimedia dataToRender={multimediaByFilmes} />
+        <TypesMultimedia dataToRender={multimediaBySeries} />
+        <TypesMultimedia dataToRender={multimediaByAnimes} />
+        <TypesMultimedia dataToRender={multimediaByGames} />
+        <TypesMultimedia dataToRender={multimediaByGibis} />
       </Div>
     </Container>
   );

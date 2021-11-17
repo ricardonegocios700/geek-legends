@@ -54,16 +54,6 @@ export const ImageDiv = styled.div`
     object-fit: scale-down;
   }
 `;
-export const H1 = styled.h1`
-  border-start-start-radius: 10px;
-  border-start-end-radius: 10px;
-  max-width: 209px;
-  height: 40px;
-  background-color: #0d3b4f;
-  color: #76f7ff;
-  text-align: center;
-  font-size: 30px;
-`;
 
 export const Div = styled.div`
   width: 209px;
@@ -87,16 +77,24 @@ export const Container = styled.section`
   position: relative;
   width: 90vw;
   height: 90vh;
-  margin-top: 450px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  /* div {
-    width: 100%;
-    height: 593px;
-  } */
+  align-items: center;
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
   }
+`;
+
+export const H1 = styled.h1`
+  margin-top: 15px;
+  border-start-start-radius: 10px;
+  border-start-end-radius: 10px;
+  width: 220px;
+  max-width: 220px;
+  height: 40px;
+  background-color: #0d3b4f;
+  color: #76f7ff;
+  text-align: center;
+  font-size: 30px;
 `;

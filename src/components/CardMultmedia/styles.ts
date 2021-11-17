@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const Container2 = styled.div`
   width: 220px;
   min-height: 320px;
-  border: 2px solid #000;
-  border-radius: 6px;
+  border: 0.25px solid #000;
+  //border-radius: 6px;
   padding: 40px 30px;
-  margin: 20px auto;
+  margin: 0px auto;
   justify-content: space-between;
   background-color: #f5f5f5;
 

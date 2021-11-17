@@ -1,31 +1,33 @@
-import { H1, Div, Container } from "./style";
+import { H1, Container } from "./style";
 import Card from "../CardMultmedia";
 
 interface CardProps {
+  id: number;
   title: string;
   type: string;
-  like?: number;
-  dislike?: number;
+  like: number;
+  dislike: number;
   image: string;
   description: string;
-  id?: number;
-  userId?: number;
+  userId: number;
 }
 
-const TypesMultimedia = ({ dataToRender }: any, title: string) => {
+const TypesMultimedia = ({ dataToRender }: any) => {
   return (
     <Container>
-      {/* <h1>{title}</h1> */}
+      <H1>{dataToRender[0]?.type}</H1>
       {dataToRender[0] &&
         dataToRender.map((data: CardProps, index: number) => (
           <Card
             key={index}
-            img={data.image}
-            name={data.title}
+            id={data.id}
+            title={data.title}
+            type={data.type}
             like={data.like}
             dislike={data.dislike}
-            url=""
-            type={data.type}
+            image={data.image}
+            description={data.description}
+            userId={data.userId}
           />
         ))}
     </Container>
