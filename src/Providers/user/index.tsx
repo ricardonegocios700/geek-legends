@@ -147,7 +147,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       )
       .then((response) => {
         setCheckMove(!checkMove);
-        toast.success(`Usuário alterado. Olá ${response.data.username}`);
+        toast.success(`Usuário alterado. Olá ${response.data.name}`);
       })
       .catch((err) => {
         console.log(err);

@@ -2,6 +2,7 @@ import { Modal, Form } from "./styles";
 import { useAuth } from "../../Providers/user/index";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import {useEffect } from 'react';
 
 interface UpdateUserModalProps {
     show: boolean;
@@ -19,9 +20,13 @@ interface DataTypes {
 const UpdateUserModal = ({ show, handleClick }: UpdateUserModalProps) => {
     const { register, handleSubmit, reset } = useForm({});
 
-    const { userProfileUpdate, userId } = useAuth();
+    const { userProfileUpdate, userId, getOneUser, config, userInfo } = useAuth();
 
-    const handleUpdateUser = (data: DataTypes) => {
+    useEffect(() => {
+        getOneUser(userId);
+      }, [config]);
+
+    const handleUpdateUser = (data: DataTypes) => {        
         if (
             data.name === "" &&
             data.aboutMe === "" &&
@@ -32,6 +37,9 @@ const UpdateUserModal = ({ show, handleClick }: UpdateUserModalProps) => {
             return null;
         } else {
             handleClick(!show);
+            if(data.name==='') { data.name = userInfo.name }
+            if(data.aboutMe==='') { data.aboutMe = userInfo.aboutMe }
+            if(data.preferences==='') { data.preferences = userInfo.preferences }
             userProfileUpdate(userId, data);
         }
         reset();
