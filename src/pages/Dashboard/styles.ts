@@ -52,7 +52,7 @@ export const ContainerDash = styled.main`
     header {
       background: lightblue;
       width: 100%;
-      height: 75px;
+
       display: flex;
       justify-content: space-around;
       & > a {

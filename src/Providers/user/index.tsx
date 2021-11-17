@@ -6,11 +6,11 @@ import {
   useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
-import api from "../../services/api";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
-
 import { History } from "history";
+import api from "../../services/api";
+
 interface AuthProps {
   children: ReactNode;
 }
@@ -44,12 +44,6 @@ interface RequestConfigTypes {
   headers: HeadersTypes;
 }
 
-interface CardUsersData {
-  id: number;
-  name: string;
-  preferences: string;
-}
-
 interface AuthProviderData {
   userSignup: (userData: UserData) => void;
   userLogin: (userData: UserLoginData) => void;
@@ -57,7 +51,6 @@ interface AuthProviderData {
   userProfileUpdate: (userId: UserData, userData: UserData) => void;
   getUsers: () => void;
   getOneUser: (userId: UserData) => void;
-  getOneUserForAddMyPersona: (id: CardUsersData) => void;
   userId: any;
   user: UserData;
   userInfo: UserData;
@@ -68,24 +61,26 @@ interface AuthProviderData {
   accessToken: string;
   config: RequestConfigTypes;
   usersList: any;
-  usersListAdd: UserData[];
-  setUsersListAdd: any;
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
+
   const [user, setUser] = useState<UserData>({} as UserData);
   const [userInfo, setUserInfo] = useState<UserData>({} as UserData);
+  const [usersList, setUsersList] = useState<UserData[]>([] as UserData[]);
+
   const [userId, setUserId] = useState<Number>(0);
+
   const [authorized, setAuthorized] = useState<boolean>(false);
+  const [checkMove, setCheckMove] = useState<boolean>(false);
+
   const [config, setConfig] = useState<RequestConfigTypes>(
     {} as RequestConfigTypes
   );
-  const [checkMove, setCheckMove] = useState<boolean>(false);
-  const [usersList, setUsersList] = useState<UserData[]>([] as UserData[]);
-  const [usersListAdd, setUsersListAdd] = useState<UserData[]>([]);
+
   const [accessToken, setAccessToken] = useState<string>(
     () => localStorage.getItem("@geekLegends:access") || ""
   );
@@ -121,7 +116,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
     api
       .get(`/users`, config)
       .then((response) => {
-        console.log(response.data);
         setUsersList(response.data);
       })
       .catch((err) => console.log(err));
@@ -132,42 +126,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .get(`users?id=${userId}`, config)
       .then((response) => {
         setUserInfo(response.data[0]);
-        setUserId(response.data.id);
       })
       .catch((err) => console.log(err));
   };
-
-  const getOneUserForAddMyPersona = ({ id }: CardUsersData) => {
-    api
-      .get(`/users?id=${id}`, config)
-      .then((response) => {
-        !usersListAdd.find(
-          (person: UserData) => person.name === response.data[0].name
-        ) && toast.success("Persona adicionado a sua lista");
-        setUsersListAdd([...usersListAdd, response.data[0]]);
-      })
-      .catch((err) => console.log(err));
-  };
-  console.log(usersListAdd);
-
-  useEffect(() => {
-    const token = accessToken;
-    if (token) {
-      const decode: DecodeData = jwtDecode(token);
-      let num = Number(decode.sub);
-      setUserId(num);
-      setAuthorized(true);
-    }
-    // esse setConfig aparecia em outro useEffect, com [accessToken],
-    // mudei para um só
-    setConfig({
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-  }, [accessToken, checkMove]);
-
-  useEffect(() => {
-    getUsers();
-  }, [config]);
 
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
     api
@@ -206,8 +167,22 @@ export const AuthProvider = ({ children }: AuthProps) => {
     toast.success("Logout realizado");
   };
 
-  console.log(config);
-  console.log(usersList);
+  useEffect(() => {
+    const token = accessToken;
+    if (token) {
+      const decode: DecodeData = jwtDecode(token);
+      let num = Number(decode.sub);
+      setUserId(num);
+      setAuthorized(true);
+    }
+    setConfig({
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }, [accessToken, checkMove]);
+
+  useEffect(() => {
+    getUsers();
+  }, [config]);
 
   return (
     <AuthContext.Provider
@@ -216,15 +191,12 @@ export const AuthProvider = ({ children }: AuthProps) => {
         Logout,
         userLogin,
         getOneUser,
-        getOneUserForAddMyPersona,
         userId,
         user,
         userInfo,
         setUser,
         setUserId,
         usersList,
-        usersListAdd,
-        setUsersListAdd,
         userProfileUpdate,
         authorized,
         setAuthorized,
