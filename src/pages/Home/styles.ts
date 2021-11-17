@@ -48,12 +48,13 @@ export const TitleSection = styled.section`
     margin: 40px;
 
     h1 {
-      margin: 10px;
+      margin: 1rem;
     }
     img {
       display: flex;
       width: 120px;
       border-radius: 50%;
+      /* margin: 0 12%; */
     }
   }
 
@@ -64,15 +65,18 @@ export const TitleSection = styled.section`
   }
 
   @media (min-width: 1000px) {
-    margin: 100px;
-    width: 480px;
+    margin: 10vh;
+    width: 420px;
 
     h1 {
       font-size: 3.5rem;
     }
 
     img {
-      width: 160px;
+      width: 13vw;
+      max-width: 135px;
+      min-height: 13vh;
+      max-height: 135px;
     }
   }
 `;
@@ -97,8 +101,8 @@ export const ButtonsDiv = styled.div`
   }
 
   @media (min-width: 1000px) {
-    left: 10%;
-    top: 65%;
+    left: 7%;
+    top: 70vh;
 
     height: max-content;
 
