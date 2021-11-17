@@ -1,8 +1,11 @@
 import { Container2, ImageDiv, Like, Dislike, Info } from "./styles";
 import { BsEmojiHeartEyesFill, BsEmojiFrownFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
+import { TiDelete } from "react-icons/ti";
 import { useLocation } from "react-router-dom";
+
 import { useMultimedia } from "../../Providers/multimedia";
+import { useMyMultimedias } from "../../Providers/myMultimedias";
 
 interface MultimediaTypes {
   id: number;
@@ -13,7 +16,7 @@ interface MultimediaTypes {
   image: string;
   description: string;
   userId: number;
-  reaction: number;
+  reaction?: number;
 }
 
 interface CardProps {
@@ -54,12 +57,22 @@ const Card = ({
     image: image,
     description: description,
     userId: userId,
+    multimediaId: id,
   };
   const { multimediaUserReaction } = useMultimedia();
+  const { addToMyMultimedias, deleteMyMultimedias } = useMyMultimedias();
   const location = useLocation<PathProps>();
   const handleClickLike = (reaction: Number) => {
     multimediaUserReaction(mediaData, Number(reaction));
   };
+
+  const handleClikeFavorite = () => {
+    addToMyMultimedias(mediaData);
+  };
+  const handleClikeRemove = (id: number) => {
+    deleteMyMultimedias(id);
+  };
+
   return (
     <Container2>
       <ImageDiv>
@@ -68,15 +81,6 @@ const Card = ({
 
       <Info>
         <h1>{title}</h1>
-        <p>
-          {location.pathname === "/persona" ? (
-            <p>{title}</p>
-          ) : location.pathname === "/geekstore" ? (
-            <a href="www.google.com.br" target="_about">
-              Site
-            </a>
-          ) : null}
-        </p>
       </Info>
 
       <div className="emojis">
@@ -87,8 +91,11 @@ const Card = ({
           />
           <p>{like}</p>
         </Like>
-        {location.pathname === "/persona" && (
-          <IoMdAddCircle className="addCard" />
+        {location.pathname === "/multimedia" && (
+          <IoMdAddCircle className="addCard" onClick={handleClikeFavorite} />
+        )}
+        {location.pathname === "/mymultimedia" && (
+          <TiDelete className="addCard" onClick={() => handleClikeRemove(id)} />
         )}
         <Dislike>
           <BsEmojiFrownFill

@@ -23,16 +23,18 @@ const Multimedia = () => {
   }, [config]);
 
   return (
-    <Container>
+    <>
       <Header />
-      <Div>
-        <TypesMultimedia dataToRender={multimediaByFilmes} />
-        <TypesMultimedia dataToRender={multimediaBySeries} />
-        <TypesMultimedia dataToRender={multimediaByAnimes} />
-        <TypesMultimedia dataToRender={multimediaByGames} />
-        <TypesMultimedia dataToRender={multimediaByGibis} />
-      </Div>
-    </Container>
+      <Container>
+        <Div>
+          <TypesMultimedia dataToRender={multimediaByFilmes} />
+          <TypesMultimedia dataToRender={multimediaBySeries} />
+          <TypesMultimedia dataToRender={multimediaByAnimes} />
+          <TypesMultimedia dataToRender={multimediaByGames} />
+          <TypesMultimedia dataToRender={multimediaByGibis} />
+        </Div>
+      </Container>
+    </>
   );
 };
 

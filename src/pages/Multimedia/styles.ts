@@ -2,7 +2,6 @@ import styled from "styled-components";
 import BackImage from "../../assets/multimidia-desktop.gif";
 
 export const Div = styled.div`
-  margin-top: 130px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -13,6 +12,7 @@ export const Div = styled.div`
 `;
 
 export const Container = styled.section`
+  padding: 150px 70px 0;
   color: #fff;
   background-color: var(--back-color);
   @media only screen and (min-width: 400px) {

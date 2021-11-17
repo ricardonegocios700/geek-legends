@@ -13,25 +13,29 @@ interface CardProps {
 }
 
 const TypesMultimedia = ({ dataToRender }: any) => {
-  return (
-    <Container>
-      <H1>{dataToRender[0]?.type}</H1>
-      {dataToRender[0] &&
-        dataToRender.map((data: CardProps, index: number) => (
-          <Card
-            key={index}
-            id={data.id}
-            title={data.title}
-            type={data.type}
-            like={data.like}
-            dislike={data.dislike}
-            image={data.image}
-            description={data.description}
-            userId={data.userId}
-          />
-        ))}
-    </Container>
-  );
+  if (dataToRender[0] === undefined) {
+    return <></>;
+  } else {
+    return (
+      <Container>
+        <H1>{dataToRender[0]?.type}</H1>
+        {dataToRender[0] &&
+          dataToRender.map((data: CardProps, index: number) => (
+            <Card
+              key={index}
+              id={data.id}
+              title={data.title}
+              type={data.type}
+              like={data.like}
+              dislike={data.dislike}
+              image={data.image}
+              description={data.description}
+              userId={data.userId}
+            />
+          ))}
+      </Container>
+    );
+  }
 };
 
 export default TypesMultimedia;
