@@ -135,9 +135,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .patch(
         `/users/${userId}/`,
         {
-          name: userData.name,
-          // email: userData.email,
-          // password: userData.password,
+          name: userData.name,          
           preferences: userData.preferences,
           aboutMe: userData.aboutMe,
         },
