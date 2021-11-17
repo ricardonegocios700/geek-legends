@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Modal = styled.div`
-    top: 20%;    
+    top: 20%;
     min-width: 50vw;
     position: fixed;
     background: rgba(255, 255, 255, 0.8);
@@ -12,11 +12,9 @@ export const Modal = styled.div`
     border-radius: 30px;
     border-top: 5px solid darkblue;
     border-bottom: 5px solid darkblue;
-    font-size: 18px;    
+    font-size: 18px;
     box-shadow: 1px 1px 30px 5px #0a0a0a;
     z-index: 1;
-
-    
 
     @media only screen and (min-width: 400px) {
         min-width: 380px;
@@ -26,14 +24,13 @@ export const Modal = styled.div`
         left: 50vw;
         transform: translateX(-50%);
         min-width: 600px;
-        max-height: 55vh;      
-        
+        max-height: 55vh;
     }
 `;
 
 export const Form = styled.form`
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -45,13 +42,12 @@ export const Form = styled.form`
         color: var(--back-color);
     }
 
-
     & > button.modalButton {
         width: 70%;
         margin: 10px;
         padding: 1px 0;
         font-family: var(--font-family-secondary);
-        border: 2px solid darkblue;        
+        border: 2px solid darkblue;
     }
 
     & > label {
@@ -78,12 +74,13 @@ export const Form = styled.form`
 
     & p {
         font-family: var(--font-family-primary);
-        font-weight: 700;        
+        font-weight: 700;
+        overflow: hidden;
     }
 
-    @media only screen and (min-width: 400px){}
-    @media only screen and (min-width: 800px){
-
+    @media only screen and (min-width: 400px) {
+    }
+    @media only screen and (min-width: 800px) {
         & button.modalButton {
             width: 50%;
         }
