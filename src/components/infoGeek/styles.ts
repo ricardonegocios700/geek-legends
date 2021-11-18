@@ -39,6 +39,25 @@ export const Container = styled.div`
     width: 80%;
     overflow: auto;
     height: 60px;
+
+    ::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 8px red;
+        border-radius: 10px;
+        
+    }   
+    ::-webkit-scrollbar-thumb {      
+        background: red;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: darkRed;
+    }
+
   }
   img {
     width: 50px;
