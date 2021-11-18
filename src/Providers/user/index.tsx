@@ -151,7 +151,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("Nome inválido");
       });
   };
 

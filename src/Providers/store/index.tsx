@@ -59,8 +59,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       { like: Number(item.like) + 1 },
       config
     ).then(((response) => {
-      getStores()
-      console.log(response.data)
+      getStores()      
     })).catch((err) => console.log(err))
   };
 
@@ -70,8 +69,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       { dislike: Number(item.dislike) + 1 },
       config
     ).then(((response) => {
-      getStores()
-      console.log(response.data)
+      getStores()      
     })).catch((err) => console.log(err))
   };
 

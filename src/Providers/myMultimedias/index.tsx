@@ -173,7 +173,7 @@ export const MyMultimediasProvider = ({
         })
         .catch((err) => {
           toast.error(
-            "Nãofoi possível adicionar o favorito no momento. Favor tentar mais tarde."
+            "Não foi possível adicionar o favorito no momento. Favor tentar mais tarde."
           );
           console.log(err);
         });

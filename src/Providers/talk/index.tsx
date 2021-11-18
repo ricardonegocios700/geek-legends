@@ -49,8 +49,7 @@ export const TalksProvider = ({ children }: TalksProps) => {
     api
       .get("/talk", config)
       .then((response) => {
-        setTotalTalks(response.data);
-        console.log(response.data);
+        setTotalTalks(response.data);        
       })
       .catch((err) => console.log(err));
   };
@@ -59,32 +58,27 @@ export const TalksProvider = ({ children }: TalksProps) => {
     api
       .get(`/talk?userId=${userId}&destinyId=${destinyId}`, config)
       .then((response) => {
-        setTalk(response.data);
-        console.log(response.data);
+        setTalk(response.data);        
       })
       .catch((err) => console.log(err));
 
     api
       .get(`/talk?userId=${userId}&destinyId=${destinyId}`, config)
       .then((response) => {
-        setTalk([...talk, response.data]);
-        console.log(response.data);
+        setTalk([...talk, response.data]);        
       });
 
     let talkOrder = talk.sort((a, b) => {
       return Number(a.id) - Number(b.id);
     });
-
-    setTalk(talkOrder);
-    console.log(talkOrder);
+    setTalk(talkOrder);    
   };
 
   const createTalks = (dataTalk: Talks) => {
     api
       .post("/talk", dataTalk, config)
       .then((response) => {
-        setTotalTalks([...totalTalks, response.data]);
-        console.log(response.data);
+        setTotalTalks([...totalTalks, response.data]);        
       })
       .catch((err) => console.log(err));
   };

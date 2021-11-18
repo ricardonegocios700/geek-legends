@@ -6,8 +6,7 @@ import { useEffect } from "react";
 
 const GeekStore = () => {
   const { stores, getStores } = useStore();
-
-  console.log(stores);
+  
   useEffect(() => {
     getStores();
   }, []);

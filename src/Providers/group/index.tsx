@@ -32,8 +32,7 @@ export const GroupProvider = ({ children }: GroupProps) => {
     api
       .get("/group", config)
       .then((response) => {
-        setGroup(response.data);
-        console.log(response.data);
+        setGroup(response.data);        
       })
       .catch((err) => console.log(err));
   };
@@ -42,8 +41,7 @@ export const GroupProvider = ({ children }: GroupProps) => {
     api
       .post("/group", groupUser, config)
       .then((response) => {
-        setGroup([...group, response.data]);
-        console.log(response.data);
+        setGroup([...group, response.data]);        
       })
       .catch((err) => console.log(`Falha! Senha ou email incorreto => ${err}`));
   };
@@ -51,7 +49,7 @@ export const GroupProvider = ({ children }: GroupProps) => {
   const deleteUserGroup = (id: Group) => {
     api
       .delete(`/group/${id}`, config)
-      .then((response) => console.log(response.data))
+      .then((response) => null)
       .catch((err) => console.log(err));
   };
 

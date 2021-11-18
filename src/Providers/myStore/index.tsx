@@ -53,8 +53,7 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
         userId: item.userId,        
       },config)
       .then((resp) => {
-        toast.success('Loja adicionada ao My Geek Stores!')
-        console.log(resp.data)
+        toast.success('Loja adicionada ao My Geek Stores!')       
         getMyStores()})
       .catch((err) => {
         toast.error('Erro! Favor tentar novamente!')
@@ -65,7 +64,7 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
     api
       .delete(`/myStores/${id}`, config)
       .then((resp) => getMyStores())
-      .catch((err) => console.log(err, id));
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
