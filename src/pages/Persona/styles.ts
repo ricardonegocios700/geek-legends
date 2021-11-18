@@ -4,8 +4,10 @@ import backImg from "../../assets/persona-desktop.gif";
 export const ContainerPersona = styled.main`
   background-image: url(${backImg});
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-repeat: no-repeat;  
+  background-position: center center;   
+  background-attachment: fixed;
+
   height: 100%;
   min-height: 100vh;
   ul {

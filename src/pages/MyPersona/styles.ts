@@ -7,6 +7,7 @@ export const ContainerMyPersona = styled.main`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   height: 100%;
   min-height: 100vh;
   ul {
@@ -25,6 +26,8 @@ export const ContainerMyPersona = styled.main`
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
+
     height: 100%;
     min-height: 99vh;
     ul {
