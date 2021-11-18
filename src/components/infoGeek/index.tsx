@@ -6,7 +6,7 @@ import { Container } from "./styles";
 
 export const InfoGeek = () => {
   const { userInfo, userId, getOneUser, config } = useAuth();
-  const [ showModal, setShowModal ] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     getOneUser(userId);
   }, [config]);
@@ -22,12 +22,12 @@ export const InfoGeek = () => {
       <img src={logoUser} alt="logoUser"></img>
       <h6>preferencias</h6>
       <p>{userInfo.preferences ? userInfo.preferences : "carregando..."}</p>
-      <h6>about me</h6>
+      <h6>sobre você</h6>
       <p>{userInfo.aboutMe ? userInfo.aboutMe : "Nada a declarar"}</p>
-      <button
-        onClick={() => setShowModal(!showModal)}
-      >atualização de usuário</button>
-      <UpdateUserModal show={showModal} handleClick={setShowModal}/>
+      <button onClick={() => setShowModal(!showModal)}>
+        atualização de usuário
+      </button>
+      <UpdateUserModal show={showModal} handleClick={setShowModal} />
     </Container>
   );
 };

@@ -4,8 +4,8 @@ import backImg from "../../assets/persona-desktop.gif";
 export const ContainerPersona = styled.main`
   background-image: url(${backImg});
   background-size: cover;
-  background-repeat: no-repeat;  
-  background-position: center center;   
+  background-repeat: no-repeat;
+  background-position: center center;
   background-attachment: fixed;
 
   height: 100%;
@@ -25,6 +25,7 @@ export const ContainerPersona = styled.main`
     ul {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-around;
       align-items: center;
       padding-top: 150px;

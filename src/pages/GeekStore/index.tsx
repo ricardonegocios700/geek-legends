@@ -17,6 +17,13 @@ const GeekStore = () => {
       <Header />
       <Container>
         <ListCardGeekStore dataToRender={stores} />
+        <audio autoPlay={true} controls={false} loop={true}>
+          <source
+            src="https://ringtonazer.b-cdn.net/fetch/d0/d0f559cdc2f26268a49690781874db55.mp3"
+            type="audio/mp3"
+          />
+          seu navegador não suporta HTML5
+        </audio>
       </Container>
     </>
   );
