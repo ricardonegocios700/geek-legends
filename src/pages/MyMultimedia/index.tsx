@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Header from "../../components/Header";
 import { motion } from "framer-motion";
-import { Container, Div } from "./styles";
+import { Container } from "./styles";
 import { useMyMultimedias } from "../../Providers/myMultimedias";
 import { useAuth } from "../../Providers/user";
 import TypesMultimedia from "../../components/TypesMultimedias";
@@ -26,21 +26,19 @@ const MyMultimedia = () => {
   }, [config]);
   return (
     <>
+      <Header />
       <motion.div
         initial={{ opacity: 0, y: "-100vh" }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: "-100h" }}
         transition={pageTransition}
       >
-        <Header />
         <Container>
-          <Div>
-            <TypesMultimedia dataToRender={myMultimediaByFilmes} />
-            <TypesMultimedia dataToRender={myMultimediaBySeries} />
-            <TypesMultimedia dataToRender={myMultimediaByAnimes} />
-            <TypesMultimedia dataToRender={myMultimediaByGames} />
-            <TypesMultimedia dataToRender={myMultimediaByGibis} />
-          </Div>
+          <TypesMultimedia dataToRender={myMultimediaByFilmes} />
+          <TypesMultimedia dataToRender={myMultimediaBySeries} />
+          <TypesMultimedia dataToRender={myMultimediaByAnimes} />
+          <TypesMultimedia dataToRender={myMultimediaByGames} />
+          <TypesMultimedia dataToRender={myMultimediaByGibis} />
         </Container>
       </motion.div>
     </>

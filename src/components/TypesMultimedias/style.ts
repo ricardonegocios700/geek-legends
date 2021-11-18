@@ -75,24 +75,34 @@ export const Div = styled.div`
 
 export const Container = styled.section`
   width: 90vw;
+  margin: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
+    flex-direction: column;
+    width: 100%;
   }
 `;
 
 export const H1 = styled.h1`
-  margin-top: 15px;
+  margin-top: 0px;
   border-start-start-radius: 10px;
   border-start-end-radius: 10px;
-  width: 170px;
-  max-width: 220px;
+  min-width: 300px;
   height: 40px;
   background-color: #0d3b4f;
   color: #76f7ff;
   text-align: center;
   font-size: 30px;
+  display: block;
+  transform: rotate(-90deg);
+  @media only screen and (min-width: 400px) {
+  }
+  @media only screen and (min-width: 800px) {
+    transform: rotate(0deg);
+    min-width: 170px;
+  }
 `;

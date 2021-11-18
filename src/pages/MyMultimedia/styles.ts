@@ -1,29 +1,32 @@
 import styled from "styled-components";
-import BackImage from "../../assets/multimidia-desktop.gif";
-
-export const Div = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  @media only screen and (min-width: 400px) {
-  }
-  @media only screen and (min-width: 800px) {
-  }
-`;
+import BackImageDesktop from "../../assets/multimidia-desktop.gif";
+import BackImageMobile from "../../assets/myMultimediaBG-mobile.png";
 
 export const Container = styled.section`
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
   padding: 150px 70px 0;
-  color: #fff;
-  background-color: var(--back-color);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  background: url(${BackImageMobile}) no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: fixed;
+
+  align-items: justify;
+
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
-    background: url(${BackImage}) no-repeat;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+
+    background: url(${BackImageDesktop}) no-repeat;
     background-size: cover;
-    background-position: center;
-    align-items: center;
-    height: 100vh;
-    max-width: 100vw;
-    width: 100%;
+    background-attachment: fixed;
+    background-position: fixed;
   }
 `;

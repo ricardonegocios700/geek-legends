@@ -1,21 +1,10 @@
 import styled from "styled-components";
 import BackImageDesktop from "../../assets/multimidia-desktop.gif";
 import BackImageMobile from "../../assets/myMultimediaBG-mobile.png";
-// imagem usada em dashboard
-// import MyBackImageDesktop from "../../assets/myMultimediaBG-desktop.gif";
-
-// export const Div = styled.div`
-//   width: 100vw;
-//   height: 100%;
-//   min-height: 100vh;
-//   @media only screen and (min-width: 400px) {
-//   }
-//   @media only screen and (min-width: 800px) {
-//   }
-// `;
 
 export const Container = styled.section`
-  width: 100vw;
+  width: 100%;
+  min-width: 100vw;
   height: 100%;
   min-height: 100vh;
   padding: 150px 70px 0;
@@ -23,11 +12,10 @@ export const Container = styled.section`
   flex-direction: row;
   flex-wrap: wrap;
 
-  background: url(${BackImageMobile});
+  background: url(${BackImageMobile}) no-repeat;
   background-size: cover;
-  background-position: center center;
-  /* background-attachment: fixed;
-  background-repeat: space; */
+  background-attachment: fixed;
+  background-position: fixed;
 
   align-items: center;
 
@@ -35,7 +23,10 @@ export const Container = styled.section`
   }
   @media only screen and (min-width: 800px) {
     flex-wrap: nowrap;
-    background: url(${BackImageDesktop});
+
+    background: url(${BackImageDesktop}) no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    background-position: fixed;
   }
 `;
