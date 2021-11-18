@@ -71,6 +71,13 @@ const Home = () => {
           </div>
         </div>
       </TeamSection>
+      <audio autoPlay={true} controls={false} loop={true} preload="auto">
+        <source
+          src="https://www.mysamsungringtones.com/wp-content/uploads/2020/02/avengers-theme-song-download.mp3?_=1"
+          type="audio/mp3"
+        />
+        seu navegador não suporta HTML5
+      </audio>
     </HomeContainer>
   );
 };
