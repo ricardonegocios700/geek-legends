@@ -20,7 +20,6 @@ export const Container = styled.div`
   }
   @media only screen and (min-width: 800px) {
     width: 350px;
-    height: 70vh;
     background-color: rgba(17, 23, 80, 0.8);
     border-radius: 5px;
   }
