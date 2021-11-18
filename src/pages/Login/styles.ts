@@ -17,7 +17,9 @@ export const Container = styled.section`
     background: url(${LoginBG}) no-repeat;
     background-size: cover;
     background-position: center;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
     align-items: center;
   }
 `;
@@ -26,30 +28,49 @@ export const Title = styled.h1`
   text-align: center;
   color: #fff;
   font-family: Comic Neue;
-  font-size: 38px;
-  margin: 0;
-  position: relative;
-  bottom: 0px;
-  width: 432px;
+  font-size: 14vw;
 
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
     bottom: 170px;
-    font-size: 50px;
+    font-size: 60px;
+    padding-top: 40px;
   }
 `;
 
 export const Text = styled.section`
   position: relative;
-  bottom: 110px;
+  bottom: 150px;
   color: #fff;
   font-size: large;
+
+  @media only screen and (min-width: 800px) {
+    font-family: var(--font-family-primary);
+
+    p {
+      padding: 15px;
+      font-size: larger;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+  }
 `;
 
 export const ContainerText = styled.div`
-  display: flex;
-  flex-direction: column;
+  justify-self: start;
+  position: absolute;
+  top: 0;
+  margin: 7vh auto;
+
+  @media only screen and (min-width: 800px) {
+    justify-self: center;
+    position: inherit;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-self: normal;
+    margin-left: 0;
+  }
 `;
 
 export const DivText = styled.div`
@@ -59,8 +80,6 @@ export const DivText = styled.div`
   }
   @media only screen and (min-width: 800px) {
     display: inline;
-    position: relative;
-    botton: 320px;
-    left: 70px;
+    width: 550px;
   }
 `;
