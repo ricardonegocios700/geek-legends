@@ -6,7 +6,7 @@ const Login = () => {
     <Container>
       <Form />
       <ContainerText>
-        <Title>Geek Legends</Title>
+        <Title>GeekLegends</Title>
         <DivText>
           <Text>
             <p>Sua entrada para o mundo Geek!!!</p>

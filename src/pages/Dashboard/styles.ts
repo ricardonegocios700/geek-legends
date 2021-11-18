@@ -52,7 +52,6 @@ export const ContainerDash = styled.main`
     header {
       background: lightblue;
       width: 100%;
-
       display: flex;
       justify-content: space-around;
       & > a {
@@ -108,5 +107,17 @@ export const Space = styled.p`
   height: 80px;
   @media (min-width: 800px) {
     height: 100px;
+  }
+`;
+
+export const Logout = styled.span`
+  font-size: 35px;
+  cursor: pointer;
+  position: absolute;
+  top: 28px;
+  right: 5px;
+  z-index: 2;
+  @media (min-width: 800px) {
+    font-size: 40px;
   }
 `;

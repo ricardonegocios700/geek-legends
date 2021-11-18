@@ -1,4 +1,5 @@
 import CardGeekStore from "../CardGeekStore";
+import { useAuth } from '../../Providers/user/index';
 
 interface CardProps {
   userId: number;
@@ -15,6 +16,8 @@ interface CardProps {
 
 const ListCardGeekStore = ({ dataToRender }: any) => {  
 
+  const { userId } = useAuth();
+
     return (
 
       <>
@@ -27,7 +30,7 @@ const ListCardGeekStore = ({ dataToRender }: any) => {
           dislike={data.dislike}
           url= {data.url}
           id={data.id}
-          userId= {data.userId}
+          userId= {userId}
         />
       ))}
       </>
