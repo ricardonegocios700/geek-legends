@@ -48,13 +48,13 @@ const Form = () => {
         <H1>Login</H1>
         <ContainerInput className="input">
           <Input placeholder="Email" {...register("email")} />
-          {errors.email && <span>{errors.email?.message}</span>}
+          {errors.email && <p>{errors.email?.message}</p>}
           <Input
             placeholder="Senha"
             type="password"
             {...register("password")}
           />
-          {errors.password && <span>{errors.password?.message}</span>}
+          {errors.password && <p>{errors.password?.message}</p>}
         </ContainerInput>
         <Button type="submit" title="Logar" />
         <a href="/signup"> Não possui uma conta? Cadastro</a>

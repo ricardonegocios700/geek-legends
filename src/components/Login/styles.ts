@@ -5,7 +5,7 @@ export const Container = styled.div`
   border-radius: 15px;
   background-color: var(--red-div);
   width: 90vw;
-  height: 40vh;
+  /* height: 40vh; */
   max-width: 400px;
   max-height: 410px;
   position: relative;
@@ -27,6 +27,7 @@ export const FormLogin = styled.form`
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  padding: 10px;
   button {
     margin: 13px 0;
     width: 80%;
@@ -67,6 +68,10 @@ export const H1 = styled.h1`
 
 export const ContainerInput = styled.div`
   text-align: center;
+
+  p {
+    color: var(--font-color-white);
+  }
 `;
 
 export const Input = styled.input`
@@ -74,6 +79,7 @@ export const Input = styled.input`
   border: none;
   margin: 8px 0;
   width: 80%;
+  min-width: 260px;
   height: 42px;
   padding: 5px;
   border-radius: 7px;
