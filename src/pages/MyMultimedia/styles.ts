@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import BackImageDesktop from "../../assets/multimidia-desktop.gif";
-import BackImageMobile from "../../assets/myMultimediaBG-mobile.png";
+import BackImageMobile from "../../assets/myMultimediaMB.gif";
 
 export const Container = styled.section`
   width: 100vw;
