@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container2 = styled.div`
   width: 170px;
   min-height: 300px;
+  max-height: 300px;
   border: 0.25px solid #000;
   //border-radius: 6px;
   padding: 40px 30px;
@@ -53,12 +54,12 @@ export const Like = styled.div`
   color: var(--red-button);
   cursor: pointer;
   border-radius: 60%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 
   & .smile {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   & p {
@@ -77,13 +78,19 @@ export const Like = styled.div`
 
 export const Dislike = styled(Like)`
   & .sad {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
 export const Info = styled.div`
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
+  height: 56px;
   text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
