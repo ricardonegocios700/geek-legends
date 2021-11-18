@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import  Home from "../pages/Home/index";
+import Home from "../pages/Home/index";
 import Login from "../pages/Login/index";
 import Dashboard from "../pages/Dashboard/index";
 import GeekStore from "../pages/GeekStore/index";
@@ -13,48 +13,47 @@ import Signup from "../pages/Signup/index";
 import { useLocation } from "react-router-dom";
 
 const Routes = () => {
+  const location = useLocation();
 
-    const location = useLocation();
-
-    return (
-        <>
-            <Switch location={location} key={location.pathname}>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/dashboard">
-                    <Dashboard />
-                </Route>
-                <Route path="/geekstore">
-                    <GeekStore />
-                </Route>
-                <Route path="/multimedia">
-                    <Multimedia />
-                </Route>
-                <Route path="/mygeekstore">
-                    <MyGeekStore />
-                </Route>
-                <Route path="/mymultimedia">
-                    <MyMultimedia />
-                </Route>
-                <Route path="/mypersona">
-                    <MyPersona />
-                </Route>
-                <Route path="/myxfilegeek">
-                    <MyXFileGeek />
-                </Route>
-                <Route path="/persona">
-                    <Persona />
-                </Route>
-                <Route path="/signup">
-                    <Signup />
-                </Route>
-            </Switch>
-        </>
-    );
+  return (
+    <>
+      <Switch location={location} key={location.pathname}>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/geekstore">
+          <GeekStore />
+        </Route>
+        <Route path="/multimedia">
+          <Multimedia />
+        </Route>
+        <Route path="/mygeekstore">
+          <MyGeekStore />
+        </Route>
+        <Route path="/mymultimedia">
+          <MyMultimedia />
+        </Route>
+        <Route path="/mypersona">
+          <MyPersona />
+        </Route>
+        <Route path="/myxfilegeek">
+          <MyXFileGeek />
+        </Route>
+        <Route path="/persona">
+          <Persona />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
+    </>
+  );
 };
 
 export default Routes;

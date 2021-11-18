@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Container, Div } from "./styles";
+import { Container } from "./styles";
 
 import Header from "../../components/Header";
 import { useAuth } from "../../Providers/user";
@@ -26,13 +26,11 @@ const Multimedia = () => {
     <>
       <Header />
       <Container>
-        <Div>
-          <TypesMultimedia dataToRender={multimediaByFilmes} />
-          <TypesMultimedia dataToRender={multimediaBySeries} />
-          <TypesMultimedia dataToRender={multimediaByAnimes} />
-          <TypesMultimedia dataToRender={multimediaByGames} />
-          <TypesMultimedia dataToRender={multimediaByGibis} />
-        </Div>
+        <TypesMultimedia dataToRender={multimediaByFilmes} />
+        <TypesMultimedia dataToRender={multimediaBySeries} />
+        <TypesMultimedia dataToRender={multimediaByAnimes} />
+        <TypesMultimedia dataToRender={multimediaByGames} />
+        <TypesMultimedia dataToRender={multimediaByGibis} />
       </Container>
     </>
   );
