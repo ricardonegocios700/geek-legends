@@ -68,6 +68,10 @@ export const H1 = styled.h1`
 
 export const ContainerInput = styled.div`
   text-align: center;
+
+  p {
+    color: var(--font-color-white);
+  }
 `;
 
 export const Input = styled.input`
@@ -75,6 +79,7 @@ export const Input = styled.input`
   border: none;
   margin: 8px 0;
   width: 80%;
+  min-width: 260px;
   height: 42px;
   padding: 5px;
   border-radius: 7px;
