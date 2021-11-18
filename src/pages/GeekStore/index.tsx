@@ -6,10 +6,9 @@ import { useEffect } from "react";
 
 const GeekStore = () => {
   const { stores, getStores } = useStore();
-
-  console.log(stores);
+  
   useEffect(() => {
-    getStores();
+    getStores(); // eslint-disable-next-line
   }, []);
 
   return (

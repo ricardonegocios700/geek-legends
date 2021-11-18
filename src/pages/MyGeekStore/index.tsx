@@ -11,10 +11,10 @@ const pageTransition = {
 };
 
 const MyGeekStore = () => {
-    const { myStores, getMyStores, removeMyStore } = useMyStores();
+    const { myStores, getMyStores } = useMyStores();
 
     useEffect(() => {
-        getMyStores();
+        getMyStores(); // eslint-disable-next-line
     }, []);
 
     return (

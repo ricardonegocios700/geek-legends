@@ -8,7 +8,7 @@ export const MessageSensei = () => {
   const { getMessage, message } = useMessages();
 
   useEffect(() => {
-    getMessage();
+    getMessage(); // eslint-disable-next-line
   }, [config]);
 
   return (

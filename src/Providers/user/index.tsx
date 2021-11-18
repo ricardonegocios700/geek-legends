@@ -151,7 +151,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("Nome inválido");
       });
   };
 
@@ -179,7 +178,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   }, [accessToken, checkMove]);
 
   useEffect(() => {
-    getUsers();
+    getUsers(); // eslint-disable-next-line
   }, [config]);
 
   return (

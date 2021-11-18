@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import {
     Container,
     FormContent,
@@ -25,7 +24,7 @@ interface FormTypes {
 }
 
 const XFilesForm = () => {
-    const { userId } = useAuth();
+    const { userId } = useAuth(); // eslint-disable-next-line
     const [date, setDate] = useState(format(new Date(), "dd-MM-yyy"));
 
     const schema = yup.object().shape({
@@ -40,7 +39,7 @@ const XFilesForm = () => {
         formState: { errors },
     } = useForm<FormTypes>({ resolver: yupResolver(schema) });
 
-    const { createAPost, postUpdate } = useXFile();
+    const { createAPost } = useXFile();
 
     const handleSubmitForm = (data: FormTypes) => {
         data.userId = userId;
