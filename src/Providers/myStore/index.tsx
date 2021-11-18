@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { convertToObject } from "typescript";
 import api from "../../services/api";
 import { useAuth } from "../user";
 
@@ -41,6 +40,9 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
   };
 
   const addMyStore = (item: ContextType) => {
+    if(myStores.find((store) => {return store.name===item.name })) { 
+      toast.error('Loja já está em sua lista!')
+      return null }
     api
       .post<ContextType[]>("/myStores", {
         name: item.name,
@@ -48,15 +50,14 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
         url: item.url,
         like: item.like,
         dislike: item.dislike,
-        userId: item.userId,
-        id: item.id
+        userId: item.userId,        
       },config)
       .then((resp) => {
-        toast.success('Loja adicionada ao My Stores Geek!')
+        toast.success('Loja adicionada ao My Geek Stores!')
         console.log(resp.data)
         getMyStores()})
       .catch((err) => {
-        toast.error('Loja já adicionada anteriormente!')
+        toast.error('Erro! Favor tentar novamente!')
         console.log(err)});
   };
 
