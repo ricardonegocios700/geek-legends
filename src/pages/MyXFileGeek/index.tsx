@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { RiArrowUpSFill } from "react-icons/ri";
+import { useAuth } from "../../Providers/user";
+import { useHistory } from "react-router";
 
 const pageTransition = {
   ease: "easeIn",
@@ -14,6 +16,13 @@ const pageTransition = {
 
 const MyXFileGeek = () => {
   const [isShow, setIsShow] = useState(false);
+
+  const history = useHistory();
+  const { authorized } = useAuth();
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

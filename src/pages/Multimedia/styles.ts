@@ -22,11 +22,12 @@ export const Container = styled.section`
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
-    flex-wrap: nowrap;
-
     background: url(${BackImageDesktop}) no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: fixed;
+    section {
+      width: 170px;
+    }
   }
 `;

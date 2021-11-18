@@ -3,6 +3,8 @@ import CardMyPersona from "../../components/cardMypersona";
 import { motion } from "framer-motion";
 import { ContainerMyPersona } from "./styles";
 import { usePersonas } from "../../Providers/myPersonas";
+import { useHistory } from "react-router";
+import { useAuth } from "../../Providers/user";
 
 const pageTransition = {
   // ease: "easeIn",
@@ -18,6 +20,13 @@ interface UsersType {
 
 const MyPersona = () => {
   const { myPersonas } = usePersonas();
+
+  const history = useHistory();
+  const { authorized } = useAuth();
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

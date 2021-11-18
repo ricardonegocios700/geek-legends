@@ -6,9 +6,11 @@ import Header from "../../components/Header";
 import { useAuth } from "../../Providers/user";
 import { useMultimedia } from "../../Providers/multimedia";
 import TypesMultimedia from "../../components/TypesMultimedias";
+import { useHistory } from "react-router-dom";
 
 const Multimedia = () => {
-  const { config } = useAuth();
+  const history = useHistory();
+  const { config, authorized } = useAuth();
   const {
     multimediaByFilmes,
     multimediaBySeries,
@@ -21,6 +23,10 @@ const Multimedia = () => {
   useEffect(() => {
     getMultimediaByType();
   }, [config]);
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

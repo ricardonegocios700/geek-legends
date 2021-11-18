@@ -4,6 +4,8 @@ import ListCardGeekStore from "../../components/ListCardGeekStore/index";
 import { useMyStores } from "../../Providers/myStore/index";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useHistory } from "react-router";
+import { useAuth } from "../../Providers/user";
 
 const pageTransition = {
   ease: "easeIn",
@@ -16,6 +18,13 @@ const MyGeekStore = () => {
   useEffect(() => {
     getMyStores(); // eslint-disable-next-line
   }, []);
+
+  const history = useHistory();
+  const { authorized } = useAuth();
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

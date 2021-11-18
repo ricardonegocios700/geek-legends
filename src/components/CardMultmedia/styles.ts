@@ -25,6 +25,7 @@ export const Container2 = styled.div`
   }
 
   & .emojis {
+    margin-top: 10px;
     width: 100%;
     display: flex;
     justify-content: space-between;
