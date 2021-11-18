@@ -19,10 +19,10 @@ const MyXFileGeek = () => {
         <>
             <Header />
             <motion.div
-                initial={{ opacity: 0, x: "-100vw" }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: "-100w" }}
-                transition={pageTransition}
+                initial = {{ opacity: 0, x: "-100vw" }}
+                animate = {{ opacity: 1, x: 0 }}
+                exit = {{ opacity: 0, x: "-100vw" }}
+                transition = {pageTransition}
             >
                 <Container>
                     <Button onClick={() => setIsShow(!isShow)}>
