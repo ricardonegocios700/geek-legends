@@ -9,15 +9,21 @@ export const Container = styled.section`
   padding: 150px 10px 0;  
 
     background: url(${BackGroundMobile});
+    background-position: center center;
     background-size: cover;
-    background-position: center;
+    background-position: fixed;
+    background-attachment: fixed;
+
 
     @media only screen and (min-width: 400px) {
     }
     @media only screen and (min-width: 800px) {
         background: url(${BackGroundDesktop}) no-repeat;
+        background-position: center center;
         background-size: cover;
-        background-position: center;
+        background-position: fixed;
+        background-attachment: fixed;
+
         padding: 150px 70px 20px;
     }
 `;

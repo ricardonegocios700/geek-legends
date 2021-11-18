@@ -19,13 +19,14 @@ const MyGeekStore = () => {
 
     return (
         <>
+            <Header />
             <motion.div
+                style={{ position: "relative" }}
                 initial={{ opacity: 0, y: "-100vh" }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: "-100h" }}
                 transition={pageTransition}
             >
-                <Header />
                 <Container>
                     <ListCardGeekStore
                         dataToRender={myStores}
