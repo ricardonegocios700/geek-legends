@@ -197,7 +197,7 @@ export const MyMultimediasProvider = ({
   };
 
   useEffect(() => {
-    getMyMultimediasFromApi();
+    getMyMultimediasFromApi(); // eslint-disable-next-line
   }, [config]);
 
   return (

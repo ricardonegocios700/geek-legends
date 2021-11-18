@@ -178,7 +178,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   }, [accessToken, checkMove]);
 
   useEffect(() => {
-    getUsers();
+    getUsers(); // eslint-disable-next-line
   }, [config]);
 
   return (

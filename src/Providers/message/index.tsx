@@ -1,8 +1,7 @@
 import {
   createContext,
   ReactNode,
-  useContext,
-  useEffect,
+  useContext,  
   useState,
 } from "react";
 import api from "../../services/api";
