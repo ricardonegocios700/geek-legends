@@ -79,14 +79,24 @@ export const Container = styled.section`
   margin: 20px;
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   overflow: auto;
+  & > div.toH1 {
+    max-width: 20px;
+    position: absolute;
+    left: -81px;
+  }
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
     overflow: visible;
     flex-direction: column;
     width: 100%;
+    & > div.toH1 {
+      max-width: 100%;
+      position: static;
+    }
   }
 `;
 
@@ -102,6 +112,7 @@ export const H1 = styled.h1`
   font-size: 30px;
   display: block;
   transform: rotate(-90deg);
+  flex-basis: 5px;
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {

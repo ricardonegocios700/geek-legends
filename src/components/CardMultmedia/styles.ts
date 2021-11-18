@@ -5,7 +5,10 @@ export const Container2 = styled.div`
   height: 100vh;
   min-height: 300px;
   max-height: 300px;
-  border: 0.25px solid #000;
+  border-bottom: 1px dashed #000;
+  border-left: 1px solid #000;
+  //border-top: 2px solid #000;
+  border-right: 1px solid #000;
   //border-radius: 6px;
   padding: 40px 30px;
   margin: 0px auto;
