@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import BackImageDesktop from "../../assets/multimidia-desktop.gif";
-import BackImageMobile from "../../assets/myMultimediaMB.gif";
+import BackImageDesktop from "../../assets/multimediaBG.gif";
+import BackImageMobile from "../../assets/multimediaMB.gif";
 
 export const Container = styled.section`
-  width: 100vw;
+  width: 100%;
+  min-width: 100vw;
   height: 100%;
   min-height: 100vh;
   padding: 150px 70px 0;
@@ -16,13 +17,13 @@ export const Container = styled.section`
   background-attachment: fixed;
   background-position: fixed;
 
-  align-items: justify;
+  align-items: center;
 
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
     flex-wrap: nowrap;
-    align-content: flex-start;
+    align-items: flex-start;
 
     background: url(${BackImageDesktop}) no-repeat;
     background-size: cover;

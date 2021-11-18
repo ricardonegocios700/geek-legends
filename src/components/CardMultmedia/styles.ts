@@ -11,7 +11,7 @@ export const Container2 = styled.div`
   border-right: 1px solid #000;
   //border-radius: 6px;
   padding: 40px 30px;
-  margin: 0px auto;
+  //margin: 0px auto;
   background-color: #f5f5f5;
 
   & h1 {
