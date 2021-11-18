@@ -25,6 +25,10 @@ const Multimedia = () => {
   return (
     <>
       <Header />
+      <audio autoPlay={true} controls={false} loop={true} preload="auto">
+        <source src="../../assets/mp3/Harry_Potter.mp3" type="audio/mp3" />
+        seu navegador não suporta HTML5
+      </audio>
       <Container>
         <TypesMultimedia dataToRender={multimediaByFilmes} />
         <TypesMultimedia dataToRender={multimediaBySeries} />

@@ -26,6 +26,10 @@ const MyMultimedia = () => {
   }, [config]);
   return (
     <>
+      <audio autoPlay={true} controls={false} loop={true} preload="auto">
+        <source src="../../assets/mp3/Harry_Potter.mp3" type="audio/mp3" />
+        seu navegador não suporta HTML5
+      </audio>
       <Header />
       <motion.div
         initial={{ opacity: 0, y: "-100vh" }}
