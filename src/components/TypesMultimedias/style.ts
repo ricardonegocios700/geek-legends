@@ -74,9 +74,7 @@ export const Div = styled.div`
 `;
 
 export const Container = styled.section`
-  position: relative;
   width: 90vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

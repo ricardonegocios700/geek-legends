@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const Container2 = styled.div`
   width: 170px;
+  height: 100vh;
   min-height: 300px;
   max-height: 300px;
   border: 0.25px solid #000;
   //border-radius: 6px;
   padding: 40px 30px;
   margin: 0px auto;
-  justify-content: space-around;
   background-color: #f5f5f5;
 
   & h1 {
