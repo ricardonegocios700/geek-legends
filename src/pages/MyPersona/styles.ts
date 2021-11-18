@@ -27,12 +27,12 @@ export const ContainerMyPersona = styled.main`
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-
     height: 100%;
     min-height: 99vh;
     ul {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-around;
       align-items: center;
       padding-top: 150px;

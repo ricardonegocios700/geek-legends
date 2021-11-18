@@ -4,9 +4,9 @@ import backCity from "../../assets/dashboardBG-desktop.gif";
 export const ContainerDash = styled.main`
   background-image: url(${backCity});
   background-size: cover;
-  background-repeat: no-repeat;  
+  background-repeat: no-repeat;
   background-position: fixed;
-  background-attachment: fixed; 
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,6 +56,12 @@ export const ContainerDash = styled.main`
       width: 100%;
       display: flex;
       justify-content: space-around;
+      h1 {
+        font-size: 40px;
+        text-align: center;
+        font-style: italic;
+        color: var(--font-color-black);
+      }
       & > a {
         width: 110px;
         div {
