@@ -8,7 +8,7 @@ const GeekStore = () => {
   const { stores, getStores } = useStore();
   
   useEffect(() => {
-    getStores();
+    getStores(); // eslint-disable-next-line
   }, []);
 
   return (

@@ -101,7 +101,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
   };
 
   useEffect(() => {
-    getPostsFromApi();
+    getPostsFromApi(); // eslint-disable-next-line
   }, [config]);
 
   return (

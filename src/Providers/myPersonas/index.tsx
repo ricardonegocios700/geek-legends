@@ -77,7 +77,7 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
   };
 
   useEffect(() => {
-    getMyPersonas();
+    getMyPersonas(); // eslint-disable-next-line
   }, [config]);  
 
   return (

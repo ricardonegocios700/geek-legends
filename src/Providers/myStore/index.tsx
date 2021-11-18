@@ -68,7 +68,7 @@ export const MyStoresProvider = ({ children }: ProviderProps) => {
   };
 
   useEffect(() => {
-    getMyStores()
+    getMyStores() // eslint-disable-next-line
   }, [config])
 
   return (

@@ -62,7 +62,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     [] as MultimediaTypes[]
   );
 
-  const { config, accessToken } = useAuth();
+  const { config } = useAuth();
 
   const getAllMultimediaFromApi = () => {
     api

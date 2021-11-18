@@ -8,7 +8,7 @@ export const InfoGeek = () => {
   const { userInfo, userId, getOneUser, config } = useAuth();
   const [ showModal, setShowModal ] = useState(false)
   useEffect(() => {
-    getOneUser(userId);
+    getOneUser(userId); // eslint-disable-next-line
   }, [config]);
 
   if (userInfo === undefined) {
