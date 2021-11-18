@@ -27,6 +27,7 @@ export const FormLogin = styled.form`
   flex-direction: column;
   align-items: center;
   justify-items: center;
+  padding: 10px;
   button {
     margin: 13px 0;
     width: 80%;
