@@ -76,7 +76,7 @@ export const Div = styled.div`
 export const Container = styled.section`
   position: relative;
   width: 90vw;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,7 +90,7 @@ export const H1 = styled.h1`
   margin-top: 15px;
   border-start-start-radius: 10px;
   border-start-end-radius: 10px;
-  width: 220px;
+  width: 170px;
   max-width: 220px;
   height: 40px;
   background-color: #0d3b4f;
