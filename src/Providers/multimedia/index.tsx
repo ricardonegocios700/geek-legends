@@ -68,7 +68,6 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     api
       .get<MultimediaTypes[]>("/multimedias", config)
       .then((response) => {
-        console.log("Provider multimediaList", response.data);
         setMultimediaList(response.data);
       })
       .catch((err) => {
@@ -93,7 +92,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         setMultimediaByGibis(response.data);
       })
       .catch((err) => {
-        console.log("Filmes: ", err);
+        console.log("Gibis: ", err);
       });
     api
       .get<MultimediaTypes[]>(`/multimedias?type=Animes`, config)
@@ -134,9 +133,7 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
         },
         config
       )
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then((response) => {})
       .catch((err) => console.log(err));
   };
 
@@ -158,7 +155,6 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
       .delete(`/multimedias/${id}`)
       .then((response) => {
         toast.success("Deletado com sucesso!");
-        console.log(response.data);
       })
       .catch((err) => {
         toast.error(
@@ -172,7 +168,6 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     { ...mediaData }: MultimediaTypes,
     reaction: number
   ) => {
-    console.log(reaction, typeof reaction, mediaData);
     let like = 0;
     let dislike = 0;
     if (reaction > 0) {
@@ -185,8 +180,6 @@ export const MultimediaProvider = ({ children }: MultimediaProviderProps) => {
     } else {
       dislike = Number(mediaData.dislike);
     }
-    console.log(like, dislike);
-    console.log(mediaData.id);
     api
       .patch<MultimediaTypes>(
         `/multimedias/${mediaData.id}`,
