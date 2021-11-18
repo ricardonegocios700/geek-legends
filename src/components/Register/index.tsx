@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Container, FormContainer, ButtonContainer } from "./styles";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { useAuth } from "../../Providers/user/index";
 
 interface FormTypes {
@@ -18,6 +17,8 @@ interface FormTypes {
 
 const Register = () => {
     const { userSignup } = useAuth();
+    const passRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const schema = yup.object().shape({
         name: yup.string().required("Campo obrigatório"),
@@ -28,7 +29,7 @@ const Register = () => {
         password: yup
             .string()
             .required("Campo obrigatório")
-            .min(8, "Mínimo de 8 caracteres"),
+            .min(8, "Mínimo de 8 caracteres").matches(passRegex, "Senha inválida - letra maiúscula e minúscula número  e  ao  menos um caracter @$!%*?&"),
         confirmPassword: yup
             .string()
             .required("Campo obrigatório")
@@ -69,12 +70,17 @@ const Register = () => {
                         <p className="errorMsg">{errors.email?.message}</p>
                     )}
 
-                    <input placeholder="Senha" {...register("password")} />
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        {...register("password")}
+                    />
                     {!!errors?.password && (
                         <p className="errorMsg">{errors.password?.message}</p>
                     )}
 
                     <input
+                        type="password"
                         placeholder="Confirmar senha"
                         {...register("confirmPassword")}
                     />
@@ -95,7 +101,10 @@ const Register = () => {
 
                     <div>
                         <span>Já possui uma conta?</span>
-                        <Link style={{color: '#fff'}} to="/login"> Login</Link>
+                        <Link style={{ color: "#fff" }} to="/login">
+                            {" "}
+                            Login
+                        </Link>
                     </div>
                     <ButtonContainer>
                         <Button type="submit" title="cadastrar" />
