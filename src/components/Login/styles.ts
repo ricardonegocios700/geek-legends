@@ -5,7 +5,7 @@ export const Container = styled.div`
   border-radius: 15px;
   background-color: var(--red-div);
   width: 90vw;
-  height: 40vh;
+  /* height: 40vh; */
   max-width: 400px;
   max-height: 410px;
   position: relative;
