@@ -25,7 +25,7 @@ interface UsersType {
 
 const MyPersona = () => {
     const { myPersonas } = usePersonas();
-    console.log(myPersonas);
+    
     return (
         <>
             <Header />

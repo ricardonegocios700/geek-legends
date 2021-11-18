@@ -42,8 +42,7 @@ export const XFileProvider = ({ children }: XFileProviderProps) => {
     api
       .get<XFileTypes[]>(`/posts?userId=${userId}`, config)
       .then((response) => {
-        setAllPosts(response.data);
-        console.log(response.data);
+        setAllPosts(response.data);        
       })
       .catch((err) => {
         console.log("Erro: " + err);
