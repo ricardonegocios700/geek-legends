@@ -121,7 +121,7 @@ export const Space = styled.p`
 export const Logout = styled.span`
   font-size: 35px;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 28px;
   right: 5px;
   z-index: 2;
