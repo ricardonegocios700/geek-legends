@@ -3,13 +3,22 @@ import { Container } from "./styles";
 import ListCardGeekStore from "../../components/ListCardGeekStore/index";
 import { useStore } from "../../Providers/store";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
+import { useAuth } from "../../Providers/user";
 
 const GeekStore = () => {
   const { stores, getStores } = useStore();
-  
+  const history = useHistory();
+  const { authorized } = useAuth();
+
   useEffect(() => {
     getStores(); // eslint-disable-next-line
   }, []);
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

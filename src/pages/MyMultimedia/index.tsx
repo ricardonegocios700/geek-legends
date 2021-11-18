@@ -5,13 +5,14 @@ import { Container } from "./styles";
 import { useMyMultimedias } from "../../Providers/myMultimedias";
 import { useAuth } from "../../Providers/user";
 import TypesMultimedia from "../../components/TypesMultimedias";
+import { useHistory } from "react-router";
 
 const MyMultimedia = () => {
   const pageTransition = {
     ease: "easeIn",
     duration: 1,
   };
-  const { config } = useAuth();
+  const { config, authorized } = useAuth();
   const {
     myMultimediaByFilmes,
     myMultimediaBySeries,
@@ -24,6 +25,13 @@ const MyMultimedia = () => {
   useEffect(() => {
     getMyMultimediaByType();
   }, [config]);
+
+  const history = useHistory();
+
+  if (!authorized) {
+    history.push("/");
+  }
+
   return (
     <>
       <audio autoPlay={true} controls={false} loop={true} preload="auto">

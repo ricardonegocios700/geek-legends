@@ -11,7 +11,6 @@ export const Container = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
   background: url(${BackImageMobile}) no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -22,12 +21,14 @@ export const Container = styled.section`
   @media only screen and (min-width: 400px) {
   }
   @media only screen and (min-width: 800px) {
-    flex-wrap: nowrap;
     align-items: flex-start;
 
     background: url(${BackImageDesktop}) no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: fixed;
+    section {
+      width: 170px;
+    }
   }
 `;

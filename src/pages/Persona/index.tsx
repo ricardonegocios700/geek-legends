@@ -2,6 +2,7 @@ import CardPersona from "../../components/CardPersona";
 import Header from "../../components/Header";
 import { useAuth } from "../../Providers/user";
 import { ContainerPersona } from "./styles";
+import { useHistory } from "react-router";
 
 interface CardUsersData {
   id: number;
@@ -11,6 +12,13 @@ interface CardUsersData {
 
 const Persona = () => {
   const { usersList } = useAuth();
+
+  const history = useHistory();
+  const { authorized } = useAuth();
+
+  if (!authorized) {
+    history.push("/");
+  }
 
   return (
     <>

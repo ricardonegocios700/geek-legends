@@ -135,7 +135,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .patch(
         `/users/${userId}/`,
         {
-          name: userData.name,          
+          name: userData.name,
           preferences: userData.preferences,
           aboutMe: userData.aboutMe,
         },
@@ -172,6 +172,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       setUserId(num);
       setAuthorized(true);
     }
+
     setConfig({
       headers: { Authorization: `Bearer ${accessToken}` },
     });
