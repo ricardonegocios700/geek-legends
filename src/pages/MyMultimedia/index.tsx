@@ -26,6 +26,15 @@ const MyMultimedia = () => {
   }, [config]);
   return (
     <>
+      <audio autoPlay={true} controls={false} loop={true} preload="auto">
+        <source
+          src={
+            "https://m.toqueparacelular.com.br/a/n04/caixinha_de_musica-harry_potter.mp3"
+          }
+          type="audio/mp3"
+        />
+        seu navegador não suporta HTML5
+      </audio>
       <Header />
       <motion.div
         initial={{ opacity: 0, y: "-100vh" }}

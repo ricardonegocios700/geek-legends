@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
 import CardMyPersona from "../../components/cardMypersona";
-import { useAuth } from "../../Providers/user";
 import { motion } from "framer-motion";
 import { ContainerMyPersona } from "./styles";
 import { usePersonas } from "../../Providers/myPersonas";
@@ -9,12 +8,6 @@ const pageTransition = {
   // ease: "easeIn",
   duration: 1,
 };
-
-interface CardUsersData {
-  id?: number;
-  name: string;
-  preferences: string;
-}
 
 interface UsersType {
   name: string;
@@ -25,7 +18,7 @@ interface UsersType {
 
 const MyPersona = () => {
   const { myPersonas } = usePersonas();
-  console.log(myPersonas);
+
   return (
     <>
       <Header />

@@ -23,7 +23,7 @@ const UpdateUserModal = ({ show, handleClick }: UpdateUserModalProps) => {
     const { userProfileUpdate, userId, getOneUser, config, userInfo } = useAuth();
 
     useEffect(() => {
-        getOneUser(userId);
+        getOneUser(userId); // eslint-disable-next-line
       }, [config]);
 
     const handleUpdateUser = (data: DataTypes) => {        

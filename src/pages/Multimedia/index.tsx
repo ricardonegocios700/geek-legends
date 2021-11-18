@@ -25,6 +25,15 @@ const Multimedia = () => {
   return (
     <>
       <Header />
+      <audio autoPlay={true} controls={false} loop={true} preload="auto">
+        <source
+          src={
+            "https://m.toqueparacelular.com.br/a/n04/caixinha_de_musica-harry_potter.mp3"
+          }
+          type="audio/mp3"
+        />
+        seu navegador não suporta HTML5
+      </audio>
       <Container>
         <TypesMultimedia dataToRender={multimediaByFilmes} />
         <TypesMultimedia dataToRender={multimediaBySeries} />

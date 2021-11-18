@@ -57,8 +57,7 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
         config
       )
       .then((resp) => {
-        toast.success("Persona adicionada a sua guilda");
-        console.log(resp.data);
+        toast.success("Persona adicionada a sua guilda");        
         getMyPersonas();
       })
       .catch((err) => {
@@ -78,10 +77,8 @@ export const MyPersonasProvider = ({ children }: ProviderProps) => {
   };
 
   useEffect(() => {
-    getMyPersonas();
-  }, [config]);
-
-  console.log(myPersonas);
+    getMyPersonas(); // eslint-disable-next-line
+  }, [config]);  
 
   return (
     <MyPersonasContext.Provider

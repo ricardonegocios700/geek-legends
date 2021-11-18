@@ -11,10 +11,10 @@ const pageTransition = {
 };
 
 const MyGeekStore = () => {
-  const { myStores, getMyStores, removeMyStore } = useMyStores();
+  const { myStores, getMyStores } = useMyStores();
 
   useEffect(() => {
-    getMyStores();
+    getMyStores(); // eslint-disable-next-line
   }, []);
 
   return (
@@ -28,10 +28,7 @@ const MyGeekStore = () => {
         transition={pageTransition}
       >
         <Container>
-          <ListCardGeekStore
-            dataToRender={myStores}
-            // handleRemove={removeMyStore}
-          />
+          <ListCardGeekStore dataToRender={myStores} />
           <audio autoPlay={true} controls={false} loop={true}>
             <source
               src="https://ringtonazer.b-cdn.net/fetch/d0/d0f559cdc2f26268a49690781874db55.mp3"
