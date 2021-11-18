@@ -26,8 +26,8 @@ export const Container = styled.header`
   }
 
   & ul > li {
-    font-size: 50px;
-    margin: 10px;
+    font-size: 35px;
+    margin: 5px;
   }
 
   .select,
@@ -46,6 +46,11 @@ export const Container = styled.header`
       border-radius: 4px;
     }
 
+    & ul > li {
+    font-size: 50px;
+    margin: 10px;
+  }
+
     .pageLocation {
       font-family: var(--font-family-primary);
       width: 250px;
@@ -61,4 +66,13 @@ export const AvatarContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 100%;
+`;
+
+export const Logout = styled.div`
+  font-size: 35px;
+  cursor: pointer;
+
+  @media only screen and (min-width: 800px) {
+    font-size: 50px;
+  }
 `;
