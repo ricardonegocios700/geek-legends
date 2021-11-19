@@ -21,10 +21,10 @@ const Multimedia = () => {
   } = useMultimedia();
 
   useEffect(() => {
-    getMultimediaByType();
+    getMultimediaByType(); // eslint-disable-next-line 
   }, [config]);
 
-  if (!authorized) {
+  if (!authorized) { 
     history.push("/");
   }
 

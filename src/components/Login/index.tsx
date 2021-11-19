@@ -1,4 +1,3 @@
-import { useHistory } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
@@ -13,14 +12,9 @@ interface UserData {
 }
 
 const Form = () => {
-  const history = useHistory();
-  const { authorized, userLogin } = useAuth();
+  
+  const { userLogin } = useAuth();
 
-  /*
-  if (authorized) {
-    history.push("/dashboard");
-  }
-  */
 
   const schema = yup.object().shape({
     email: yup

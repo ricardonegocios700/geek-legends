@@ -7,18 +7,6 @@ import { useLocation } from "react-router-dom";
 import { useMultimedia } from "../../Providers/multimedia";
 import { useMyMultimedias } from "../../Providers/myMultimedias";
 
-interface MultimediaTypes {
-  id: number;
-  title: string;
-  type: string;
-  like: number;
-  dislike: number;
-  image: string;
-  description: string;
-  userId: number;
-  reaction?: number;
-}
-
 interface CardProps {
   id: number;
   title: string;

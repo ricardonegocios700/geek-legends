@@ -23,7 +23,7 @@ const MyMultimedia = () => {
   } = useMyMultimedias();
 
   useEffect(() => {
-    getMyMultimediaByType();
+    getMyMultimediaByType(); // eslint-disable-next-line 
   }, [config]);
 
   const history = useHistory();
