@@ -4,13 +4,14 @@ import {
   useContext,
   useState,
   useEffect,
+  Dispatch,
+  SetStateAction,
 } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
 import { History } from "history";
 import api from "../../services/api";
-
 interface AuthProps {
   children: ReactNode;
 }
@@ -18,7 +19,6 @@ interface UserLoginData {
   email: string;
   password: string;
 }
-
 interface UserData {
   userId?: number;
   name: string;
@@ -29,21 +29,18 @@ interface UserData {
   aboutMe: string;
   decode?: DecodeData;
 }
-
 interface DecodeData {
   email: string;
   iat: number;
   exp: number;
   sub: string;
 }
-
 interface HeadersTypes {
   Authorization: string;
 }
 interface RequestConfigTypes {
   headers: HeadersTypes;
 }
-
 interface AuthProviderData {
   userSignup: (userData: UserData) => void;
   userLogin: (userData: UserLoginData) => void;
@@ -56,35 +53,32 @@ interface AuthProviderData {
   userInfo: UserData;
   setUser: any;
   setUserId: any;
-  authorized: boolean;
-  setAuthorized: any;
+  authorized: () => boolean;
+  setAuthorized: Dispatch<SetStateAction<() => boolean>>; //tipagem do state
   accessToken: string;
   config: RequestConfigTypes;
   usersList: any;
 }
-
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
-
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
-
   const [user, setUser] = useState<UserData>({} as UserData);
   const [userInfo, setUserInfo] = useState<UserData>({} as UserData);
   const [usersList, setUsersList] = useState<UserData[]>([] as UserData[]);
-
   const [userId, setUserId] = useState<Number>(0);
-
-  const [authorized, setAuthorized] = useState<boolean>(false);
+  const [authorized, setAuthorized] = useState<() => boolean>(() => {
+    if (localStorage.getItem("@geekLegends:access")) {
+      return true;
+    }
+    return false;
+  });
   const [checkMove, setCheckMove] = useState<boolean>(false);
-
   const [config, setConfig] = useState<RequestConfigTypes>(
     {} as RequestConfigTypes
   );
-
   const [accessToken, setAccessToken] = useState<string>(
     () => localStorage.getItem("@geekLegends:access") || ""
   );
-
   const userSignup = (userData: UserData) => {
     api
       .post("/users", userData)
@@ -97,7 +91,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
         toast.error(`erro ao criar`);
       });
   };
-
   const userLogin = (userData: UserLoginData) => {
     api
       .post("/login", userData)
@@ -105,13 +98,17 @@ export const AuthProvider = ({ children }: AuthProps) => {
         const { accessToken } = response.data;
         localStorage.setItem("@geekLegends:access", accessToken);
         setAccessToken(accessToken);
-        setAuthorized(true);
+        setAuthorized(() => {
+          if (localStorage.getItem("@geekLegends:access")) {
+            return true;
+          }
+          return false;
+        });
         toast.success("Login efetuado com sucesso!");
         history.push("/dashboard");
       })
       .catch((err) => toast.error(`Falha! Senha ou email incorreto => ${err}`));
   };
-
   const getUsers = () => {
     api
       .get(`/users`, config)
@@ -120,7 +117,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       })
       .catch((err) => console.log(err));
   };
-
   const getOneUser = () => {
     api
       .get(`users?id=${userId}`, config)
@@ -129,7 +125,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       })
       .catch((err) => console.log(err));
   };
-
   const userProfileUpdate = (userId: UserData, userData: UserData) => {
     api
       .patch(
@@ -153,35 +148,32 @@ export const AuthProvider = ({ children }: AuthProps) => {
         console.log(err);
       });
   };
-
   const Logout = (history: History) => {
     localStorage.clear();
-
     setAccessToken("");
-
     history.push("/login");
-
     toast.success("Logout realizado");
   };
-
   useEffect(() => {
     const token = accessToken;
     if (token) {
       const decode: DecodeData = jwtDecode(token);
       let num = Number(decode.sub);
       setUserId(num);
-      setAuthorized(true);
+      setAuthorized(() => {
+        if (localStorage.getItem("@geekLegends:access")) {
+          return true;
+        }
+        return false;
+      });
     }
-
     setConfig({
       headers: { Authorization: `Bearer ${accessToken}` },
     });
   }, [accessToken, checkMove]);
-
   useEffect(() => {
     getUsers(); // eslint-disable-next-line
   }, [config]);
-
   return (
     <AuthContext.Provider
       value={{
@@ -207,5 +199,4 @@ export const AuthProvider = ({ children }: AuthProps) => {
     </AuthContext.Provider>
   );
 };
-
 export const useAuth = () => useContext(AuthContext);
